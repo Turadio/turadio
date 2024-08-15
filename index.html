@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://turadio2.atwebpages.com/source/bootstrap.min.css">
+    <!-- APlayer CSS -->
+	<link rel="stylesheet" href="http://turadio2.atwebpages.com/source/APlayer.min.css"/>
+
+    <title>TURADIO Central de Radios</title>
+    <style>
+    	body{
+    		background-color: #fbd5e5;
+    		font-family: Garamond;
+    	}
+    	img{
+    		width: 100%;
+    		min-height: 250px;
+    	}
+    	.main{
+    		padding: 40px 0;
+    	}
+    	.col-md-3{
+    		margin-bottom: 40px;
+    	}
+    	.album-poster{
+    		position: relative;
+    		display: block;
+    		border-radius: 7px;
+    		overflow: hidden;
+    		box-shadow: 0 15px 35px #3d2173a1;
+    		transition: all ease 0.4s;
+    	}
+    	.album-poster:hover{
+    		box-shadow: none;
+    		transform: scale(0.98) translateY(5px);
+    	}
+    	h3{
+    		font-size: 34px;
+    		margin-bottom: 34px;
+    		border-bottom: 4px solid #e6e6e6;
+    		padding-bottom: 15px;
+    	}
+    	p{
+    		font-size: 20px;
+    	}
+    	h4{
+    		font-size: 12px;
+    		text-transform: uppercase;
+    		margin-top: 15px;
+    		font-weight: 700;
+    	}
+		
+
+		/*default is hide music player*/
+		#aplayer{
+			position: fixed;
+			bottom: -100%;
+			left: 0;
+			width: 100%;
+			margin: 0;
+			box-shadow: 0 -2px 2px #dadada;
+			background-color: #a0a0a0;
+			transition: all ease 0.5s;
+		}
+		#aplayer.showPlayer{
+			bottom: 0;
+		}
+
+		
+		/*MUSIC PLAYER CUSTOMIZING STYLE*/
+		span{
+			color: #0a0a0a !important;
+			font-size: 16px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded{
+			background: #e0e0e0;
+    		height: 4px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played{
+			height: 4px;
+			background-color: #2196F3 !important;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb{
+			background-color: #2196F3 !important;
+		}
+
+		.aplayer .aplayer-icon{
+			width: 20px;
+			height: 20px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+		    fill: #fff;
+		}
+		.aplayer .aplayer-info .aplayer-music{
+			margin-bottom: 5px;
+		}
+
+
+    </style>
+    <style>
+div {
+  background-image: url('https://img.freepik.com/vector-gratis/fondo-degradado-cielo-pastel_23-2148925555.jpg?size=626&ext=jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+}
+    </style> 
+ 
+<style> 
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #f79ae5;
+  border: none;
+  color: black;
+  padding: 10px 26px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
+
+ 	</head>
+	<body>
+	
+
+<div class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<center>
+			
+			<H1>TURADIO</H1>
+            <H3>CENTRAL DE RADIOS</H3>
+			<h4>CARACAS <p>
+VENEZUELA</h4> 
+            </center>  			
+<div class="row">
+			<div class="col-md-12">
+				<center>
+
+	
+</td><td width="160">&nbsp;</td>
+</tr></table>
+				
+				
+				
+				
+			</center>
+			</div>
+			<div class="col-md-3">
+				<a href="javascript:void();" class="album-poster" data-switch="0">
+					<img src="https://s2.abcstatics.com/media/200805/16/sh375.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Éxitos</p>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="1">
+					<img src="https://thumbs.dreamstime.com/b/brunette-com-auscultadores-13106190.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Baladas en español</p>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="2">
+					<img src="https://i.pinimg.com/originals/2d/a5/d0/2da5d0658e5fa44f6e5204893f6efcc6.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Tropical</p>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="3">
+					<img src="https://st.depositphotos.com/1814084/1754/i/450/depositphotos_17548343-stock-photo-shania-twain.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Décadas</p>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="4">
+					<img src="https://i.pinimg.com/originals/8c/ea/c2/8ceac22d90e057e43ee7cbdc901da4de.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Venezolana</p>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="5">
+					<img src="https://thumbs.web.sapo.io/?W=800&H=0&delay_optim=1&epic=NjNlKmsb1Fc6Zu2C89Fv9hffhsRmHnUqu08+X2vPJd53rSsHou4zEJE87NE0VJ30+LzYNh0i+Dy5vJZM8RrYkW4STIt/s0mlpVR5l3adfHTuevc=?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Turadio Dos</p>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="7">
+					<img src="https://i.pinimg.com/736x/34/da/1a/34da1a03c028de60be6fcf5af3ce7056.jpg?cb=20200704132209?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Easy Listening</p>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="6">
+					<img src="https://i.pinimg.com/474x/48/4f/68/484f689817803c76a32d9cd24ded4dc3.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Actual</p>
+			</div>
+		</div>
+		
+			 
+			 <div class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<center>
+				<h1></h1>
+				<h3></h3>
+	
+	   <div class="site-content cf">
+		<center>
+		
+           <a class="btn btn-download" href="https://onedrive.live.com/?authkey=%21AH5dcDcgaFJKnPU&cid=62B73BC7AF1156F0&id=62B73BC7AF1156F0%211335&parId=62B73BC7AF1156F0%211334&o=OneUp" target="_blank" download="Aplicación Android TURADIO"><input type="button" value="NEW - DOWNLOAD APP - DESCARGAR APP ANDROID DE TURADIO - GRATIS - SIN PUBLICIDAD - SIN INSCRIPCIÓN"></a> 
+        </center>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+        <script src="http://tutsplus.github.io/github-analytics/js/scripts.js"></script>
+
+
+<!--analytics-->
+<script src="http://tutsplus.github.io/github-analytics/ga-tracking.min.js"></script>
+	
+	
+				
+</center>
+				
+</td><td width="160">&nbsp;</td>
+</tr></table>		
+		
+		
+		
+		
+
+		
+		<div class="row">
+			<div class="col-md-12">
+				<h4></h4>
+				
+			</div>
+			<br>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="8">
+					<img src="https://media.allure.com/photos/646cd466cc4b77b13fe785af/1:1/w_3481,h_3481,c_limit/dua%20lipa%20super%20long%20bangs%20hero.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Años 60´70´80´</P>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="9">
+					<img src="https://aws.revistavanityfair.es/prod/designs/v1/assets/655x516/35018.jpg?crop=0.5625xw:1xh;0.1823xw,0xh?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Pop</P>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="12">
+					<img src="https://3.bp.blogspot.com/-B088frUsFVQ/Trog0McfVqI/AAAAAAAAETQ/_mc9wsETj7M/s1600/avril-lavigne-5.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Clásicos</P>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="11">
+					<img src="https://vimusen.com/wp-content/uploads/2020/11/ariana-grande-edad.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Studio</P>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="10">
+					<img src="https://javitour.com/wp-content/uploads/2017/02/Torre-de-Pisa-2_opt-1200x900.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Italia</P>
+			</div>
+			
+			
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="13">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQF1bzVDk4WF9aJArjENA37EBr057FwrKmUFBzJzyhIVIdlIF4ljue6dvQxPN9wU5MC7U&usqp=CAU?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Más éxitos</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="14">
+					<img src="https://ak.picdn.net/shutterstock/videos/8620417/thumb/11.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Más romántica</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="15">
+					<img src="https://s1.1zoom.me/b5050/925/Microphone_485555_3840x2400.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Solo Beatles</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="19">
+					<img src="https://i.pinimg.com/474x/06/ea/e8/06eae8c5d6d36613fe5631a59ba005c6.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Bee Gees</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="16">
+					<img src="https://st.depositphotos.com/1825047/4932/i/950/depositphotos_49329821-stock-photo-the-dancer.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Solo Phil Collins</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="17">
+					<img src="https://i.pinimg.com/originals/e2/af/ab/e2afab8633d38f78ba12926ff4ec5bfd.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Solo en español</P>
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="18">
+					<img src="https://i.pinimg.com/474x/a1/96/71/a196713f6e35d31dd5bab1256869b533.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+				<h4>TURADIO</h4>
+				<p>Solo Pop</P>
+			</div>
+			
+			
+			
+			
+
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="20">
+					<img src="https://bebesyembarazos.com/wp-content/uploads/2013/01/leche.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Maxi Radio</p>			
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="21">
+					<img src="https://ruizhealytimes.com/wp-content/uploads/2020/11/elton-john.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Solo Elton John</p>			
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="22">
+					<img src="https://www.cambio16.com/wp-content/uploads/2018/04/abbaprincipal.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Solo ABBA</p>			
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="23">
+					<img src="https://i.pinimg.com/474x/03/cd/b2/03cdb2419d0b5e819422d2a9bfff8cf5.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Ilusion</p>			
+			</div>
+			
+		
+
+            <div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="24">
+					<img src="https://cache.marriott.com/Content/Destinations/A-M/Caracas/664x373_CARACAS.jpg?interpolation=progressive-bilinear&downsize=600px:*?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Caracas</p>			
+			</div>		
+
+
+            <div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="25">
+					<img src="https://acironline.mx/wp-content/uploads/2021/03/Depositphotos_319907566_l-2015.jpg?interpolation=progressive-bilinear&downsize=600px:*?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Armonía</p>			
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="26">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu_ysz9LfiZ3oD9fuHaWjF0atIn6_8Urb0D2RFOLt_SeA7stzU4N5vj1DdW5C272Bx33Q&usqp=CAU?interpolation=progressive-bilinear&downsize=600px:*?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Trip</p>			
+			</div>
+			
+			<div class="col-md-3">
+				<a href="#" class="album-poster" data-switch="27">
+					<img src="https://hairstylecamp.com/wp-content/uploads/pink-curly-hair-13.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+				</a>
+                <h4>TURADIO</h4>
+				<p>Ha Ash</p>			
+			</div>			
+
+        				
+
+
+                <center>
+				
+				
+	
+				
+			
+			   <h5>Share</h5>
+
+<a href="https://twitter.com/intent/tweet?text=Puedes%20escuchar%20TURADIO%20por%20www.turadiofm.ga%20con%20la%20mejor%20música%20y%20sin%20interrupciones&url=http%3A%2F%2Fturadiofm.ga" class="twitter-share-button" data-show-count="false">Recomiéndanos por Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>	
+							
+				
+	
+		
+		
+	</div>
+</div>
+
+<div class="site-content cf">
+		<center>
+		
+           <a class="btn"><input type="button" value="CORREO: turadio1@hotmail.com"></a>
+        </center>
+		</div>
+</center>
+<br>
+<br>
+
+	<div id="aplayer"></div>
+
+	<!-- Jquery Link -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<!-- Bootstrap Link -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!-- APlayer Jquery link -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>	
+
+	<script>
+
+
+		// NOW I CLICK album-poster TO GET CURRENT SONG ID
+		$(".album-poster").on('click', function(e){
+			var dataSwitchId = $(this).attr('data-switch');
+			//console.log(dataSwitchId);
+
+			// and now i use aplayer switch function see
+			ap.list.switch(dataSwitchId); //this is static id but i use dynamic 
+
+			// aplayer play function
+			// when i click any song to play
+			ap.play();
+
+			// click to slideUp player see
+			$("#aplayer").addClass('showPlayer');
+		});
+
+		const ap = new APlayer({
+		    container: document.getElementById('aplayer'),
+		    listFolded: true,
+		    audio: [
+		    {
+		        name: 'TURADIO',
+		        artist: 'Éxitos',
+		        url: 'http://stream.zeno.fm/g1exgkb357zuv.aac',
+		        cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+		    },
+			{
+		        name: 'TURADIO',  // SONG NAME
+		        artist: 'Baladas', //ARTIST NAME
+		        url: 'http://stream.zeno.fm/6aggxv60w7zuv.aac', // PATH NAME AND SONG URL
+		        cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500' // COVER IMAGE
+		    },
+			{
+				name: 'TURADIO',
+				artist: 'Tropical',
+				url: 'http://stream.zeno.fm/m2vx7szxx7zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			{
+				name: 'TURADIO',
+				artist: 'Décadas',
+				url: 'http://stream.zeno.fm/f695cdexy7zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+
+{
+				name: 'TURADIO',
+				artist: 'Venezolana',
+				url: 'http://stream.zeno.fm/sxngy87z67zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'TURADIO DOS',
+				url: 'https://stream.zeno.fm/3fht9h9hxy8uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'Actual',
+				url: 'https://stream.zeno.fm/ktbsr02tn2zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Easy Listening',
+				url: 'https://stream.zeno.fm/93y0p786sk8uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Años 60´70´80',
+				url: 'http://stream.zeno.fm/7evvcp3u0p8uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Pop',
+				url: 'https://stream.zeno.fm/wqdx2d5uebruv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Italia',
+				url: 'http://stream.zeno.fm/c1cqk93w1f8uv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Studio',
+				url: 'https://stream.zeno.fm/ysshnvbn01zuv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Rock Clásico',
+				url: 'https://stream.zeno.fm/70p43pdptf9uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Más éxitos',
+				url: 'https://stream.zeno.fm/qmhf2yd9dm0uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'Más romántica',
+				url: 'https://stream.zeno.fm/h4rudewsd5zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo Beatles',
+				url: 'https://stream.zeno.fm/6tmx3ddb86duv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo Phil Collins',
+				url: 'https://stream.zeno.fm/x05b33cy4yzuv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo en español',
+				url: 'https://stream.zeno.fm/ar535em1ra0uv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo Pop',
+				url: 'https://stream.zeno.fm/4da7khy7pzzuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Bee Gees',
+				url: 'https://streaming.exclusive.radio/er/beegees/icecast.audio',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'Maxi Radio',
+				url: 'http://stream.zeno.fm/kns3mkxb6ehvv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo Elton John',
+				url: 'https://stream.zeno.fm/1v0crt8n1wzuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'Solo ABBA',
+				url: 'https://stream.zeno.fm/90c7m6x8mbruv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			{
+				name: 'TURADIO',
+				artist: 'Ilusion',
+				url: 'https://stream.zeno.fm/ktbsr02tn2zuv.aac',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'TURADIO Caracas',
+				url: 'https://stream.zeno.fm/3fht9h9hxy8uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?interpolation=progressive-bilinear&downsize=600px:*?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'TURADIO Armonía',
+				url: 'https://stream.zeno.fm/wfsfgsrwftzuv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'TURADIO Trip',
+				url: 'https://stream.zenolive.com/e3r11d73sfeuv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			{
+				name: 'TURADIO',
+				artist: 'TURADIO Ha Ash',
+				url: 'https://stream.zeno.fm/wxgv509m6f0uv',
+				cover: 'https://i.pinimg.com/736x/8c/c4/f0/8cc4f069196324d23206d662d5ab21a7.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+			},
+			
+			
+			
+		    ]
+			
+			
+		});
+		
+		
+	</script>
+
+	
+ <div style="display:flex;justify-content:center;align-items:center;">
+    <div style="width:1px;height:1px;">
+        <div data-video="H4PyYmbJFkw" data-autoplay="1" data-loop="1" id="youtube-audio"></div>
+        <div style="clear:both;margin:10px;text-align:center">
+                        
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+<script>
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+
+    var ctrlq = document.getElementById("youtube-audio");
+    ctrlq.innerHTML = '<img id="youtube-icon" src=""/><div id="youtube-player"></div>';
+    ctrlq.style.cssText = 'width:0px;margin:2em auto;cursor:pointer;cursor:hand;display:none';
+    ctrlq.onclick = toggleAudio;
+
+    player = new YT.Player('youtube-player', {
+      height: '0',
+      width: '0',
+      videoId: ctrlq.dataset.video,
+      playerVars: {
+        autoplay: ctrlq.dataset.autoplay,
+        loop: ctrlq.dataset.loop,
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange 
+      } 
+    });
+  } 
+
+  function togglePlayButton(play) {    
+    document.getElementById("youtube-icon").src = play ? "https://i.imgur.com/IDzX9gL.png" : "https://i.imgur.com/quyUPXN.png";
+  }
+
+  function toggleAudio() {
+    if ( player.getPlayerState() == 1 || player.getPlayerState() == 3 ) {
+      player.pauseVideo(); 
+      togglePlayButton(false);
+    } else {
+      player.playVideo(); 
+      togglePlayButton(true);
+    } 
+  } 
+
+  function onPlayerReady(event) {
+    player.setPlaybackQuality("small");
+    document.getElementById("youtube-audio").style.display = "block";
+    togglePlayButton(player.getPlayerState() !== 5);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === 0) {
+      togglePlayButton(false); 
+    }
+  }
+
+</script>
+
+
+  
+
+
+
+ 
+ 
+
+
+
+
+
+
+	</body>
+</html>

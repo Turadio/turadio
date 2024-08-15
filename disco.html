@@ -1,0 +1,206 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="gDaniel" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" type="image/jpg" href="" />
+    <title>TURADIO</title>
+    
+    <link rel="stylesheet" type="text/css" href="https://turadio-online.com/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://turadio-online.com/css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="https://turadio-online.com/css/estilo-musica-album.css">
+    <link rel="stylesheet" type="text/css" href="https://turadio-online.com/css/mplayer.css">
+    
+    <link href='http://fonts.googleapis.com/css?family=Kelly+Slab' rel='stylesheet' type='text/css' />
+    
+    
+    <script type="text/javascript" src="https://turadio-online.com/js/jquery.js"></script>
+    <script type="text/javascript" src="https://turadio-online.com/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://turadio-online.com/js/perfect-scrollbar.jquery.min.js"></script>
+    <script type="text/javascript" src="https://turadio-online.com/js/mplayer.js"></script>
+    
+   
+ 
+   
+
+
+</head>
+
+ <style>
+body {
+  background-image: url('https://www.10wallpaper.com/wallpaper/1366x768/1307/radio_microphone-Music_theme_wallpapers_1366x768.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style> 
+
+
+<header>
+  
+    <div class="logo1"></div>
+
+<nav class="navbar">
+  <button class="navbar-btn">
+    ☰<span class="sr-only">Menu</span></button>
+  <div class="navbar-inner">
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link" >TURADIO 10 EMISORAS</a></li>
+        </li> 
+    </ul>
+  </div>
+</nav>
+</header>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min-6.js'></script><script src="https://turadio-online.com/js/script.js"></script>
+
+    
+<section>
+<div class="contenedor">
+        
+        <div class="mplayer">
+        <div class="mplayer__front-header">
+        <div class="mplayer__front-header-next-bg"></div>
+        <div class="mplayer__front-header-current-bg"></div>
+        <div class="mplayer__front-header-current-bg-center"></div>
+        <div class="mplayer__front-btn-playlist"></div>
+        <div class="mplayer__cover-art">
+            <img class="mplayer__cover-art-next" src="#" alt="Tu Radio | On Line">
+            <img class="mplayer__cover-art-current" src="#" alt="Tu Radio | On Line">
+        </div>
+        <div class="mplayer__toolbar">
+            <div class="mplayer__prev"></div>
+            <div class="mplayer__pause"></div>
+            <div class="mplayer__next"></div>
+        </div>
+        <div class="mplayer__front-body">
+            <div class="mplayer__front-row">
+                <div class="mplayer__front-title-wrap">
+                    <div class="mplayer__front-title-track"></div>
+                    <div class="mplayer__front-title-author"></div>
+                </div>
+            </div>
+            <div class="mplayer__front-row">
+                <div class="mplayer__long">
+                    
+                </div>
+            </div>
+            <div class="mplayer__front-row">
+                <div class="mplayer__order-btn-wrap">
+                    
+                </div>
+                <div class="mplayer__volume">
+                    <div class="mplayer__volume-icon"></div>
+                    <div class="mplayer__volume-slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mplayer__playlist ">
+        <div class="mplayer__playlist-header">
+            <div class="mplayer__playlist-btn-front"></div>
+            <div class="mplayer__playlist-header-title">
+                <b>EMISORAS</b>
+            </div>
+        </div>
+        <div class="mplayer__playlist-body">
+            <div class="mplayer__playlist-body-next-bg"></div>
+            <div class="mplayer__playlist-body-current-bg"></div>
+            <div class="mplayer__playlist-body-inner js-perfect-scrollbar"></div>
+        </div>
+    </div>
+<script type="text/javascript">
+"use strict";
+    $(function () {
+        $('.mplayer').mplayer({
+            'volume': 100,
+            'playlist': [
+	    		{
+					"pfile": "http://stream.zeno.fm/g1exgkb357zuv.aac",
+					"title":"TURADIO Exitos",
+					"author": "Siguiente estación TURADIO Baladas",
+                    "cover": "https://c0.klipartz.com/pngpicture/884/489/gratis-png-productor-de-musica-disco-compacto-new-york-city-genero-musical-discos.png",
+                    "background": "https://images4.alphacoders.com/202/thumb-1920-202036.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/6aggxv60w7zuv.aac",
+					"title":"TURADIO Baladas en español",
+					"author": "Siguiente estación TURADIO Tropical",
+                    "cover": "https://www.radiosinergia.cl/wp-content/themes/radiosinergia2019/img/vinyl-vector-platinum-record.png",
+                    "background": "https://images4.alphacoders.com/202/thumb-1920-202036.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/m2vx7szxx7zuv.aac",
+					"title":"TURADIO Tropical",
+					"author": "Siguiente estación TURADIO Décadas",
+                    "cover": "https://static.vecteezy.com/system/resources/previews/001/207/751/non_2x/vinyl-record-png.png",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/f695cdexy7zuv.aac",
+					"title":"TURADIO Décadas",
+					"author": "Siguiente estación TURADIO Venezuela",
+                    "cover": "https://cloud10.todocoleccion.online/discos-vinilo/tc/2015/12/10/05/53229538_29285344.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/sxngy87z67zuv.aac",
+					"title":"TURADIO Venezuela",
+					"author": "Siguiente estación TURADIO Pop",
+                    "cover": "https://i.pinimg.com/originals/e6/da/99/e6da99ff9e29ca63bf9846e34ad75f1f.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/3fht9h9hxy8uv",
+					"title":"TURADIO Pop",
+					"author": "Siguiente estación TURADIO Música Italiana",
+                    "cover": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disco_de_vinilo_7_pulgadas_45_RPM.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "http://stream.zeno.fm/c1cqk93w1f8uv.aac",
+					"title":"TURADIO Italia",
+					"author": "Siguiente estación TURADIO Solo Beatles",
+                    "cover": "https://www.vichaunter.org/wp-content/uploads/14433900-registro-de-lp-de-vinilo-negro-en-el-disco-disco-aislado-en-blanco.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "https://stream.zeno.fm/6tmx3ddb86duv.aac",
+					"title":"TURADIO Beatles",
+					"author": "Siguiente estación TURADIO Ilusion",
+                    "cover": "https://http2.mlstatic.com/D_NQ_NP_634479-MLA41593871382_042020-O.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "https://stream.zeno.fm/ktbsr02tn2zuv.aac",
+					"title":"TURADIO Ilusion",
+					"author": "Siguiente estación TURADIO Solo ABBA",
+                    "cover": "https://thumbs.dreamstime.com/b/vector-la-imagen-del-ejemplo-de-un-expediente-del-disco-del-vinilo-del-vintage-y-del-an%C3%A1logo-rpm-lp-con-la-etiqueta-central-verde-30185977.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				{
+					"pfile": "https://stream.zeno.fm/90c7m6x8mbruv.aac",
+					"title":"TURADIO ABBA",
+					"author": "Siguiente estación TURADIO Éxitos",
+                    "cover": "https://www.merchandisingplaza.es/288721/2/Discos-de-vinilo-ABBA-Vinilo-Abba---Eagle-Thank-For-The-Music--7----Picture-Disc--l.jpg",
+                    "background": "100 Essential Tracks - Pop.jpg",
+                },
+				
+            ]
+        });
+    });
+
+</script>
+
+
+</div>
+
+<footer>
+
+  <marquee>
+    <i> AQUI ESCUCHARÁS 10 ESTACIONES <j> ❤ </j> Realizado por <b>TURADIO</b> turadio1@gmail.com <j> ❤ </j> - Derecho Reservado - Año <script>document.write(new Date().getFullYear());</script>
+  </marquee>
+</footer>
+
+</section></body>
+</html>
