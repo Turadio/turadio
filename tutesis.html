@@ -425,17 +425,173 @@
                 </div>
             </div>
         </div>
+
+        <!-- Paso 3: Marco Teórico -->
+        <div class="step-content" id="step3">
+            <div class="section">
+                <h2>Paso 3: Marco Teórico y Antecedentes</h2>
+                
+                <div class="form-group">
+                    <label for="theoreticalFramework">Marco Teórico:</label>
+                    <textarea id="theoreticalFramework" placeholder="Describa las teorías y conceptos que sustentan la investigación..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="researchBackground">Antecedentes de la Investigación:</label>
+                    <textarea id="researchBackground" placeholder="Mencione investigaciones previas relacionadas con el tema..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="basicConcepts">Definición de Términos Básicos:</label>
+                    <textarea id="basicConcepts" placeholder="Defina los conceptos clave de su investigación..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="legalBases">Bases Legales (si aplica):</label>
+                    <textarea id="legalBases" placeholder="Mencione las leyes o normativas relevantes..."></textarea>
+                </div>
+                
+                <div class="deepseek-assistant">
+                    <h3>💡 Asistente DeepSeek - Paso 3</h3>
+                    <p>Prompts específicos para Marco Teórico:</p>
+                    <div class="prompt-suggestions">
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Marco Teórico:</strong>
+                            <p>"Desarrolla un marco teórico para investigación sobre [mi tema]. Incluye teorías principales, autores relevantes y conceptos fundamentales."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Antecedentes:</strong>
+                            <p>"Identifica 5 investigaciones previas relevantes sobre [mi tema]. Para cada una, menciona autor, año, objetivo principal y hallazgos."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Definición de términos:</strong>
+                            <p>"Define 8 términos básicos esenciales para comprender una investigación sobre [mi tema]. Incluye definiciones académicas."</p>
+                        </div>
+                    </div>
+                    <button class="btn-info btn-small" onclick="openDeepSeek()">Abrir DeepSeek Chat</button>
+                </div>
+                
+                <div class="navigation">
+                    <button onclick="showStep(2)">Paso Anterior</button>
+                    <button class="btn-success" onclick="saveProgress()">Guardar Progreso</button>
+                    <button class="btn-primary" onclick="showStep(4)">Siguiente Paso</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 4: Metodología -->
+        <div class="step-content" id="step4">
+            <div class="section">
+                <h2>Paso 4: Metodología de la Investigación</h2>
+                
+                <div class="form-group">
+                    <label for="researchModality">Modalidad de la Investigación:</label>
+                    <select id="researchModality">
+                        <option value="">Seleccione la modalidad</option>
+                        <option value="campo">De Campo</option>
+                        <option value="documental">Documental</option>
+                        <option value="experimental">Experimental</option>
+                        <option value="mixta">Mixta</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="researchLevel">Nivel de la Investigación:</label>
+                    <select id="researchLevel">
+                        <option value="">Seleccione el nivel</option>
+                        <option value="exploratorio">Exploratorio</option>
+                        <option value="descriptivo">Descriptivo</option>
+                        <option value="explicativo">Explicativo</option>
+                        <option value="correlacional">Correlacional</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="populationSample">Población y Muestra:</label>
+                    <textarea id="populationSample" placeholder="Describa la población de estudio y el método de muestreo..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dataCollection">Técnicas e Instrumentos de Recolección de Datos:</label>
+                    <textarea id="dataCollection" placeholder="Describa los instrumentos seleccionados..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dataAnalysis">Técnicas de Análisis de Datos:</label>
+                    <textarea id="dataAnalysis" placeholder="Describa las técnicas para analizar los datos..."></textarea>
+                </div>
+                
+                <div class="deepseek-assistant">
+                    <h3>💡 Asistente DeepSeek - Paso 4</h3>
+                    <p>Prompts específicos para Metodología:</p>
+                    <div class="prompt-suggestions">
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Diseño metodológico:</strong>
+                            <p>"Propón un diseño metodológico completo para investigación sobre [mi tema]. Incluye tipo, nivel, enfoque y diseño de investigación."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Población y muestra:</strong>
+                            <p>"Define la población y muestra apropiada para investigación sobre [mi tema]. Incluye criterios de inclusión/exclusión y tamaño muestral."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Instrumentos de recolección:</strong>
+                            <p>"Diseña los instrumentos de recolección de datos para investigación sobre [mi tema]. Incluye cuestionarios, entrevistas o guías de observación."</p>
+                        </div>
+                    </div>
+                    <button class="btn-info btn-small" onclick="openDeepSeek()">Abrir DeepSeek Chat</button>
+                </div>
+                
+                <div class="navigation">
+                    <button onclick="showStep(3)">Paso Anterior</button>
+                    <button class="btn-success" onclick="saveProgress()">Guardar Progreso</button>
+                    <button class="btn-primary" onclick="showStep(5)">Siguiente Paso</button>
+                </div>
+            </div>
+        </div>
         
-        <!-- Los pasos 3, 4 y 5 continuarían con la misma estructura -->
-        
-        <!-- Paso 5: Exportación -->
+        <!-- Paso 5: Resultados y Conclusiones -->
         <div class="step-content" id="step5">
             <div class="section">
-                <h2>Paso 5: Exportar tu Investigación</h2>
+                <h2>Paso 5: Resultados, Conclusiones y Exportación</h2>
+                
+                <div class="form-group">
+                    <label for="expectedResults">Resultados Esperados:</label>
+                    <textarea id="expectedResults" placeholder="Describa los resultados que espera obtener..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resultsPresentation">Presentación de Resultados:</label>
+                    <textarea id="resultsPresentation" placeholder="Describa cómo presentará los resultados..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="conclusions">Conclusiones y Recomendaciones:</label>
+                    <textarea id="conclusions" placeholder="Redacte las conclusiones y recomendaciones..."></textarea>
+                </div>
                 
                 <div class="form-group">
                     <label for="finalReview">Revisión Final:</label>
-                    <textarea id="finalReview" placeholder="Realiza ajustes finales a tu investigación..."></textarea>
+                    <textarea id="finalReview" placeholder="Realice ajustes finales a su investigación..."></textarea>
+                </div>
+                
+                <div class="deepseek-assistant">
+                    <h3>💡 Asistente DeepSeek - Paso 5</h3>
+                    <p>Prompts para resultados y conclusiones:</p>
+                    <div class="prompt-suggestions">
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Resultados esperados:</strong>
+                            <p>"Describe los resultados esperados para investigación sobre [mi tema]. Incluye hallazgos cuantitativos y cualitativos probables."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Conclusiones:</strong>
+                            <p>"Redacta conclusiones sólidas para investigación sobre [mi tema]. Relaciónalas con los objetivos planteados."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Recomendaciones:</strong>
+                            <p>"Formula recomendaciones prácticas y académicas derivadas de investigación sobre [mi tema]."</p>
+                        </div>
+                    </div>
+                    <button class="btn-info btn-small" onclick="openDeepSeek()">Abrir DeepSeek Chat</button>
                 </div>
                 
                 <div class="export-options">
@@ -468,7 +624,19 @@
             generalObjective: '',
             specificObjectives: '',
             justification: '',
-            // ... otros campos
+            theoreticalFramework: '',
+            researchBackground: '',
+            basicConcepts: '',
+            legalBases: '',
+            researchModality: '',
+            researchLevel: '',
+            populationSample: '',
+            dataCollection: '',
+            dataAnalysis: '',
+            expectedResults: '',
+            resultsPresentation: '',
+            conclusions: '',
+            finalReview: ''
         };
         
         // Mostrar paso específico
@@ -547,7 +715,19 @@
                 generalObjective: document.getElementById('generalObjective').value,
                 specificObjectives: document.getElementById('specificObjectives').value,
                 justification: document.getElementById('researchJustification').value,
-                // ... otros campos
+                theoreticalFramework: document.getElementById('theoreticalFramework').value,
+                researchBackground: document.getElementById('researchBackground').value,
+                basicConcepts: document.getElementById('basicConcepts').value,
+                legalBases: document.getElementById('legalBases').value,
+                researchModality: document.getElementById('researchModality').value,
+                researchLevel: document.getElementById('researchLevel').value,
+                populationSample: document.getElementById('populationSample').value,
+                dataCollection: document.getElementById('dataCollection').value,
+                dataAnalysis: document.getElementById('dataAnalysis').value,
+                expectedResults: document.getElementById('expectedResults').value,
+                resultsPresentation: document.getElementById('resultsPresentation').value,
+                conclusions: document.getElementById('conclusions').value,
+                finalReview: document.getElementById('finalReview').value
             };
             
             localStorage.setItem('researchData', JSON.stringify(researchData));
@@ -568,6 +748,19 @@
                 document.getElementById('generalObjective').value = researchData.generalObjective || '';
                 document.getElementById('specificObjectives').value = researchData.specificObjectives || '';
                 document.getElementById('researchJustification').value = researchData.justification || '';
+                document.getElementById('theoreticalFramework').value = researchData.theoreticalFramework || '';
+                document.getElementById('researchBackground').value = researchData.researchBackground || '';
+                document.getElementById('basicConcepts').value = researchData.basicConcepts || '';
+                document.getElementById('legalBases').value = researchData.legalBases || '';
+                document.getElementById('researchModality').value = researchData.researchModality || '';
+                document.getElementById('researchLevel').value = researchData.researchLevel || '';
+                document.getElementById('populationSample').value = researchData.populationSample || '';
+                document.getElementById('dataCollection').value = researchData.dataCollection || '';
+                document.getElementById('dataAnalysis').value = researchData.dataAnalysis || '';
+                document.getElementById('expectedResults').value = researchData.expectedResults || '';
+                document.getElementById('resultsPresentation').value = researchData.resultsPresentation || '';
+                document.getElementById('conclusions').value = researchData.conclusions || '';
+                document.getElementById('finalReview').value = researchData.finalReview || '';
                 
                 alert('📚 Progreso anterior cargado');
             }
@@ -603,23 +796,61 @@
         
         // Generar contenido completo de la tesis
         function generateFullThesis() {
-            return `Tesis: ${researchData.title || 'Investigación'}
+            return `TESIS DE INVESTIGACIÓN
 
-Área: ${researchData.area || 'No especificada'}
+TÍTULO: ${researchData.title || 'Por definir'}
+TEMA: ${researchData.topic || 'Por definir'}
+ÁREA: ${researchData.area || 'No especificada'}
 
-PLANTEAMIENTO DEL PROBLEMA:
+1. PLANTEAMIENTO DEL PROBLEMA:
 ${researchData.problem || 'Por completar'}
 
-OBJETIVO GENERAL:
+2. OBJETIVOS:
+Objetivo General:
 ${researchData.generalObjective || 'Por completar'}
 
-OBJETIVOS ESPECÍFICOS:
+Objetivos Específicos:
 ${researchData.specificObjectives || 'Por completar'}
 
-JUSTIFICACIÓN:
+3. JUSTIFICACIÓN:
 ${researchData.justification || 'Por completar'}
 
---- Generado con Asistente Inteligente para Tesis ---`;
+4. MARCO TEÓRICO:
+${researchData.theoreticalFramework || 'Por completar'}
+
+5. ANTECEDENTES:
+${researchData.researchBackground || 'Por completar'}
+
+6. DEFINICIÓN DE TÉRMINOS:
+${researchData.basicConcepts || 'Por completar'}
+
+7. BASES LEGALES:
+${researchData.legalBases || 'No aplica'}
+
+8. METODOLOGÍA:
+Modalidad: ${researchData.researchModality || 'Por definir'}
+Nivel: ${researchData.researchLevel || 'Por definir'}
+
+Población y Muestra:
+${researchData.populationSample || 'Por completar'}
+
+Técnicas e Instrumentos:
+${researchData.dataCollection || 'Por completar'}
+
+Análisis de Datos:
+${researchData.dataAnalysis || 'Por completar'}
+
+9. RESULTADOS ESPERADOS:
+${researchData.expectedResults || 'Por completar'}
+
+10. PRESENTACIÓN DE RESULTADOS:
+${researchData.resultsPresentation || 'Por completar'}
+
+11. CONCLUSIONES Y RECOMENDACIONES:
+${researchData.conclusions || 'Por completar'}
+
+--- Generado con Asistente Inteligente para Tesis ---
+Fecha: ${new Date().toLocaleDateString()}`;
         }
         
         // Inicializar - Cargar progreso al iniciar
