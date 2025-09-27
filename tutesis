@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Inteligente para Tesis - TUTESIS</title>
+    <style>
+        :root {
+            --primary-color: #f2f4f5;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+        
+        .btn-info {
+            background-color: var(--info-color);
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            font-weight: bold;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .step-circle.active {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .step-circle.completed {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        .Inteligencia Artificial-assistant {
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--info-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .prompt-suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .prompt-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .prompt-card:hover {
+            border-color: var(--info-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .export-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .research-status {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .status-icon.completed {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .prompt-suggestions {
+                grid-template-columns: 1fr;
+            }
+            
+            .export-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+	        <p><h1> TUTESIS</H1><p>
+		<p>Integrado con Inteligencia Artificial - Trabaja sección por sección</p>
+    </header>
+    
+    <div class="container">
+        <div class="research-status">
+            <h3>Progreso de tu Investigación</h3>
+            <div class="status-item">
+                <div class="status-icon" id="status-1">1</div>
+                <span>Información Básica</span>
+            </div>
+            <div class="status-item">
+                <div class="status-icon" id="status-2">2</div>
+                <span>Problema y Objetivos</span>
+            </div>
+            <div class="status-item">
+                <div class="status-icon" id="status-3">3</div>
+                <span>Marco Teórico</span>
+            </div>
+            <div class="status-item">
+                <div class="status-icon" id="status-4">4</div>
+                <span>Metodología</span>
+            </div>
+            <div class="status-item">
+                <div class="status-icon" id="status-5">5</div>
+                <span>Resultados y Conclusiones</span>
+            </div>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-circle active" data-step="1">1</div>
+            <div class="step-circle" data-step="2">2</div>
+            <div class="step-circle" data-step="3">3</div>
+            <div class="step-circle" data-step="4">4</div>
+            <div class="step-circle" data-step="5">5</div>
+        </div>
+        
+        <!-- Paso 1: Información Básica -->
+        <div class="step-content active" id="step1">
+            <div class="section">
+                <h2>Paso 1: Información Básica de la Investigación</h2>
+                
+                <div class="form-group">
+                    <label for="researchTopic">Tema de Investigación:</label>
+                    <input type="text" id="researchTopic" placeholder="Ej: Estilo de vida saludable en los estudiantes de enfermería">
+                </div>
+                
+                <div class="form-group">
+                    <label for="researchArea">Área de Investigación:</label>
+                    <select id="researchArea">
+                        <option value="">Seleccione un área</option>
+                        <option value="ciencias-sociales">Ciencias Sociales</option>
+                        <option value="ciencias-salud">Ciencias de la Salud</option>
+                        <option value="ingenieria-tecnologia">Ingeniería y Tecnología</option>
+                        <option value="ciencias-naturales">Ciencias Naturales</option>
+                        <option value="humanidades">Humanidades</option>
+                        <option value="educacion">Educación</option>
+                        <option value="administracion">Administración y Negocios</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="researchTitle">Título de la Investigación:</label>
+                    <input type="text" id="researchTitle" placeholder="Ej: Estilo de vida saludable en los estudiantes de enfermería">
+                </div>
+                
+                <div class="Inteligencia Artificial-assistant">
+                    <h3>Asistente Inteligencia Artificial</h3>
+                    <p>Para generar un buen título con Inteligencia Artificial, usa este prompt:</p>
+                    <div class="prompt-suggestions">
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Prompt para título:</strong>
+                            <p>"Genera 3 opciones de título académico para una investigación sobre [mi tema] en el área de [mi área]. Los títulos deben ser claros, específicos y apropiados para nivel universitario."</p>
+                        </div>
+                    </div>
+                    <button class="btn-info btn-small" onclick="openInteligencia Artificial()">Abrir AI Chat</button>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn-success" onclick="saveProgress()">Guardar Progreso</button>
+                    <button class="btn-primary" onclick="showStep(2)">Siguiente Paso</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 2: Planteamiento del Problema y Objetivos -->
+        <div class="step-content" id="step2">
+            <div class="section">
+                <h2>Paso 2: Planteamiento del Problema y Objetivos</h2>
+                
+                <div class="form-group">
+                    <label for="problemStatement">Planteamiento del Problema:</label>
+                    <textarea id="problemStatement" placeholder="Describa claramente el problema de investigación..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="generalObjective">Objetivo General:</label>
+                    <textarea id="generalObjective" placeholder="Objetivo principal de la investigación..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specificObjectives">Objetivos Específicos (uno por línea):</label>
+                    <textarea id="specificObjectives" placeholder="Objetivo específico 1\nObjetivo específico 2\n..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="researchJustification">Justificación:</label>
+                    <textarea id="researchJustification" placeholder="Explique por qué es importante esta investigación..."></textarea>
+                </div>
+                
+                <div class="Inteligencia Artificial-assistant">
+                    <h3>Asistente Inteligencia Artificial - Paso 2</h3>
+                    <p>Prompts específicos para esta sección:</p>
+                    <div class="prompt-suggestions">
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Planteamiento del problema:</strong>
+                            <p>"Redacta un planteamiento del problema académico para investigación sobre [mi tema]. Incluye contexto, problemática central, consecuencias y vacío en la literatura."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Objetivos:</strong>
+                            <p>"Formula un objetivo general y 4 objetivos específicos para una investigación sobre [mi tema]. Los objetivos deben ser medibles y alcanzables."</p>
+                        </div>
+                        <div class="prompt-card" onclick="copyPrompt(this)">
+                            <strong>Justificación:</strong>
+                            <p>"Elabora una justificación académica para investigación sobre [mi tema]. Incluye justificación teórica, práctica y metodológica."</p>
+                        </div>
+                    </div>
+                    <button class="btn-info btn-small" onclick="openInteligencia Artificial()">Abrir AI Chat</button>
+                </div>
+                
+                <div class="navigation">
+                    <button onclick="showStep(1)">Paso Anterior</button>
+                    <button class="btn-success" onclick="saveProgress()">Guardar Progreso</button>
+                    <button class="btn-primary" onclick="showStep(3)">Siguiente Paso</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Los pasos 3, 4 y 5 continuarían con la misma estructura -->
+        
+        <!-- Paso 5: Exportación -->
+        <div class="step-content" id="step5">
+            <div class="section">
+                <h2>Paso 5: Exportar tu Investigación</h2>
+                
+                <div class="form-group">
+                    <label for="finalReview">Revisión Final:</label>
+                    <textarea id="finalReview" placeholder="Realiza ajustes finales a tu investigación..."></textarea>
+                </div>
+                
+                <div class="export-options">
+                    <button class="btn-success" onclick="exportToWord()">Exportar a Word</button>
+                    <button class="btn-primary" onclick="exportToPDF()">Exportar a PDF</button>
+                    <button class="btn-info" onclick="saveToLocal()">Guardar Localmente</button>
+                    <button class="btn-warning" onclick="printThesis()">Imprimir</button>
+                </div>
+                
+                <div class="navigation">
+                    <button onclick="showStep(4)">Paso Anterior</button>
+                    <button class="btn-success" onclick="saveProgress()">Guardar Progreso</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Asistente Inteligente para Tesis - Integrado con Inteligencia Artificial &copy; 2023</p>
+        <p>Consejo: Usa <a href="https://chat.Inteligencia Artificial.com" target="_blank" style="color: #3498db;">Inteligencia Artificial Chat</a> en otra pestaña para generar contenido</p>
+    </footer>
+
+    <script>
+        // Estado de la investigación
+        let researchData = {
+            topic: '',
+            area: '',
+            title: '',
+            problem: '',
+            generalObjective: '',
+            specificObjectives: '',
+            justification: '',
+            // ... otros campos
+        };
+        
+        // Mostrar paso específico
+        function showStep(stepNumber) {
+            // Ocultar todos los pasos
+            document.querySelectorAll('.step-content').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Mostrar el paso seleccionado
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            
+            // Actualizar indicadores
+            document.querySelectorAll('.step-circle').forEach((circle, index) => {
+                if (index + 1 === stepNumber) {
+                    circle.classList.add('active');
+                } else {
+                    circle.classList.remove('active');
+                }
+            });
+            
+            // Actualizar estado
+            updateStatus(stepNumber);
+        }
+        
+        // Actualizar estado de completitud
+        function updateStatus(currentStep) {
+            for (let i = 1; i <= 5; i++) {
+                const statusIcon = document.getElementById(`status-${i}`);
+                if (i < currentStep) {
+                    statusIcon.classList.add('completed');
+                    statusIcon.innerHTML = '✓';
+                } else if (i === currentStep) {
+                    statusIcon.classList.remove('completed');
+                    statusIcon.innerHTML = i;
+                } else {
+                    statusIcon.classList.remove('completed');
+                    statusIcon.innerHTML = i;
+                }
+            }
+        }
+        
+        // Copiar prompt al portapapeles
+        function copyPrompt(element) {
+            const promptText = element.querySelector('p').textContent;
+            const topic = document.getElementById('researchTopic').value || '[mi tema]';
+            const area = document.getElementById('researchArea').value || '[mi área]';
+            
+            const finalPrompt = promptText
+                .replace('[mi tema]', topic)
+                .replace('[mi área]', area);
+            
+            navigator.clipboard.writeText(finalPrompt).then(() => {
+                // Efecto visual de copiado
+                element.style.backgroundColor = '#e8f5e8';
+                element.style.borderColor = '#4caf50';
+                setTimeout(() => {
+                    element.style.backgroundColor = '';
+                    element.style.borderColor = '';
+                }, 1000);
+            });
+        }
+        
+        // Abrir Inteligencia Artificial en nueva pestaña
+        function openInteligencia Artificial() {
+            window.open('https://chat.Inteligencia Artificial.com', '_blank');
+        }
+        
+        // Guardar progreso en localStorage
+        function saveProgress() {
+            researchData = {
+                topic: document.getElementById('researchTopic').value,
+                area: document.getElementById('researchArea').value,
+                title: document.getElementById('researchTitle').value,
+                problem: document.getElementById('problemStatement').value,
+                generalObjective: document.getElementById('generalObjective').value,
+                specificObjectives: document.getElementById('specificObjectives').value,
+                justification: document.getElementById('researchJustification').value,
+                // ... otros campos
+            };
+            
+            localStorage.setItem('researchData', JSON.stringify(researchData));
+            alert('Progreso guardado correctamente');
+        }
+        
+        // Cargar progreso guardado
+        function loadProgress() {
+            const savedData = localStorage.getItem('researchData');
+            if (savedData) {
+                researchData = JSON.parse(savedData);
+                
+                // Llenar campos con datos guardados
+                document.getElementById('researchTopic').value = researchData.topic || '';
+                document.getElementById('researchArea').value = researchData.area || '';
+                document.getElementById('researchTitle').value = researchData.title || '';
+                document.getElementById('problemStatement').value = researchData.problem || '';
+                document.getElementById('generalObjective').value = researchData.generalObjective || '';
+                document.getElementById('specificObjectives').value = researchData.specificObjectives || '';
+                document.getElementById('researchJustification').value = researchData.justification || '';
+                
+                alert('Progreso anterior cargado');
+            }
+        }
+        
+        // Exportar a Word (simulado)
+        function exportToWord() {
+            alert('Función de exportación a Word - En un sistema real esto generaría un documento .docx');
+            // En implementación real, aquí iría la lógica para generar un Word
+        }
+        
+        // Exportar a PDF (simulado)
+        function exportToPDF() {
+            alert('Función de exportación a PDF - En un sistema real esto generaría un PDF');
+            // En implementación real, aquí iría la lógica para generar un PDF
+        }
+        
+        // Guardar localmente
+        function saveToLocal() {
+            const content = generateFullThesis();
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tesis-${researchData.topic || 'investigacion'}.txt`;
+            a.click();
+        }
+        
+        // Imprimir
+        function printThesis() {
+            window.print();
+        }
+        
+        // Generar contenido completo de la tesis
+        function generateFullThesis() {
+            return `Tesis: ${researchData.title || 'Investigación'}
+
+Área: ${researchData.area || 'No especificada'}
+
+PLANTEAMIENTO DEL PROBLEMA:
+${researchData.problem || 'Por completar'}
+
+OBJETIVO GENERAL:
+${researchData.generalObjective || 'Por completar'}
+
+OBJETIVOS ESPECÍFICOS:
+${researchData.specificObjectives || 'Por completar'}
+
+JUSTIFICACIÓN:
+${researchData.justification || 'Por completar'}
+
+--- Generado con Asistente Inteligente para Tesis ---`;
+        }
+        
+        // Inicializar - Cargar progreso al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            
+            // Hacer los círculos de paso clickeables
+            document.querySelectorAll('.step-circle').forEach(circle => {
+                circle.addEventListener('click', function() {
+                    const step = parseInt(this.getAttribute('data-step'));
+                    showStep(step);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
