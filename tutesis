@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ido <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistente Inteligente para Tesis - TUTESIS</title>
+    <title>Bienvenido -  Asistente Inteligente para Tesis - TUTESIS</title>
     <style>
         :root {
             --primary-color: #f2f4f5;
