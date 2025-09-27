@@ -1,12 +1,12 @@
-ido -<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido - Asistente Inteligente para Tesis - TUTESIS</title>
+    <title>Asistente Inteligente para Tesis - Integrado con DeepSeek</title>
     <style>
         :root {
-            --primary-color: #f2f4f5;
+            --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
             --light-color: #ecf0f1;
@@ -191,7 +191,7 @@ ido -<!DOCTYPE html>
             display: block;
         }
         
-        .Inteligencia Artificial-assistant {
+        .deepseek-assistant {
             background-color: #e8f4f8;
             border-left: 4px solid var(--info-color);
             padding: 1rem;
@@ -287,8 +287,8 @@ ido -<!DOCTYPE html>
 </head>
 <body>
     <header>
-	        <p><h1> TUTESIS</H1><p>
-		<p>Integrado con Inteligencia Artificial - Trabaja sección por sección</p>
+        <h1>Asistente Inteligente para Tesis</h1>
+        <p>Integrado con DeepSeek - Trabaja sección por sección</p>
     </header>
     
     <div class="container">
@@ -331,7 +331,7 @@ ido -<!DOCTYPE html>
                 
                 <div class="form-group">
                     <label for="researchTopic">Tema de Investigación:</label>
-                    <input type="text" id="researchTopic" placeholder="Ej: Estilo de vida saludable en los estudiantes de enfermería">
+                    <input type="text" id="researchTopic" placeholder="Ej: Impacto de las redes sociales en adolescentes">
                 </div>
                 
                 <div class="form-group">
@@ -351,19 +351,19 @@ ido -<!DOCTYPE html>
                 
                 <div class="form-group">
                     <label for="researchTitle">Título de la Investigación:</label>
-                    <input type="text" id="researchTitle" placeholder="Ej: Estilo de vida saludable en los estudiantes de enfermería">
+                    <input type="text" id="researchTitle" placeholder="Ej: Influencia de Instagram en la autoestima de adolescentes">
                 </div>
                 
-                <div class="Inteligencia Artificial-assistant">
-                    <h3>Asistente Inteligencia Artificial</h3>
-                    <p>Para generar un buen título con Inteligencia Artificial, usa este prompt:</p>
+                <div class="deepseek-assistant">
+                    <h3>💡 Asistente DeepSeek</h3>
+                    <p>Para generar un buen título con DeepSeek, usa este prompt:</p>
                     <div class="prompt-suggestions">
                         <div class="prompt-card" onclick="copyPrompt(this)">
                             <strong>Prompt para título:</strong>
                             <p>"Genera 3 opciones de título académico para una investigación sobre [mi tema] en el área de [mi área]. Los títulos deben ser claros, específicos y apropiados para nivel universitario."</p>
                         </div>
                     </div>
-                    <button class="btn-info btn-small" onclick="openInteligencia Artificial()">Abrir AI Chat</button>
+                    <button class="btn-info btn-small" onclick="openDeepSeek()">Abrir DeepSeek Chat</button>
                 </div>
                 
                 <div class="navigation">
@@ -398,8 +398,8 @@ ido -<!DOCTYPE html>
                     <textarea id="researchJustification" placeholder="Explique por qué es importante esta investigación..."></textarea>
                 </div>
                 
-                <div class="Inteligencia Artificial-assistant">
-                    <h3>Asistente Inteligencia Artificial - Paso 2</h3>
+                <div class="deepseek-assistant">
+                    <h3>💡 Asistente DeepSeek - Paso 2</h3>
                     <p>Prompts específicos para esta sección:</p>
                     <div class="prompt-suggestions">
                         <div class="prompt-card" onclick="copyPrompt(this)">
@@ -415,7 +415,7 @@ ido -<!DOCTYPE html>
                             <p>"Elabora una justificación académica para investigación sobre [mi tema]. Incluye justificación teórica, práctica y metodológica."</p>
                         </div>
                     </div>
-                    <button class="btn-info btn-small" onclick="openInteligencia Artificial()">Abrir AI Chat</button>
+                    <button class="btn-info btn-small" onclick="openDeepSeek()">Abrir DeepSeek Chat</button>
                 </div>
                 
                 <div class="navigation">
@@ -439,10 +439,10 @@ ido -<!DOCTYPE html>
                 </div>
                 
                 <div class="export-options">
-                    <button class="btn-success" onclick="exportToWord()">Exportar a Word</button>
-                    <button class="btn-primary" onclick="exportToPDF()">Exportar a PDF</button>
-                    <button class="btn-info" onclick="saveToLocal()">Guardar Localmente</button>
-                    <button class="btn-warning" onclick="printThesis()">Imprimir</button>
+                    <button class="btn-success" onclick="exportToWord()">📄 Exportar a Word</button>
+                    <button class="btn-primary" onclick="exportToPDF()">📊 Exportar a PDF</button>
+                    <button class="btn-info" onclick="saveToLocal()">💾 Guardar Localmente</button>
+                    <button class="btn-warning" onclick="printThesis()">🖨️ Imprimir</button>
                 </div>
                 
                 <div class="navigation">
@@ -454,8 +454,8 @@ ido -<!DOCTYPE html>
     </div>
     
     <footer>
-        <p>Asistente Inteligente para Tesis - Integrado con Inteligencia Artificial &copy; 2023</p>
-        <p>Consejo: Usa <a href="https://chat.Inteligencia Artificial.com" target="_blank" style="color: #3498db;">Inteligencia Artificial Chat</a> en otra pestaña para generar contenido</p>
+        <p>Asistente Inteligente para Tesis - Integrado con DeepSeek &copy; 2023</p>
+        <p>💡 Consejo: Usa <a href="https://chat.deepseek.com" target="_blank" style="color: #3498db;">DeepSeek Chat</a> en otra pestaña para generar contenido</p>
     </footer>
 
     <script>
@@ -532,9 +532,9 @@ ido -<!DOCTYPE html>
             });
         }
         
-        // Abrir Inteligencia Artificial en nueva pestaña
-        function openInteligencia Artificial() {
-            window.open('https://chat.Inteligencia Artificial.com', '_blank');
+        // Abrir DeepSeek en nueva pestaña
+        function openDeepSeek() {
+            window.open('https://chat.deepseek.com', '_blank');
         }
         
         // Guardar progreso en localStorage
@@ -551,7 +551,7 @@ ido -<!DOCTYPE html>
             };
             
             localStorage.setItem('researchData', JSON.stringify(researchData));
-            alert('Progreso guardado correctamente');
+            alert('✅ Progreso guardado correctamente');
         }
         
         // Cargar progreso guardado
@@ -569,19 +569,19 @@ ido -<!DOCTYPE html>
                 document.getElementById('specificObjectives').value = researchData.specificObjectives || '';
                 document.getElementById('researchJustification').value = researchData.justification || '';
                 
-                alert('Progreso anterior cargado');
+                alert('📚 Progreso anterior cargado');
             }
         }
         
         // Exportar a Word (simulado)
         function exportToWord() {
-            alert('Función de exportación a Word - En un sistema real esto generaría un documento .docx');
+            alert('📄 Función de exportación a Word - En un sistema real esto generaría un documento .docx');
             // En implementación real, aquí iría la lógica para generar un Word
         }
         
         // Exportar a PDF (simulado)
         function exportToPDF() {
-            alert('Función de exportación a PDF - En un sistema real esto generaría un PDF');
+            alert('📊 Función de exportación a PDF - En un sistema real esto generaría un PDF');
             // En implementación real, aquí iría la lógica para generar un PDF
         }
         
