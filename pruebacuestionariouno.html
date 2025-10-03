@@ -262,22 +262,22 @@
         <div class="options">
             <div class="option" onclick="selectOption(1)">
                 <input type="radio" id="option1" name="academicOption" value="1">
-                <label for="option1">Nunca <span class="value">(Valor: 1)</span></label>
+                <label for="option1">Nunca <span class="value">(1)</span></label>
             </div>
             
             <div class="option" onclick="selectOption(2)">
                 <input type="radio" id="option2" name="academicOption" value="2">
-                <label for="option2">Rara vez (1-2 veces al mes) <span class="value">(Valor: 2)</span></label>
+                <label for="option2">Rara vez (1-2 veces al mes) <span class="value">(2)</span></label>
             </div>
             
             <div class="option" onclick="selectOption(3)">
                 <input type="radio" id="option3" name="academicOption" value="3">
-                <label for="option3">A veces (1-2 veces a la semana) <span class="value">(Valor: 3)</span></label>
+                <label for="option3">A veces (1-2 veces a la semana) <span class="value">(3)</span></label>
             </div>
             
             <div class="option" onclick="selectOption(4)">
                 <input type="radio" id="option4" name="academicOption" value="4">
-                <label for="option4">Frecuentemente (3 o más veces a la semana) <span class="value">(Valor: 4)</span></label>
+                <label for="option4">Frecuentemente (3 o más veces a la semana) <span class="value">(4)</span></label>
             </div>
         </div>
         
@@ -286,11 +286,16 @@
             <button id="downloadBtn" onclick="downloadResults()" disabled>Descargar Resultados</button>
         </div>
         
-                    
+        <div class="result" id="resultSection">
+            <h3>Resultado de la Encuesta</h3>
+            <p><strong>Pregunta:</strong> ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?</p>
+            <p id="selectedAnswer"><strong>Respuesta seleccionada:</strong></p>
+            <div class="score" id="scoreValue">Selección: </div>
+            
             <div id="emailStatus"></div>
             
             <div class="interpretation">
-                <h4>Interpretación de la puntuación:</h4>
+                <h4>Interpretación de la Selección:</h4>
                 <p id="interpretationText"></p>
             </div>
         </div>
@@ -361,7 +366,7 @@
                 
                 // Update result text
                 document.getElementById('selectedAnswer').innerHTML = `<strong>Respuesta seleccionada:</strong> ${selectedText}`;
-                document.getElementById('scoreValue').textContent = `Puntuación: ${selectedValue}`;
+                document.getElementById('scoreValue').textContent = `Selección: ${selectedValue}`;
                 
                 // Mostrar estado del correo
                 const emailStatus = document.getElementById('emailStatus');
@@ -418,11 +423,11 @@
             const score = selectedValue;
             
             const content = `ENCUESTA ACADÉMICA - RESULTADOS\n\n` +
-                           `Pregunta: ${question}\n` +
-                           `Respuesta seleccionada: ${answer}\n` +
-                           `Valor de la respuesta: ${score}\n\n` +
+                           `: ${question}\n` +
+                           `: ${answer}\n` +
+                           `: ${score}\n\n` +
                            `Fecha: ${new Date().toLocaleString()}\n` +
-                           `Interpretación: ${document.getElementById('interpretationText').textContent}`;
+                           `: ${document.getElementById('interpretationText').textContent}`;
             
             // Create and download the file
             const blob = new Blob([content], { type: 'text/plain' });
