@@ -1,0 +1,469 @@
+# Página Web para Encuesta Académica con Envío por Correo
+
+Te he modificado el código para que las respuestas se envíen automáticamente a tu correo danvenezuela@gmail.com usando EmailJS:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Académica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .description {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .question {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            border-color: #3498db;
+            background-color: #f8fafc;
+        }
+        
+        .option.selected {
+            border-color: #3498db;
+            background-color: #e1f0fa;
+        }
+        
+        .option input {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        
+        .option label {
+            font-size: 16px;
+            color: #2c3e50;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .value {
+            font-weight: bold;
+            color: #3498db;
+            margin-left: 10px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #submitBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        #submitBtn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        #submitBtn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        #downloadBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        #downloadBtn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        #downloadBtn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            display: none;
+        }
+        
+        .result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .result p {
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        
+        .result .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .interpretation {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+        }
+        
+        .interpretation h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .interpretation p {
+            color: #34495e;
+            line-height: 1.5;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .email-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .email-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .email-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .question {
+                font-size: 18px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta Académica</h1>
+        <p class="description">Su participación nos ayuda a comprender mejor las cargas académicas</p>
+        
+        <div class="question">
+            ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?
+        </div>
+        
+        <div class="options">
+            <div class="option" onclick="selectOption(1)">
+                <input type="radio" id="option1" name="academicOption" value="1">
+                <label for="option1">Nunca <span class="value">(Valor: 1)</span></label>
+            </div>
+            
+            <div class="option" onclick="selectOption(2)">
+                <input type="radio" id="option2" name="academicOption" value="2">
+                <label for="option2">Rara vez (1-2 veces al mes) <span class="value">(Valor: 2)</span></label>
+            </div>
+            
+            <div class="option" onclick="selectOption(3)">
+                <input type="radio" id="option3" name="academicOption" value="3">
+                <label for="option3">A veces (1-2 veces a la semana) <span class="value">(Valor: 3)</span></label>
+            </div>
+            
+            <div class="option" onclick="selectOption(4)">
+                <input type="radio" id="option4" name="academicOption" value="4">
+                <label for="option4">Frecuentemente (3 o más veces a la semana) <span class="value">(Valor: 4)</span></label>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button id="submitBtn" onclick="submitAnswer()" disabled>Enviar Respuesta</button>
+            <button id="downloadBtn" onclick="downloadResults()" disabled>Descargar Resultados</button>
+        </div>
+        
+        <div class="result" id="resultSection">
+            <h3>Resultado de la Encuesta</h3>
+            <p><strong>Pregunta:</strong> ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?</p>
+            <p id="selectedAnswer"><strong>Respuesta seleccionada:</strong></p>
+            <div class="score" id="scoreValue">Puntuación: </div>
+            
+            <div id="emailStatus"></div>
+            
+            <div class="interpretation">
+                <h4>Interpretación de la puntuación:</h4>
+                <p id="interpretationText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar EmailJS - REEMPLAZA CON TUS CREDENCIALES
+        (function() {
+            emailjs.init("4nYJFF-M_hnbkCPtD"); // Reemplaza con tu Public Key de EmailJS
+        })();
+        
+        let selectedValue = 0;
+        let selectedText = "";
+        
+        function selectOption(value) {
+            selectedValue = value;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            event.currentTarget.classList.add('selected');
+            
+            // Check the radio button
+            document.getElementById(`option${value}`).checked = true;
+            
+            // Enable submit button
+            document.getElementById('submitBtn').disabled = false;
+            
+            // Store the selected text
+            switch(value) {
+                case 1:
+                    selectedText = "Nunca";
+                    break;
+                case 2:
+                    selectedText = "Rara vez (1-2 veces al mes)";
+                    break;
+                case 3:
+                    selectedText = "A veces (1-2 veces a la semana)";
+                    break;
+                case 4:
+                    selectedText = "Frecuentemente (3 o más veces a la semana)";
+                    break;
+            }
+        }
+        
+        async function submitAnswer() {
+            if (selectedValue === 0) {
+                alert("Por favor, seleccione una opción antes de enviar.");
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Mostrar loading
+            submitBtn.innerHTML = '<div class="loading"></div> Enviando...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Enviar por correo automáticamente
+                const emailSent = await enviarPorCorreo();
+                
+                // Show result section
+                document.getElementById('resultSection').style.display = 'block';
+                
+                // Update result text
+                document.getElementById('selectedAnswer').innerHTML = `<strong>Respuesta seleccionada:</strong> ${selectedText}`;
+                document.getElementById('scoreValue').textContent = `Puntuación: ${selectedValue}`;
+                
+                // Mostrar estado del correo
+                const emailStatus = document.getElementById('emailStatus');
+                if (emailSent) {
+                    emailStatus.innerHTML = '<div class="email-status email-success">✅ Respuesta enviada correctamente a danvenezuela@gmail.com</div>';
+                } else {
+                    emailStatus.innerHTML = '<div class="email-status email-error">⚠️ Respuesta guardada localmente, pero no se pudo enviar por correo</div>';
+                }
+                
+                // Update interpretation
+                let interpretation = "";
+                switch(selectedValue) {
+                    case 1:
+                        interpretation = "Su respuesta indica que generalmente no experimenta sobrecarga académica. Esto sugiere un buen equilibrio entre sus responsabilidades académicas y su capacidad para manejarlas.";
+                        break;
+                    case 2:
+                        interpretation = "Ocasionalmente experimenta sobrecarga académica, lo cual es común entre estudiantes. Podría beneficiarse de técnicas de organización del tiempo para manejar esos momentos puntuales.";
+                        break;
+                    case 3:
+                        interpretation = "Experimenta sobrecarga académica con regularidad. Esto podría indicar la necesidad de revisar sus estrategias de estudio o buscar apoyo académico para manejar mejor la carga de trabajo.";
+                        break;
+                    case 4:
+                        interpretation = "Experimenta sobrecarga académica frecuentemente. Esto puede afectar su bienestar y rendimiento académico. Considere hablar con un asesor académico o buscar recursos de apoyo estudiantil.";
+                        break;
+                }
+                document.getElementById('interpretationText').textContent = interpretation;
+                
+                // Enable download button
+                document.getElementById('downloadBtn').disabled = false;
+                
+                // Scroll to results
+                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('emailStatus').innerHTML = '<div class="email-status email-error">❌ Error al procesar la respuesta</div>';
+            } finally {
+                // Restaurar botón
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // Función para enviar por correo usando EmailJS
+        async function enviarPorCorreo() {
+            const question = "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?";
+            
+            const templateParams = {
+                to_email: 'danvenezuela@gmail.com',
+                pregunta: question,
+                respuesta: selectedText,
+                puntuacion: selectedValue,
+                fecha: new Date().toLocaleString('es-ES'),
+                interpretacion: document.getElementById('interpretationText').textContent
+            };
+
+            try {
+                // Enviar email usando EmailJS - REEMPLAZA CON TUS CREDENCIALES
+                const response = await emailjs.send('service_xe1bdwm', 'template_jsc3p1g', templateParams); console.log('Correo enviado con éxito:', response);
+                return true;
+            } catch (error) {
+                console.error('Error al enviar correo:', error);
+                return false;
+            }
+        }
+        
+        function downloadResults() {
+            // Create text content for the file
+            const question = "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?";
+            const answer = selectedText;
+            const score = selectedValue;
+            
+            const content = `ENCUESTA ACADÉMICA - RESULTADOS\n\n` +
+                           `Pregunta: ${question}\n` +
+                           `Respuesta seleccionada: ${answer}\n` +
+                           `Valor de la respuesta: ${score}\n\n` +
+                           `Fecha: ${new Date().toLocaleString()}\n` +
+                           `Interpretación: ${document.getElementById('interpretationText').textContent}`;
+            
+            // Create and download the file
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `resultado_encuesta_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
+```
+
