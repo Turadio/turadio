@@ -381,24 +381,7 @@ Te he modificado el código para que las respuestas se envíen automáticamente 
                     emailStatus.innerHTML = '<div class="email-status email-error">⚠️ Respuesta guardada localmente, pero no se pudo enviar por correo</div>';
                 }
                 
-                // Update interpretation
-                let interpretation = "";
-                switch(selectedValue) {
-                    case 1:
-                        interpretation = "Su respuesta indica que generalmente no experimenta sobrecarga académica. Esto sugiere un buen equilibrio entre sus responsabilidades académicas y su capacidad para manejarlas.";
-                        break;
-                    case 2:
-                        interpretation = "Ocasionalmente experimenta sobrecarga académica, lo cual es común entre estudiantes. Podría beneficiarse de técnicas de organización del tiempo para manejar esos momentos puntuales.";
-                        break;
-                    case 3:
-                        interpretation = "Experimenta sobrecarga académica con regularidad. Esto podría indicar la necesidad de revisar sus estrategias de estudio o buscar apoyo académico para manejar mejor la carga de trabajo.";
-                        break;
-                    case 4:
-                        interpretation = "Experimenta sobrecarga académica frecuentemente. Esto puede afectar su bienestar y rendimiento académico. Considere hablar con un asesor académico o buscar recursos de apoyo estudiantil.";
-                        break;
-                }
-                document.getElementById('interpretationText').textContent = interpretation;
-                
+                                
                 // Enable download button
                 document.getElementById('downloadBtn').disabled = false;
                 
@@ -466,6 +449,7 @@ Te he modificado el código para que las respuestas se envíen automáticamente 
 </body>
 </html>
 ```
+
 
 
 
