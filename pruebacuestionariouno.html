@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta Académica</title>
+    <title>Encuesta Académica | Salud Estudiantil</title>
     <style>
         * {
             margin: 0;
@@ -12,182 +12,247 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            line-height: 1.6;
         }
         
         .container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 800px;
-            padding: 30px;
+            max-width: 900px;
+            padding: 40px;
             transition: all 0.3s ease;
-            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        h1 {
-            color: #2c3e50;
+        .header {
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        
-        .description {
-            text-align: center;
-            color: #7f8c8d;
             margin-bottom: 30px;
-            font-size: 16px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header h1 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header .description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
         }
         
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 25px;
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 15px;
             overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .progress {
             height: 100%;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            transition: width 0.4s ease;
             width: 0%;
+            border-radius: 10px;
         }
         
         .progress-text {
             text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-            font-size: 14px;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         
         .question-container {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         
         .question-container.active {
             display: block;
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
         .question {
-            font-size: 18px;
-            color: #2c3e50;
+            font-size: 1.3rem;
+            color: var(--dark);
             margin-bottom: 25px;
             line-height: 1.5;
-            text-align: center;
             font-weight: 600;
         }
         
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 30px;
         }
         
         .option {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            background: white;
         }
         
         .option:hover {
-            border-color: #3498db;
-            background-color: #f8fafc;
+            border-color: var(--primary);
+            background-color: #f8f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
         }
         
         .option.selected {
-            border-color: #3498db;
-            background-color: #e1f0fa;
+            border-color: var(--primary);
+            background-color: #eef2ff;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.15);
         }
         
         .option input {
-            margin-right: 12px;
-            transform: scale(1.2);
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: var(--primary);
         }
         
         .option label {
-            font-size: 15px;
-            color: #2c3e50;
+            font-size: 1rem;
+            color: var(--dark);
             cursor: pointer;
             flex: 1;
+            font-weight: 500;
         }
         
         .buttons {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             gap: 15px;
+            margin-top: 20px;
         }
         
         button {
-            padding: 12px 20px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 120px;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         #nextBtn, #submitBtn, #startSurvey {
-            background-color: #3498db;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
         
         #nextBtn:hover, #submitBtn:hover, #startSurvey:hover {
-            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
         }
         
         #nextBtn:disabled, #submitBtn:disabled {
-            background-color: #bdc3c7;
+            background: #adb5bd;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         .result {
             margin-top: 25px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff, #eef2ff);
             display: none;
+            text-align: center;
+            border: 2px solid var(--primary);
         }
         
-        .loading {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
+        .thank-you h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 2rem;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .thank-you p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
         }
         
         .email-status {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: 500;
-            font-size: 14px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
         }
         
         .email-success {
@@ -202,61 +267,52 @@
             border: 1px solid #f5c6cb;
         }
         
-        .thank-you {
-            text-align: center;
-            padding: 25px;
-        }
-        
-        .thank-you h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-        
-        .thank-you p {
-            color: #7f8c8d;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        
         .personal-data {
             margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff, #eef2ff);
+            border: 2px dashed var(--primary);
         }
         
         .personal-data h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: var(--secondary);
+            margin-bottom: 25px;
             text-align: center;
-            font-size: 20px;
+            font-size: 1.5rem;
         }
         
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #2c3e50;
-            font-size: 15px;
+            color: var(--dark);
+            font-size: 1rem;
         }
         
         .form-group input, .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 15px;
+            padding: 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+            outline: none;
         }
         
         .form-row {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
         
         .form-row .form-group {
@@ -266,81 +322,86 @@
         .footer {
             text-align: center;
             color: white;
-            margin-top: 20px;
-            padding: 15px;
-            font-size: 14px;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9rem;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
+            opacity: 0.9;
         }
         
         @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
             .form-row {
                 flex-direction: column;
                 gap: 0;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option label {
+                font-size: 0.95rem;
+            }
+            
+            button {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+                min-width: 120px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
             }
             
             .container {
                 padding: 20px;
             }
             
-            h1 {
-                font-size: 24px;
+            .header h1 {
+                font-size: 1.8rem;
             }
             
-            .question {
-                font-size: 16px;
-            }
-            
-            .option label {
-                font-size: 14px;
-            }
-            
-            button {
-                padding: 10px 15px;
-                font-size: 14px;
-                min-width: 100px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 22px;
-            }
-            
-            .question {
-                font-size: 15px;
-                margin-bottom: 20px;
+            .question-card {
+                padding: 20px;
             }
             
             .option {
-                padding: 10px 12px;
+                padding: 14px 16px;
             }
-            
-            .option label {
-                font-size: 13px;
-            }
-            
-            .buttons {
-                flex-direction: column;
-            }
-            
-            button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            
-            .footer {
-                font-size: 12px;
-                padding: 10px;
-            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .icon {
+            font-size: 1.2rem;
         }
     </style>
     <!-- EmailJS SDK -->
@@ -348,26 +409,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>Encuesta Académica</h1>
-        <p class="description">Su participación es muy importante para nuestra investigación</p>
-        
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
+        <div class="header">
+            <h1>📊 Encuesta Académica</h1>
+            <p class="description">Su participación es fundamental para nuestra investigación sobre salud estudiantil</p>
         </div>
-        <div class="progress-text" id="progressText">Datos Personales</div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="progress-text" id="progressText">Datos Personales</div>
+        </div>
         
         <!-- Datos Personales -->
         <div class="question-container active" id="personalData">
             <div class="personal-data">
-                <h3>Datos Personales</h3>
+                <h3>👤 Información Personal</h3>
                 
                 <div class="form-group">
-                    <label for="fecha">Fecha:</label>
+                    <label for="fecha">📅 Fecha:</label>
                     <input type="date" id="fecha" name="fecha" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="semestre">Semestre que cursa:</label>
+                    <label for="semestre">🎓 Semestre que cursa:</label>
                     <select id="semestre" name="semestre" required>
                         <option value="">Seleccione un semestre</option>
                         <option value="Semestre 1">Semestre 1</option>
@@ -380,16 +445,31 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="edad">Edad:</label>
+                    <label for="edad">👤 Edad:</label>
                     <select id="edad" name="edad" required>
                         <option value="">Seleccione su edad</option>
-                        <!-- Opciones de edad desde 15 hasta 50 años -->
+                        <option value="15">15 años</option>
+                        <option value="16">16 años</option>
+                        <option value="17">17 años</option>
+                        <option value="18">18 años</option>
+                        <option value="19">19 años</option>
+                        <option value="20">20 años</option>
+                        <option value="21">21 años</option>
+                        <option value="22">22 años</option>
+                        <option value="23">23 años</option>
+                        <option value="24">24 años</option>
+                        <option value="25">25 años</option>
+                        <option value="26">26 años</option>
+                        <option value="27">27 años</option>
+                        <option value="28">28 años</option>
+                        <option value="29">29 años</option>
+                        <option value="30">30 años</option>
                     </select>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="sexo">Sexo:</label>
+                        <label for="sexo">⚧ Sexo:</label>
                         <select id="sexo" name="sexo" required>
                             <option value="">Seleccione</option>
                             <option value="Masculino">Masculino</option>
@@ -398,7 +478,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="estadoCivil">Estado civil:</label>
+                        <label for="estadoCivil">💍 Estado civil:</label>
                         <select id="estadoCivil" name="estadoCivil" required>
                             <option value="">Seleccione</option>
                             <option value="Soltero/a">Soltero/a</option>
@@ -411,7 +491,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="trabajaEstudia">¿Trabaja y estudia?</label>
+                    <label for="trabajaEstudia">💼 ¿Trabaja y estudia?</label>
                     <select id="trabajaEstudia" name="trabajaEstudia" required>
                         <option value="">Seleccione</option>
                         <option value="Sí">Sí</option>
@@ -421,653 +501,714 @@
             </div>
             
             <div class="buttons">
-                <button id="startSurvey" onclick="startSurvey()">Comenzar Encuesta</button>
+                <button id="startSurvey" onclick="startSurvey()">
+                    <span class="icon">🚀</span> Comenzar Encuesta
+                </button>
             </div>
         </div>
         
-        <!-- Preguntas de la encuesta -->
         <!-- Pregunta 1 -->
         <div class="question-container" id="question1">
-            <div class="question">
-                1. ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(1, 1)">
-                    <input type="radio" id="q1_option1" name="q1" value="1">
-                    <label for="q1_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 1 de 20</div>
+                <div class="question">¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1, 1)">
+                        <input type="radio" id="q1_option1" name="q1" value="1">
+                        <label for="q1_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 2)">
+                        <input type="radio" id="q1_option2" name="q1" value="2">
+                        <label for="q1_option2">Rara vez (1-2 veces al mes)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 3)">
+                        <input type="radio" id="q1_option3" name="q1" value="3">
+                        <label for="q1_option3">A veces (1-2 veces a la semana)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 4)">
+                        <input type="radio" id="q1_option4" name="q1" value="4">
+                        <label for="q1_option4">Frecuentemente (3 o más veces a la semana)</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(1, 2)">
-                    <input type="radio" id="q1_option2" name="q1" value="2">
-                    <label for="q1_option2">Rara vez (1-2 veces al mes)</label>
+                <div class="buttons">
+                    <button id="nextBtn1" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(1, 3)">
-                    <input type="radio" id="q1_option3" name="q1" value="3">
-                    <label for="q1_option3">A veces (1-2 veces a la semana)</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(1, 4)">
-                    <input type="radio" id="q1_option4" name="q1" value="4">
-                    <label for="q1_option4">Frecuentemente (3 o más veces a la semana)</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn1" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
         
         <!-- Pregunta 2 -->
         <div class="question-container" id="question2">
-            <div class="question">
-                2. ¿Con qué frecuencia siente un alto nivel de tensión o presión durante sus rotaciones de prácticas clínicas/hospitalarias?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(2, 1)">
-                    <input type="radio" id="q2_option1" name="q2" value="1">
-                    <label for="q2_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 2 de 20</div>
+                <div class="question">¿Con qué frecuencia siente un alto nivel de tensión o presión durante sus rotaciones de prácticas clínicas/hospitalarias?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 2, 1)">
+                        <input type="radio" id="q2_option1" name="q2" value="1">
+                        <label for="q2_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 2)">
+                        <input type="radio" id="q2_option2" name="q2" value="2">
+                        <label for="q2_option2">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 3)">
+                        <input type="radio" id="q2_option3" name="q2" value="3">
+                        <label for="q2_option3">A veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 4)">
+                        <input type="radio" id="q2_option4" name="q2" value="4">
+                        <label for="q2_option4">Frecuentemente</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(2, 2)">
-                    <input type="radio" id="q2_option2" name="q2" value="2">
-                    <label for="q2_option2">Rara vez</label>
+                <div class="buttons">
+                    <button id="nextBtn2" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(2, 3)">
-                    <input type="radio" id="q2_option3" name="q2" value="3">
-                    <label for="q2_option3">A veces</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(2, 4)">
-                    <input type="radio" id="q2_option4" name="q2" value="4">
-                    <label for="q2_option4">Frecuentemente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn2" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 3 -->
         <div class="question-container" id="question3">
-            <div class="question">
-                3. En el último mes, ¿con qué frecuencia ha experimentado síntomas físicos como dolores de cabeza, tensión muscular o problemas estomacales relacionados con el estudio?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(3, 1)">
-                    <input type="radio" id="q3_option1" name="q3" value="1">
-                    <label for="q3_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 3 de 20</div>
+                <div class="question">En el último mes, ¿con qué frecuencia ha experimentado síntomas físicos como dolores de cabeza, tensión muscular o problemas estomacales relacionados con el estudio?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3, 1)">
+                        <input type="radio" id="q3_option1" name="q3" value="1">
+                        <label for="q3_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 2)">
+                        <input type="radio" id="q3_option2" name="q3" value="2">
+                        <label for="q3_option2">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 3)">
+                        <input type="radio" id="q3_option3" name="q3" value="3">
+                        <label for="q3_option3">A veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 4)">
+                        <input type="radio" id="q3_option4" name="q3" value="4">
+                        <label for="q3_option4">Frecuentemente</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(3, 2)">
-                    <input type="radio" id="q3_option2" name="q3" value="2">
-                    <label for="q3_option2">Rara vez</label>
+                <div class="buttons">
+                    <button id="nextBtn3" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(3, 3)">
-                    <input type="radio" id="q3_option3" name="q3" value="3">
-                    <label for="q3_option3">A veces</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(3, 4)">
-                    <input type="radio" id="q3_option4" name="q3" value="4">
-                    <label for="q3_option4">Frecuentemente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn3" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 4 -->
         <div class="question-container" id="question4">
-            <div class="question">
-                4. ¿Cómo calificaría el apoyo que recibe de sus profesores cuando tiene dificultades académicas?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(4, 1)">
-                    <input type="radio" id="q4_option1" name="q4" value="1">
-                    <label for="q4_option1">Excelente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 4 de 20</div>
+                <div class="question">¿Qué tan a menudo se siente completamente agotado o al límite emocionalmente por la carrera?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4, 1)">
+                        <input type="radio" id="q4_option1" name="q4" value="1">
+                        <label for="q4_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 2)">
+                        <input type="radio" id="q4_option2" name="q4" value="2">
+                        <label for="q4_option2">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 3)">
+                        <input type="radio" id="q4_option3" name="q4" value="3">
+                        <label for="q4_option3">A veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 4)">
+                        <input type="radio" id="q4_option4" name="q4" value="4">
+                        <label for="q4_option4">Frecuentemente</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(4, 2)">
-                    <input type="radio" id="q4_option2" name="q4" value="2">
-                    <label for="q4_option2">Bueno</label>
+                <div class="buttons">
+                    <button id="nextBtn4" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(4, 3)">
-                    <input type="radio" id="q4_option3" name="q4" value="3">
-                    <label for="q4_option3">Regular</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(4, 4)">
-                    <input type="radio" id="q4_option4" name="q4" value="4">
-                    <label for="q4_option4">Insuficiente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn4" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 5 -->
         <div class="question-container" id="question5">
-            <div class="question">
-                5. ¿Qué tan satisfecho está con su rendimiento académico actual?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(5, 1)">
-                    <input type="radio" id="q5_option1" name="q5" value="1">
-                    <label for="q5_option1">Muy satisfecho</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 5 de 20</div>
+                <div class="question">¿Cuántas horas duerme en promedio por noche durante un semestre académico regular?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5, 1)">
+                        <input type="radio" id="q5_option1" name="q5" value="4">
+                        <label for="q5_option1">Más de 8 horas</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 2)">
+                        <input type="radio" id="q5_option2" name="q5" value="3">
+                        <label for="q5_option2">7 - 8 horas</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 3)">
+                        <input type="radio" id="q5_option3" name="q5" value="2">
+                        <label for="q5_option3">5 - 6 horas</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 4)">
+                        <input type="radio" id="q5_option4" name="q5" value="1">
+                        <label for="q5_option4">Menos de 5 horas</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(5, 2)">
-                    <input type="radio" id="q5_option2" name="q5" value="2">
-                    <label for="q5_option2">Satisfecho</label>
+                <div class="buttons">
+                    <button id="nextBtn5" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(5, 3)">
-                    <input type="radio" id="q5_option3" name="q5" value="3">
-                    <label for="q5_option3">Poco satisfecho</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(5, 4)">
-                    <input type="radio" id="q5_option4" name="q5" value="4">
-                    <label for="q5_option4">Insatisfecho</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn5" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 6 -->
         <div class="question-container" id="question6">
-            <div class="question">
-                6. ¿Con qué frecuencia utiliza recursos de apoyo académico como tutorías o asesorías?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(6, 1)">
-                    <input type="radio" id="q6_option1" name="q6" value="1">
-                    <label for="q6_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 6 de 20</div>
+                <div class="question">Al despertar, ¿siente que su sueño fue realmente reparador y se siente con energía?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 6, 1)">
+                        <input type="radio" id="q6_option1" name="q6" value="4">
+                        <label for="q6_option1">Siempre</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 2)">
+                        <input type="radio" id="q6_option2" name="q6" value="3">
+                        <label for="q6_option2">Casi siempre</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 3)">
+                        <input type="radio" id="q6_option3" name="q6" value="2">
+                        <label for="q6_option3">A veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 4)">
+                        <input type="radio" id="q6_option4" name="q6" value="1">
+                        <label for="q6_option4">Nunca</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(6, 2)">
-                    <input type="radio" id="q6_option2" name="q6" value="2">
-                    <label for="q6_option2">Rara vez</label>
+                <div class="buttons">
+                    <button id="nextBtn6" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(6, 3)">
-                    <input type="radio" id="q6_option3" name="q6" value="3">
-                    <label for="q6_option3">Ocasionalmente</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(6, 4)">
-                    <input type="radio" id="q6_option4" name="q6" value="4">
-                    <label for="q6_option4">Frecuentemente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn6" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 7 -->
         <div class="question-container" id="question7">
-            <div class="question">
-                7. ¿Cómo calificaría la calidad de la infraestructura de su institución educativa?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(7, 1)">
-                    <input type="radio" id="q7_option1" name="q7" value="1">
-                    <label for="q7_option1">Excelente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 7 de 20</div>
+                <div class="question">¿Con qué frecuencia tiene dificultad para conciliar el sueño o se despierta sin poder volver a dormir?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 7, 1)">
+                        <input type="radio" id="q7_option1" name="q7" value="4">
+                        <label for="q7_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 2)">
+                        <input type="radio" id="q7_option2" name="q7" value="3">
+                        <label for="q7_option2">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 3)">
+                        <input type="radio" id="q7_option3" name="q7" value="2">
+                        <label for="q7_option3">A veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 4)">
+                        <input type="radio" id="q7_option4" name="q7" value="1">
+                        <label for="q7_option4">Frecuentemente</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(7, 2)">
-                    <input type="radio" id="q7_option2" name="q7" value="2">
-                    <label for="q7_option2">Buena</label>
+                <div class="buttons">
+                    <button id="nextBtn7" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(7, 3)">
-                    <input type="radio" id="q7_option3" name="q7" value="3">
-                    <label for="q7_option3">Regular</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(7, 4)">
-                    <input type="radio" id="q7_option4" name="q7" value="4">
-                    <label for="q7_option4">Mala</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn7" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
-        <!-- Pregunta 8 con 2 opciones -->
+
+        <!-- Pregunta 8 -->
         <div class="question-container" id="question8">
-            <div class="question">
-                8. ¿Considera que la carga horaria de sus clases es adecuada?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(8, 1)">
-                    <input type="radio" id="q8_option1" name="q8" value="1">
-                    <label for="q8_option1">Sí</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 8 de 20</div>
+                <div class="question">¿Ha utilizado alguna sustancia (pastillas para dormir, alcohol) para ayudarle a conciliar el sueño en el último semestre?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 8, 1)">
+                        <input type="radio" id="q8_option1" name="q8" value="2">
+                        <label for="q8_option1">No</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 2)">
+                        <input type="radio" id="q8_option2" name="q8" value="1">
+                        <label for="q8_option2">Si</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(8, 2)">
-                    <input type="radio" id="q8_option2" name="q8" value="2">
-                    <label for="q8_option2">No</label>
+                <div class="buttons">
+                    <button id="nextBtn8" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
             </div>
-            
-            <div class="buttons">
-                <button id="nextBtn8" onclick="nextQuestion()" disabled>Siguiente</button>
-            </div>
         </div>
-        
+
         <!-- Pregunta 9 -->
         <div class="question-container" id="question9">
-            <div class="question">
-                9. ¿Qué tan motivado se siente para continuar sus estudios?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(9, 1)">
-                    <input type="radio" id="q9_option1" name="q9" value="1">
-                    <label for="q9_option1">Muy motivado</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 9 de 20</div>
+                <div class="question">¿Cuántas veces a la semana consume comidas nutritivas preparadas en casa?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 9, 1)">
+                        <input type="radio" id="q9_option1" name="q9" value="4">
+                        <label for="q9_option1">5 o más veces (casi a diario)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 2)">
+                        <input type="radio" id="q9_option2" name="q9" value="3">
+                        <label for="q9_option2">3 - 4 veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 3)">
+                        <input type="radio" id="q9_option3" name="q9" value="2">
+                        <label for="q9_option3">1 - 2 veces</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 4)">
+                        <input type="radio" id="q9_option4" name="q9" value="1">
+                        <label for="q9_option4">Nunca o rara vez</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(9, 2)">
-                    <input type="radio" id="q9_option2" name="q9" value="2">
-                    <label for="q9_option2">Motivado</label>
+                <div class="buttons">
+                    <button id="nextBtn9" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(9, 3)">
-                    <input type="radio" id="q9_option3" name="q9" value="3">
-                    <label for="q9_option3">Poco motivado</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(9, 4)">
-                    <input type="radio" id="q9_option4" name="q9" value="4">
-                    <label for="q9_option4">Desmotivado</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn9" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 10 -->
         <div class="question-container" id="question10">
-            <div class="question">
-                10. ¿Con qué frecuencia participa en actividades extracurriculares de su institución?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(10, 1)">
-                    <input type="radio" id="q10_option1" name="q10" value="1">
-                    <label for="q10_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 10 de 20</div>
+                <div class="question">¿Con qué frecuencia consume comida rápida (p. ej. hamburguesas, pizzas) o snacks altamente procesados (bollería, papas fritas)?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 10, 1)">
+                        <input type="radio" id="q10_option1" name="q10" value="4">
+                        <label for="q10_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 2)">
+                        <input type="radio" id="q10_option2" name="q10" value="3">
+                        <label for="q10_option2">Rara vez (1-2 veces al mes)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 3)">
+                        <input type="radio" id="q10_option3" name="q10" value="2">
+                        <label for="q10_option3">1 - 2 veces a la semana</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 4)">
+                        <input type="radio" id="q10_option4" name="q10" value="1">
+                        <label for="q10_option4">3 o más veces a la semana</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(10, 2)">
-                    <input type="radio" id="q10_option2" name="q10" value="2">
-                    <label for="q10_option2">Rara vez</label>
+                <div class="buttons">
+                    <button id="nextBtn10" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(10, 3)">
-                    <input type="radio" id="q10_option3" name="q10" value="3">
-                    <label for="q10_option3">Ocasionalmente</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(10, 4)">
-                    <input type="radio" id="q10_option4" name="q10" value="4">
-                    <label for="q10_option4">Frecuentemente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn10" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 11 -->
         <div class="question-container" id="question11">
-            <div class="question">
-                11. ¿Cómo calificaría la claridad de los objetivos de aprendizaje en sus cursos?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(11, 1)">
-                    <input type="radio" id="q11_option1" name="q11" value="1">
-                    <label for="q11_option1">Muy claros</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 11 de 20</div>
+                <div class="question">En promedio, ¿cuántas porciones de frutas y/o vegetales consume al día?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 11, 1)">
+                        <input type="radio" id="q11_option1" name="q11" value="4">
+                        <label for="q11_option1">3 o más porciones</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 2)">
+                        <input type="radio" id="q11_option2" name="q11" value="3">
+                        <label for="q11_option2">2 porciones</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 3)">
+                        <input type="radio" id="q11_option3" name="q11" value="2">
+                        <label for="q11_option3">1 porción</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 4)">
+                        <input type="radio" id="q11_option4" name="q11" value="1">
+                        <label for="q11_option4">0 porciones</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(11, 2)">
-                    <input type="radio" id="q11_option2" name="q11" value="2">
-                    <label for="q11_option2">Claros</label>
+                <div class="buttons">
+                    <button id="nextBtn11" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(11, 3)">
-                    <input type="radio" id="q11_option3" name="q11" value="3">
-                    <label for="q11_option3">Poco claros</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(11, 4)">
-                    <input type="radio" id="q11_option4" name="q11" value="4">
-                    <label for="q11_option4">Confusos</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn11" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 12 -->
         <div class="question-container" id="question12">
-            <div class="question">
-                12. ¿Qué tan adecuado considera el tiempo disponible para completar sus asignaciones?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(12, 1)">
-                    <input type="radio" id="q12_option1" name="q12" value="1">
-                    <label for="q12_option1">Más que suficiente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 12 de 20</div>
+                <div class="question">¿Con qué frecuencia omite o no toma alguna de las comidas principales del día (desayuno, almuerzo, cena) por razones académicas/horarios?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 12, 1)">
+                        <input type="radio" id="q12_option1" name="q12" value="1">
+                        <label for="q12_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 2)">
+                        <input type="radio" id="q12_option2" name="q12" value="2">
+                        <label for="q12_option2">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 3)">
+                        <input type="radio" id="q12_option3" name="q12" value="3">
+                        <label for="q12_option3">A veces (1-3 veces a la semana)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 4)">
+                        <input type="radio" id="q12_option4" name="q12" value="4">
+                        <label for="q12_option4">Frecuentemente (4 o más veces a la semana)</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(12, 2)">
-                    <input type="radio" id="q12_option2" name="q12" value="2">
-                    <label for="q12_option2">Suficiente</label>
+                <div class="buttons">
+                    <button id="nextBtn12" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(12, 3)">
-                    <input type="radio" id="q12_option3" name="q12" value="3">
-                    <label for="q12_option3">Insuficiente</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(12, 4)">
-                    <input type="radio" id="q12_option4" name="q12" value="4">
-                    <label for="q12_option4">Muy insuficiente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn12" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 13 -->
         <div class="question-container" id="question13">
-            <div class="question">
-                13. ¿Cómo calificaría la retroalimentación que recibe sobre su desempeño académico?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(13, 1)">
-                    <input type="radio" id="q13_option1" name="q13" value="1">
-                    <label for="q13_option1">Excelente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 13 de 20</div>
+                <div class="question">¿Con qué frecuencia consume bebidas alcohólicas?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 13, 1)">
+                        <input type="radio" id="q13_option1" name="q13" value="4">
+                        <label for="q13_option1">Nunca</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 2)">
+                        <input type="radio" id="q13_option2" name="q13" value="3">
+                        <label for="q13_option2">Rara vez (1 vez al mes o menos)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 3)">
+                        <input type="radio" id="q13_option3" name="q13" value="2">
+                        <label for="q13_option3">2-3 veces al mes</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 4)">
+                        <input type="radio" id="q13_option4" name="q13" value="1">
+                        <label for="q13_option4">1 o más veces a la semana</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(13, 2)">
-                    <input type="radio" id="q13_option2" name="q13" value="2">
-                    <label for="q13_option2">Buena</label>
+                <div class="buttons">
+                    <button id="nextBtn13" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(13, 3)">
-                    <input type="radio" id="q13_option3" name="q13" value="3">
-                    <label for="q13_option3">Regular</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(13, 4)">
-                    <input type="radio" id="q13_option4" name="q13" value="4">
-                    <label for="q13_option4">Mala</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn13" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
-        <!-- Pregunta 14 con 2 opciones -->
+
+        <!-- Pregunta 14 -->
         <div class="question-container" id="question14">
-            <div class="question">
-                14. ¿Ha considerado abandonar sus estudios por dificultades académicas?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(14, 1)">
-                    <input type="radio" id="q14_option1" name="q14" value="1">
-                    <label for="q14_option1">Sí</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 14 de 20</div>
+                <div class="question">¿Ha consumido cigarrillos o productos de tabaco en el último año?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 14, 1)">
+                        <input type="radio" id="q14_option1" name="q14" value="2">
+                        <label for="q14_option1">No</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 2)">
+                        <input type="radio" id="q14_option2" name="q14" value="1">
+                        <label for="q14_option2">Si</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(14, 2)">
-                    <input type="radio" id="q14_option2" name="q14" value="2">
-                    <label for="q14_option2">No</label>
+                <div class="buttons">
+                    <button id="nextBtn14" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
             </div>
-            
-            <div class="buttons">
-                <button id="nextBtn14" onclick="nextQuestion()" disabled>Siguiente</button>
-            </div>
         </div>
-        
-        <!-- Pregunta 15 con 2 opciones -->
+
+        <!-- Pregunta 15 -->
         <div class="question-container" id="question15">
-            <div class="question">
-                15. ¿Recibe apoyo económico familiar para sus estudios?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(15, 1)">
-                    <input type="radio" id="q15_option1" name="q15" value="1">
-                    <label for="q15_option1">Sí</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 15 de 20</div>
+                <div class="question">¿Considera que consumir alcohol o tabaco le ayuda a reducir o manejar el estrés de la carrera?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 15, 1)">
+                        <input type="radio" id="q15_option1" name="q15" value="2">
+                        <label for="q15_option1">No, no me ayuda</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 2)">
+                        <input type="radio" id="q15_option2" name="q15" value="1">
+                        <label for="q15_option2">Sí, me ayuda un poco o mucho</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(15, 2)">
-                    <input type="radio" id="q15_option2" name="q15" value="2">
-                    <label for="q15_option2">No</label>
+                <div class="buttons">
+                    <button id="nextBtn15" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
             </div>
-            
-            <div class="buttons">
-                <button id="nextBtn15" onclick="nextQuestion()" disabled>Siguiente</button>
-            </div>
         </div>
-        
+
         <!-- Pregunta 16 -->
         <div class="question-container" id="question16">
-            <div class="question">
-                16. ¿Qué tan frecuentemente utiliza recursos digitales para su aprendizaje?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(16, 1)">
-                    <input type="radio" id="q16_option1" name="q16" value="1">
-                    <label for="q16_option1">Nunca</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 16 de 20</div>
+                <div class="question">¿Cuántas veces a la semana realiza al menos 30 minutos de ejercicio físico moderado o intenso?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 16, 1)">
+                        <input type="radio" id="q16_option1" name="q16" value="4">
+                        <label for="q16_option1">3 o más veces a la semana</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 2)">
+                        <input type="radio" id="q16_option2" name="q16" value="3">
+                        <label for="q16_option2">1 - 2 veces a la semana</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 3)">
+                        <input type="radio" id="q16_option3" name="q16" value="2">
+                        <label for="q16_option3">Rara vez (1-3 veces al mes)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 4)">
+                        <input type="radio" id="q16_option4" name="q16" value="1">
+                        <label for="q16_option4">Nunca</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(16, 2)">
-                    <input type="radio" id="q16_option2" name="q16" value="2">
-                    <label for="q16_option2">Rara vez</label>
+                <div class="buttons">
+                    <button id="nextBtn16" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(16, 3)">
-                    <input type="radio" id="q16_option3" name="q16" value="3">
-                    <label for="q16_option3">Ocasionalmente</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(16, 4)">
-                    <input type="radio" id="q16_option4" name="q16" value="4">
-                    <label for="q16_option4">Frecuentemente</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn16" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 17 -->
         <div class="question-container" id="question17">
-            <div class="question">
-                17. ¿Cómo calificaría la relación con sus compañeros de estudio?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(17, 1)">
-                    <input type="radio" id="q17_option1" name="q17" value="1">
-                    <label for="q17_option1">Excelente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 17 de 20</div>
+                <div class="question">¿Cuántas horas al día pasa sentado/a por ocio pasivo (ver televisión, redes sociales, videojuegos), sin contar las horas de clase o estudio?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 17, 1)">
+                        <input type="radio" id="q17_option1" name="q17" value="4">
+                        <label for="q17_option1">Menos de 1 hora</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 2)">
+                        <input type="radio" id="q17_option2" name="q17" value="3">
+                        <label for="q17_option2">1 - 2 horas</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 3)">
+                        <input type="radio" id="q17_option3" name="q17" value="2">
+                        <label for="q17_option3">3 - 4 horas</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 4)">
+                        <input type="radio" id="q17_option4" name="q17" value="1">
+                        <label for="q17_option4">5 o más horas</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(17, 2)">
-                    <input type="radio" id="q17_option2" name="q17" value="2">
-                    <label for="q17_option2">Buena</label>
+                <div class="buttons">
+                    <button id="nextBtn17" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(17, 3)">
-                    <input type="radio" id="q17_option3" name="q17" value="3">
-                    <label for="q17_option3">Regular</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(17, 4)">
-                    <input type="radio" id="q17_option4" name="q17" value="4">
-                    <label for="q17_option4">Mala</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn17" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 18 -->
         <div class="question-container" id="question18">
-            <div class="question">
-                18. ¿Qué tan accesibles son los materiales de estudio en su institución?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(18, 1)">
-                    <input type="radio" id="q18_option1" name="q18" value="1">
-                    <label for="q18_option1">Muy accesibles</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 18 de 20</div>
+                <div class="question">¿Con qué frecuencia se realiza evaluación o cheque médicos de rutina (no por enfermedad aguda)?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 18, 1)">
+                        <input type="radio" id="q18_option1" name="q18" value="4">
+                        <label for="q18_option1">Anualmente</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 2)">
+                        <input type="radio" id="q18_option2" name="q18" value="3">
+                        <label for="q18_option2">Cada 2-3 años</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 3)">
+                        <input type="radio" id="q18_option3" name="q18" value="2">
+                        <label for="q18_option3">Rara vez (más de 3 años)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 4)">
+                        <input type="radio" id="q18_option4" name="q18" value="1">
+                        <label for="q18_option4">Nunca</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(18, 2)">
-                    <input type="radio" id="q18_option2" name="q18" value="2">
-                    <label for="q18_option2">Accesibles</label>
+                <div class="buttons">
+                    <button id="nextBtn18" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(18, 3)">
-                    <input type="radio" id="q18_option3" name="q18" value="3">
-                    <label for="q18_option3">Poco accesibles</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(18, 4)">
-                    <input type="radio" id="q18_option4" name="q18" value="4">
-                    <label for="q18_option4">Inaccesibles</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn18" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 19 -->
         <div class="question-container" id="question19">
-            <div class="question">
-                19. ¿Cómo calificaría la preparación académica de sus profesores?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(19, 1)">
-                    <input type="radio" id="q19_option1" name="q19" value="1">
-                    <label for="q19_option1">Excelente</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 19 de 20</div>
+                <div class="question">¿Con qué frecuencia utiliza técnicas de relajación, meditación para manejar el estrés?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 19, 1)">
+                        <input type="radio" id="q19_option1" name="q19" value="1">
+                        <label for="q19_option1">Frecuentemente (Varias veces a la semana)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 2)">
+                        <input type="radio" id="q19_option2" name="q19" value="2">
+                        <label for="q19_option2">A veces (1-3 veces al mes)</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 3)">
+                        <input type="radio" id="q19_option3" name="q19" value="3">
+                        <label for="q19_option3">Rara vez</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 4)">
+                        <input type="radio" id="q19_option4" name="q19" value="4">
+                        <label for="q19_option4">Nunca</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(19, 2)">
-                    <input type="radio" id="q19_option2" name="q19" value="2">
-                    <label for="q19_option2">Buena</label>
+                <div class="buttons">
+                    <button id="nextBtn19" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(19, 3)">
-                    <input type="radio" id="q19_option3" name="q19" value="3">
-                    <label for="q19_option3">Regular</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(19, 4)">
-                    <input type="radio" id="q19_option4" name="q19" value="4">
-                    <label for="q19_option4">Mala</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="nextBtn19" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
-        
+
         <!-- Pregunta 20 -->
         <div class="question-container" id="question20">
-            <div class="question">
-                20. ¿Recomendaría su institución educativa a otros estudiantes?
-            </div>
-            
-            <div class="options">
-                <div class="option" onclick="selectOption(20, 1)">
-                    <input type="radio" id="q20_option1" name="q20" value="1">
-                    <label for="q20_option1">Definitivamente sí</label>
+            <div class="question-card">
+                <div class="question-number">Pregunta 20 de 20</div>
+                <div class="question">En general, ¿cómo calificaría su nivel de energía y vitalidad en la mayoría de los días?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 20, 1)">
+                        <input type="radio" id="q20_option1" name="q20" value="4">
+                        <label for="q20_option1">Excelente</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 2)">
+                        <input type="radio" id="q20_option2" name="q20" value="3">
+                        <label for="q20_option2">Bueno</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 3)">
+                        <input type="radio" id="q20_option3" name="q20" value="2">
+                        <label for="q20_option3">Regular</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 4)">
+                        <input type="radio" id="q20_option4" name="q20" value="1">
+                        <label for="q20_option4">Bajo</label>
+                    </div>
                 </div>
                 
-                <div class="option" onclick="selectOption(20, 2)">
-                    <input type="radio" id="q20_option2" name="q20" value="2">
-                    <label for="q20_option2">Probablemente sí</label>
+                <div class="buttons">
+                    <button id="submitBtn" onclick="submitSurvey()" disabled>
+                        <span class="icon">✅</span> Finalizar Encuesta
+                    </button>
                 </div>
-                
-                <div class="option" onclick="selectOption(20, 3)">
-                    <input type="radio" id="q20_option3" name="q20" value="3">
-                    <label for="q20_option3">Probablemente no</label>
-                </div>
-                
-                <div class="option" onclick="selectOption(20, 4)">
-                    <input type="radio" id="q20_option4" name="q20" value="4">
-                    <label for="q20_option4">Definitivamente no</label>
-                </div>
-            </div>
-            
-            <div class="buttons">
-                <button id="submitBtn" onclick="submitSurvey()" disabled>Finalizar Encuesta</button>
             </div>
         </div>
         
         <!-- Pantalla de agradecimiento -->
         <div class="result" id="thankYouSection">
             <div class="thank-you">
-                <h2>¡Gracias por participar!</h2>
-                <p>Su respuesta ha sido registrada exitosamente.</p>
+                <h2>¡Gracias por participar! 🎉</h2>
+                <p>Su respuesta ha sido registrada exitosamente. Los resultados han sido enviados.</p>
                 <div id="emailStatus"></div>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        REALIZADO POR PILAR BEATRIZ PÉREZ LEMUS. 2025
+        REALIZADO POR PILAR BEATRIZ PÉREZ LEMUS | INVESTIGACIÓN ACADÉMICA 2025
     </div>
 
     <script>
@@ -1076,9 +1217,8 @@
             emailjs.init("4nYJFF-M_hnbkCPtD");
         })();
         
-        // Configuración de preguntas (20 preguntas)
-        const questions = [
-            // Preguntas 1-7 con 4 opciones
+        // Array con todas las preguntas y sus opciones
+        const questionsData = [
             {
                 id: 1,
                 text: "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?",
@@ -1096,118 +1236,105 @@
             },
             {
                 id: 4,
-                text: "¿Cómo calificaría el apoyo que recibe de sus profesores cuando tiene dificultades académicas?",
-                options: ["Excelente", "Bueno", "Regular", "Insuficiente"]
+                text: "¿Qué tan a menudo se siente completamente agotado o al límite emocionalmente por la carrera?",
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente"]
             },
             {
                 id: 5,
-                text: "¿Qué tan satisfecho está con su rendimiento académico actual?",
-                options: ["Muy satisfecho", "Satisfecho", "Poco satisfecho", "Insatisfecho"]
+                text: "¿Cuántas horas duerme en promedio por noche durante un semestre académico regular?",
+                options: ["Más de 8 horas", "7 - 8 horas", "5 - 6 horas", "Menos de 5 horas"]
             },
             {
                 id: 6,
-                text: "¿Con qué frecuencia utiliza recursos de apoyo académico como tutorías o asesorías?",
-                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+                text: "Al despertar, ¿siente que su sueño fue realmente reparador y se siente con energía?",
+                options: ["Siempre", "Casi siempre", "A veces", "Nunca"]
             },
             {
                 id: 7,
-                text: "¿Cómo calificaría la calidad de la infraestructura de su institución educativa?",
-                options: ["Excelente", "Buena", "Regular", "Mala"]
+                text: "¿Con qué frecuencia tiene dificultad para conciliar el sueño o se despierta sin poder volver a dormir?",
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente"]
             },
-            // Pregunta 8 con 2 opciones
             {
                 id: 8,
-                text: "¿Considera que la carga horaria de sus clases es adecuada?",
-                options: ["Sí", "No"]
+                text: "¿Ha utilizado alguna sustancia (pastillas para dormir, alcohol) para ayudarle a conciliar el sueño en el último semestre?",
+                options: ["No", "Si"]
             },
-            // Preguntas 9-13 con 4 opciones
             {
                 id: 9,
-                text: "¿Qué tan motivado se siente para continuar sus estudios?",
-                options: ["Muy motivado", "Motivado", "Poco motivado", "Desmotivado"]
+                text: "¿Cuántas veces a la semana consume comidas nutritivas preparadas en casa?",
+                options: ["5 o más veces (casi a diario)", "3 - 4 veces", "1 - 2 veces", "Nunca o rara vez"]
             },
             {
                 id: 10,
-                text: "¿Con qué frecuencia participa en actividades extracurriculares de su institución?",
-                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+                text: "¿Con qué frecuencia consume comida rápida (p. ej. hamburguesas, pizzas) o snacks altamente procesados (bollería, papas fritas)?",
+                options: ["Nunca", "Rara vez (1-2 veces al mes)", "1 - 2 veces a la semana", "3 o más veces a la semana"]
             },
             {
                 id: 11,
-                text: "¿Cómo calificaría la claridad de los objetivos de aprendizaje en sus cursos?",
-                options: ["Muy claros", "Claros", "Poco claros", "Confusos"]
+                text: "En promedio, ¿cuántas porciones de frutas y/o vegetales consume al día?",
+                options: ["3 o más porciones", "2 porciones", "1 porción", "0 porciones"]
             },
             {
                 id: 12,
-                text: "¿Qué tan adecuado considera el tiempo disponible para completar sus asignaciones?",
-                options: ["Más que suficiente", "Suficiente", "Insuficiente", "Muy insuficiente"]
+                text: "¿Con qué frecuencia omite o no toma alguna de las comidas principales del día (desayuno, almuerzo, cena) por razones académicas/horarios?",
+                options: ["Nunca", "Rara vez", "A veces (1-3 veces a la semana)", "Frecuentemente (4 o más veces a la semana)"]
             },
             {
                 id: 13,
-                text: "¿Cómo calificaría la retroalimentación que recibe sobre su desempeño académico?",
-                options: ["Excelente", "Buena", "Regular", "Mala"]
+                text: "¿Con qué frecuencia consume bebidas alcohólicas?",
+                options: ["Nunca", "Rara vez (1 vez al mes o menos)", "2-3 veces al mes", "1 o más veces a la semana"]
             },
-            // Pregunta 14 con 2 opciones
             {
                 id: 14,
-                text: "¿Ha considerado abandonar sus estudios por dificultades académicas?",
-                options: ["Sí", "No"]
+                text: "¿Ha consumido cigarrillos o productos de tabaco en el último año?",
+                options: ["No", "Si"]
             },
-            // Pregunta 15 con 2 opciones
             {
                 id: 15,
-                text: "¿Recibe apoyo económico familiar para sus estudios?",
-                options: ["Sí", "No"]
+                text: "¿Considera que consumir alcohol o tabaco le ayuda a reducir o manejar el estrés de la carrera?",
+                options: ["No, no me ayuda", "Sí, me ayuda un poco o mucho"]
             },
-            // Preguntas 16-20 con 4 opciones
             {
                 id: 16,
-                text: "¿Qué tan frecuentemente utiliza recursos digitales para su aprendizaje?",
-                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+                text: "¿Cuántas veces a la semana realiza al menos 30 minutos de ejercicio físico moderado o intenso?",
+                options: ["3 o más veces a la semana", "1 - 2 veces a la semana", "Rara vez (1-3 veces al mes)", "Nunca"]
             },
             {
                 id: 17,
-                text: "¿Cómo calificaría la relación con sus compañeros de estudio?",
-                options: ["Excelente", "Buena", "Regular", "Mala"]
+                text: "¿Cuántas horas al día pasa sentado/a por ocio pasivo (ver televisión, redes sociales, videojuegos), sin contar las horas de clase o estudio?",
+                options: ["Menos de 1 hora", "1 - 2 horas", "3 - 4 horas", "5 o más horas"]
             },
             {
                 id: 18,
-                text: "¿Qué tan accesibles son los materiales de estudio en su institución?",
-                options: ["Muy accesibles", "Accesibles", "Poco accesibles", "Inaccesibles"]
+                text: "¿Con qué frecuencia se realiza evaluación o cheque médicos de rutina (no por enfermedad aguda)?",
+                options: ["Anualmente", "Cada 2-3 años", "Rara vez (más de 3 años)", "Nunca"]
             },
             {
                 id: 19,
-                text: "¿Cómo calificaría la preparación académica de sus profesores?",
-                options: ["Excelente", "Buena", "Regular", "Mala"]
+                text: "¿Con qué frecuencia utiliza técnicas de relajación, meditación para manejar el estrés?",
+                options: ["Frecuentemente (Varias veces a la semana)", "A veces (1-3 veces al mes)", "Rara vez", "Nunca"]
             },
             {
                 id: 20,
-                text: "¿Recomendaría su institución educativa a otros estudiantes?",
-                options: ["Definitivamente sí", "Probablemente sí", "Probablemente no", "Definitivamente no"]
+                text: "En general, ¿cómo calificaría su nivel de energía y vitalidad en la mayoría de los días?",
+                options: ["Excelente", "Bueno", "Regular", "Bajo"]
             }
         ];
-        
-        let currentQuestion = 0; // 0 = Datos personales, 1-20 = Preguntas
-        const totalQuestions = questions.length;
+
+        // Variables globales
+        let currentQuestion = 0;
+        const totalQuestions = 20;
         const answers = {};
         let personalData = {};
         
         // Inicializar respuestas
-        questions.forEach(q => {
-            answers[q.id] = {
-                selected: false,
-                value: 0,
-                text: ""
-            };
-        });
-        
-        // Función para llenar las opciones de edad
-        function fillAgeOptions() {
-            const ageSelect = document.getElementById('edad');
-            for (let i = 15; i <= 50; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `${i} años`;
-                ageSelect.appendChild(option);
+        function initializeAnswers() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                answers[i] = {
+                    selected: false,
+                    value: 0,
+                    optionText: ""
+                };
             }
         }
         
@@ -1253,11 +1380,11 @@
             updateProgress();
         }
         
-        function selectOption(questionId, optionValue) {
-            // Guardar respuesta
+        function selectOption(element, questionId, optionValue) {
+            // Guardar respuesta con el texto completo de la opción
             answers[questionId].selected = true;
             answers[questionId].value = optionValue;
-            answers[questionId].text = questions[questionId-1].options[optionValue-1];
+            answers[questionId].optionText = questionsData[questionId-1].options[optionValue-1];
             
             // Remover clase selected de todas las opciones de esta pregunta
             const options = document.querySelectorAll(`#question${questionId} .option`);
@@ -1266,7 +1393,7 @@
             });
             
             // Agregar clase selected a la opción clickeada
-            event.currentTarget.classList.add('selected');
+            element.classList.add('selected');
             
             // Marcar el radio button
             document.getElementById(`q${questionId}_option${optionValue}`).checked = true;
@@ -1329,39 +1456,81 @@
             }
         }
         
-        // Función para enviar por correo usando EmailJS
+        // FUNCIÓN CORREGIDA - TEXTO PLANO
         async function enviarPorCorreo() {
-            const answersText = questions.map(q => {
-                const answer = answers[q.id];
-                if (answer.selected) {
-                    return `P${q.id}: ${answer.text} [Valoración: ${answer.value}]`;
-                }
-                return `P${q.id}: Sin respuesta`;
-            }).join('\n');
-            
-            const templateParams = {
-                to_email: 'danvenezuela@gmail.com',
-                fecha: new Date().toLocaleString('es-ES'),
-                datos_personales: `DATOS DEL ESTUDIANTE:\nSemestre: ${personalData.semestre}\nEdad: ${personalData.edad} años\nSexo: ${personalData.sexo}\nEstado Civil: ${personalData.estadoCivil}\nTrabaja y Estudia: ${personalData.trabajaEstudia}`,
-                total_preguntas: totalQuestions,
-                respuestas: answersText
-            };
-
             try {
-                // Enviar email usando EmailJS
-                const response = await emailjs.send('service_xe1bdwm', 'template_u2oplvu', templateParams);
-                console.log('Correo enviado con éxito:', response);
+                console.log('Iniciando envío de correo...');
+                
+                // 1. CREAR DATOS PERSONALES EN TEXTO PLANO
+                const datosPersonalesTexto = `
+FECHA: ${personalData.fecha}
+SEMESTRE: ${personalData.semestre}
+EDAD: ${personalData.edad} años
+SEXO: ${personalData.sexo}
+ESTADO CIVIL: ${personalData.estadoCivil}
+TRABAJA Y ESTUDIA: ${personalData.trabajaEstudia}
+                `.trim();
+
+                // 2. CREAR RESPUESTAS EN TEXTO PLANO
+                let respuestasTexto = "";
+                let answeredCount = 0;
+                
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const question = questionsData[i-1];
+                    const answer = answers[i];
+                    
+                    if (answer && answer.selected) {
+                        answeredCount++;
+                        respuestasTexto += `
+PREGUNTA ${i}: ${question.text}
+RESPUESTA: ${answer.optionText}
+VALORACIÓN: ${answer.value}
+────────────────────────────────────────────
+                        `.trim() + '\n\n';
+                    }
+                }
+
+                // 3. CREAR RESUMEN EN TEXTO PLANO
+                const completionPercentage = Math.round((answeredCount / totalQuestions) * 100);
+                const resumenTexto = `
+TOTAL DE PREGUNTAS: ${totalQuestions}
+PREGUNTAS RESPONDIDAS: ${answeredCount}
+PORCENTAJE COMPLETADO: ${completionPercentage}%
+                `.trim();
+
+                // 4. PREPARAR PARÁMETROS PARA EMAILJS
+                const templateParams = {
+                    fecha_envio: new Date().toLocaleDateString('es-ES'),
+                    datos_personales: datosPersonalesTexto,
+                    respuestas_html: respuestasTexto,
+                    resumen: resumenTexto
+                };
+
+                console.log('Enviando correo con EmailJS...');
+                
+                // 5. ENVIAR CORREO
+                const response = await emailjs.send(
+                    'service_xe1bdwm',    // Service ID
+                    'template_u2oplvu',   // Template ID
+                    templateParams
+                );
+
+                console.log('Correo enviado exitosamente');
                 return true;
+                
             } catch (error) {
                 console.error('Error al enviar correo:', error);
+                if (error.text) {
+                    console.error('Detalles del error:', error.text);
+                }
                 return false;
             }
         }
-        
-        // Inicializar
+
+        // Inicializar la aplicación
         document.addEventListener('DOMContentLoaded', function() {
-            // Llenar opciones de edad
-            fillAgeOptions();
+            // Inicializar respuestas
+            initializeAnswers();
             
             // Establecer fecha actual por defecto
             const today = new Date().toISOString().split('T')[0];
