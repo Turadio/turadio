@@ -16,6 +16,7 @@
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -26,9 +27,10 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             padding: 30px;
             transition: all 0.3s ease;
+            flex: 1;
         }
         
         h1 {
@@ -45,8 +47,39 @@
             font-size: 16px;
         }
         
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .question-container {
+            display: none;
+        }
+        
+        .question-container.active {
+            display: block;
+        }
+        
         .question {
-            font-size: 20px;
+            font-size: 18px;
             color: #2c3e50;
             margin-bottom: 25px;
             line-height: 1.5;
@@ -57,14 +90,14 @@
         .options {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 30px;
         }
         
         .option {
             display: flex;
             align-items: center;
-            padding: 15px;
+            padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             cursor: pointer;
@@ -82,70 +115,46 @@
         }
         
         .option input {
-            margin-right: 15px;
-            transform: scale(1.3);
+            margin-right: 12px;
+            transform: scale(1.2);
         }
         
         .option label {
-            font-size: 16px;
+            font-size: 15px;
             color: #2c3e50;
             cursor: pointer;
             flex: 1;
         }
         
-        .value {
-            font-weight: bold;
-            color: #3498db;
-            margin-left: 10px;
-        }
-        
         .buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 15px;
         }
         
         button {
-            flex: 1;
-            padding: 15px;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 120px;
         }
         
-        #submitBtn {
+        #nextBtn, #submitBtn, #startSurvey {
             background-color: #3498db;
             color: white;
         }
         
-        #submitBtn:hover {
+        #nextBtn:hover, #submitBtn:hover, #startSurvey:hover {
             background-color: #2980b9;
-            transform: translateY(-2px);
         }
         
-        #submitBtn:disabled {
+        #nextBtn:disabled, #submitBtn:disabled {
             background-color: #bdc3c7;
             cursor: not-allowed;
-            transform: none;
-        }
-        
-        #downloadBtn {
-            background-color: #2ecc71;
-            color: white;
-        }
-        
-        #downloadBtn:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-        }
-        
-        #downloadBtn:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
         }
         
         .result {
@@ -156,47 +165,10 @@
             display: none;
         }
         
-        .result h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .result p {
-            margin-bottom: 10px;
-            color: #34495e;
-        }
-        
-        .result .score {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e74c3c;
-            text-align: center;
-            margin: 15px 0;
-        }
-        
-        .interpretation {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #e8f4fc;
-            border-left: 4px solid #3498db;
-        }
-        
-        .interpretation h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .interpretation p {
-            color: #34495e;
-            line-height: 1.5;
-        }
-        
         .loading {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 3px solid #f3f3f3;
             border-top: 3px solid #3498db;
             border-radius: 50%;
@@ -211,10 +183,11 @@
         
         .email-status {
             margin-top: 15px;
-            padding: 10px;
+            padding: 12px;
             border-radius: 5px;
             text-align: center;
             font-weight: 500;
+            font-size: 14px;
         }
         
         .email-success {
@@ -229,7 +202,83 @@
             border: 1px solid #f5c6cb;
         }
         
-        @media (max-width: 480px) {
+        .thank-you {
+            text-align: center;
+            padding: 25px;
+        }
+        
+        .thank-you h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .thank-you p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .personal-data {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        
+        .personal-data h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
             .container {
                 padding: 20px;
             }
@@ -239,11 +288,58 @@
             }
             
             .question {
-                font-size: 18px;
+                font-size: 16px;
+            }
+            
+            .option label {
+                font-size: 14px;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .question {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .option {
+                padding: 10px 12px;
+            }
+            
+            .option label {
+                font-size: 13px;
             }
             
             .buttons {
                 flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .footer {
+                font-size: 12px;
+                padding: 10px;
             }
         }
     </style>
@@ -253,103 +349,951 @@
 <body>
     <div class="container">
         <h1>Encuesta Académica</h1>
-        <p class="description">Su participación nos ayuda a comprender mejor las cargas académicas</p>
+        <p class="description">Su participación es muy importante para nuestra investigación</p>
         
-        <div class="question">
-            ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="progress-text" id="progressText">Datos Personales</div>
+        
+        <!-- Datos Personales -->
+        <div class="question-container active" id="personalData">
+            <div class="personal-data">
+                <h3>Datos Personales</h3>
+                
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="semestre">Semestre que cursa:</label>
+                    <select id="semestre" name="semestre" required>
+                        <option value="">Seleccione un semestre</option>
+                        <option value="Semestre 1">Semestre 1</option>
+                        <option value="Semestre 2">Semestre 2</option>
+                        <option value="Semestre 3">Semestre 3</option>
+                        <option value="Semestre 4">Semestre 4</option>
+                        <option value="Semestre 5">Semestre 5</option>
+                        <option value="Semestre 6">Semestre 6</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edad">Edad:</label>
+                    <select id="edad" name="edad" required>
+                        <option value="">Seleccione su edad</option>
+                        <!-- Opciones de edad desde 15 hasta 50 años -->
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sexo">Sexo:</label>
+                        <select id="sexo" name="sexo" required>
+                            <option value="">Seleccione</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="estadoCivil">Estado civil:</label>
+                        <select id="estadoCivil" name="estadoCivil" required>
+                            <option value="">Seleccione</option>
+                            <option value="Soltero/a">Soltero/a</option>
+                            <option value="Casado/a">Casado/a</option>
+                            <option value="Divorciado/a">Divorciado/a</option>
+                            <option value="Viudo/a">Viudo/a</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trabajaEstudia">¿Trabaja y estudia?</label>
+                    <select id="trabajaEstudia" name="trabajaEstudia" required>
+                        <option value="">Seleccione</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="startSurvey" onclick="startSurvey()">Comenzar Encuesta</button>
+            </div>
         </div>
         
-        <div class="options">
-            <div class="option" onclick="selectOption(1)">
-                <input type="radio" id="option1" name="academicOption" value="1">
-                <label for="option1">Nunca <span class="value">(1)</span></label>
+        <!-- Preguntas de la encuesta -->
+        <!-- Pregunta 1 -->
+        <div class="question-container" id="question1">
+            <div class="question">
+                1. ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?
             </div>
             
-            <div class="option" onclick="selectOption(2)">
-                <input type="radio" id="option2" name="academicOption" value="2">
-                <label for="option2">Rara vez (1-2 veces al mes) <span class="value">(2)</span></label>
+            <div class="options">
+                <div class="option" onclick="selectOption(1, 1)">
+                    <input type="radio" id="q1_option1" name="q1" value="1">
+                    <label for="q1_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(1, 2)">
+                    <input type="radio" id="q1_option2" name="q1" value="2">
+                    <label for="q1_option2">Rara vez (1-2 veces al mes)</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(1, 3)">
+                    <input type="radio" id="q1_option3" name="q1" value="3">
+                    <label for="q1_option3">A veces (1-2 veces a la semana)</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(1, 4)">
+                    <input type="radio" id="q1_option4" name="q1" value="4">
+                    <label for="q1_option4">Frecuentemente (3 o más veces a la semana)</label>
+                </div>
             </div>
             
-            <div class="option" onclick="selectOption(3)">
-                <input type="radio" id="option3" name="academicOption" value="3">
-                <label for="option3">A veces (1-2 veces a la semana) <span class="value">(3)</span></label>
-            </div>
-            
-            <div class="option" onclick="selectOption(4)">
-                <input type="radio" id="option4" name="academicOption" value="4">
-                <label for="option4">Frecuentemente (3 o más veces a la semana) <span class="value">(4)</span></label>
+            <div class="buttons">
+                <button id="nextBtn1" onclick="nextQuestion()" disabled>Siguiente</button>
             </div>
         </div>
         
-        <div class="buttons">
-            <button id="submitBtn" onclick="submitAnswer()" disabled>Enviar Respuesta</button>
-            <button id="downloadBtn" onclick="downloadResults()" disabled>Descargar Resultados</button>
+        <!-- Pregunta 2 -->
+        <div class="question-container" id="question2">
+            <div class="question">
+                2. ¿Con qué frecuencia siente un alto nivel de tensión o presión durante sus rotaciones de prácticas clínicas/hospitalarias?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(2, 1)">
+                    <input type="radio" id="q2_option1" name="q2" value="1">
+                    <label for="q2_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(2, 2)">
+                    <input type="radio" id="q2_option2" name="q2" value="2">
+                    <label for="q2_option2">Rara vez</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(2, 3)">
+                    <input type="radio" id="q2_option3" name="q2" value="3">
+                    <label for="q2_option3">A veces</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(2, 4)">
+                    <input type="radio" id="q2_option4" name="q2" value="4">
+                    <label for="q2_option4">Frecuentemente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn2" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
         </div>
         
-        <div class="result" id="resultSection">
-            <h3>Resultado de la Encuesta</h3>
-            <p><strong>Pregunta:</strong> ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?</p>
-            <p id="selectedAnswer"><strong>Respuesta seleccionada:</strong></p>
-            <div class="score" id="scoreValue">Selección: </div>
+        <!-- Pregunta 3 -->
+        <div class="question-container" id="question3">
+            <div class="question">
+                3. En el último mes, ¿con qué frecuencia ha experimentado síntomas físicos como dolores de cabeza, tensión muscular o problemas estomacales relacionados con el estudio?
+            </div>
             
-            <div id="emailStatus"></div>
+            <div class="options">
+                <div class="option" onclick="selectOption(3, 1)">
+                    <input type="radio" id="q3_option1" name="q3" value="1">
+                    <label for="q3_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(3, 2)">
+                    <input type="radio" id="q3_option2" name="q3" value="2">
+                    <label for="q3_option2">Rara vez</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(3, 3)">
+                    <input type="radio" id="q3_option3" name="q3" value="3">
+                    <label for="q3_option3">A veces</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(3, 4)">
+                    <input type="radio" id="q3_option4" name="q3" value="4">
+                    <label for="q3_option4">Frecuentemente</label>
+                </div>
+            </div>
             
-            <div class="interpretation">
-                <h4>Interpretación de la Selección:</h4>
-                <p id="interpretationText"></p>
+            <div class="buttons">
+                <button id="nextBtn3" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 4 -->
+        <div class="question-container" id="question4">
+            <div class="question">
+                4. ¿Cómo calificaría el apoyo que recibe de sus profesores cuando tiene dificultades académicas?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(4, 1)">
+                    <input type="radio" id="q4_option1" name="q4" value="1">
+                    <label for="q4_option1">Excelente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(4, 2)">
+                    <input type="radio" id="q4_option2" name="q4" value="2">
+                    <label for="q4_option2">Bueno</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(4, 3)">
+                    <input type="radio" id="q4_option3" name="q4" value="3">
+                    <label for="q4_option3">Regular</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(4, 4)">
+                    <input type="radio" id="q4_option4" name="q4" value="4">
+                    <label for="q4_option4">Insuficiente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn4" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 5 -->
+        <div class="question-container" id="question5">
+            <div class="question">
+                5. ¿Qué tan satisfecho está con su rendimiento académico actual?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(5, 1)">
+                    <input type="radio" id="q5_option1" name="q5" value="1">
+                    <label for="q5_option1">Muy satisfecho</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(5, 2)">
+                    <input type="radio" id="q5_option2" name="q5" value="2">
+                    <label for="q5_option2">Satisfecho</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(5, 3)">
+                    <input type="radio" id="q5_option3" name="q5" value="3">
+                    <label for="q5_option3">Poco satisfecho</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(5, 4)">
+                    <input type="radio" id="q5_option4" name="q5" value="4">
+                    <label for="q5_option4">Insatisfecho</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn5" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 6 -->
+        <div class="question-container" id="question6">
+            <div class="question">
+                6. ¿Con qué frecuencia utiliza recursos de apoyo académico como tutorías o asesorías?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(6, 1)">
+                    <input type="radio" id="q6_option1" name="q6" value="1">
+                    <label for="q6_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(6, 2)">
+                    <input type="radio" id="q6_option2" name="q6" value="2">
+                    <label for="q6_option2">Rara vez</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(6, 3)">
+                    <input type="radio" id="q6_option3" name="q6" value="3">
+                    <label for="q6_option3">Ocasionalmente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(6, 4)">
+                    <input type="radio" id="q6_option4" name="q6" value="4">
+                    <label for="q6_option4">Frecuentemente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn6" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 7 -->
+        <div class="question-container" id="question7">
+            <div class="question">
+                7. ¿Cómo calificaría la calidad de la infraestructura de su institución educativa?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(7, 1)">
+                    <input type="radio" id="q7_option1" name="q7" value="1">
+                    <label for="q7_option1">Excelente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(7, 2)">
+                    <input type="radio" id="q7_option2" name="q7" value="2">
+                    <label for="q7_option2">Buena</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(7, 3)">
+                    <input type="radio" id="q7_option3" name="q7" value="3">
+                    <label for="q7_option3">Regular</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(7, 4)">
+                    <input type="radio" id="q7_option4" name="q7" value="4">
+                    <label for="q7_option4">Mala</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn7" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 8 con 2 opciones -->
+        <div class="question-container" id="question8">
+            <div class="question">
+                8. ¿Considera que la carga horaria de sus clases es adecuada?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(8, 1)">
+                    <input type="radio" id="q8_option1" name="q8" value="1">
+                    <label for="q8_option1">Sí</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(8, 2)">
+                    <input type="radio" id="q8_option2" name="q8" value="2">
+                    <label for="q8_option2">No</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn8" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 9 -->
+        <div class="question-container" id="question9">
+            <div class="question">
+                9. ¿Qué tan motivado se siente para continuar sus estudios?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(9, 1)">
+                    <input type="radio" id="q9_option1" name="q9" value="1">
+                    <label for="q9_option1">Muy motivado</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(9, 2)">
+                    <input type="radio" id="q9_option2" name="q9" value="2">
+                    <label for="q9_option2">Motivado</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(9, 3)">
+                    <input type="radio" id="q9_option3" name="q9" value="3">
+                    <label for="q9_option3">Poco motivado</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(9, 4)">
+                    <input type="radio" id="q9_option4" name="q9" value="4">
+                    <label for="q9_option4">Desmotivado</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn9" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 10 -->
+        <div class="question-container" id="question10">
+            <div class="question">
+                10. ¿Con qué frecuencia participa en actividades extracurriculares de su institución?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(10, 1)">
+                    <input type="radio" id="q10_option1" name="q10" value="1">
+                    <label for="q10_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(10, 2)">
+                    <input type="radio" id="q10_option2" name="q10" value="2">
+                    <label for="q10_option2">Rara vez</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(10, 3)">
+                    <input type="radio" id="q10_option3" name="q10" value="3">
+                    <label for="q10_option3">Ocasionalmente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(10, 4)">
+                    <input type="radio" id="q10_option4" name="q10" value="4">
+                    <label for="q10_option4">Frecuentemente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn10" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 11 -->
+        <div class="question-container" id="question11">
+            <div class="question">
+                11. ¿Cómo calificaría la claridad de los objetivos de aprendizaje en sus cursos?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(11, 1)">
+                    <input type="radio" id="q11_option1" name="q11" value="1">
+                    <label for="q11_option1">Muy claros</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(11, 2)">
+                    <input type="radio" id="q11_option2" name="q11" value="2">
+                    <label for="q11_option2">Claros</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(11, 3)">
+                    <input type="radio" id="q11_option3" name="q11" value="3">
+                    <label for="q11_option3">Poco claros</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(11, 4)">
+                    <input type="radio" id="q11_option4" name="q11" value="4">
+                    <label for="q11_option4">Confusos</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn11" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 12 -->
+        <div class="question-container" id="question12">
+            <div class="question">
+                12. ¿Qué tan adecuado considera el tiempo disponible para completar sus asignaciones?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(12, 1)">
+                    <input type="radio" id="q12_option1" name="q12" value="1">
+                    <label for="q12_option1">Más que suficiente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(12, 2)">
+                    <input type="radio" id="q12_option2" name="q12" value="2">
+                    <label for="q12_option2">Suficiente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(12, 3)">
+                    <input type="radio" id="q12_option3" name="q12" value="3">
+                    <label for="q12_option3">Insuficiente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(12, 4)">
+                    <input type="radio" id="q12_option4" name="q12" value="4">
+                    <label for="q12_option4">Muy insuficiente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn12" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 13 -->
+        <div class="question-container" id="question13">
+            <div class="question">
+                13. ¿Cómo calificaría la retroalimentación que recibe sobre su desempeño académico?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(13, 1)">
+                    <input type="radio" id="q13_option1" name="q13" value="1">
+                    <label for="q13_option1">Excelente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(13, 2)">
+                    <input type="radio" id="q13_option2" name="q13" value="2">
+                    <label for="q13_option2">Buena</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(13, 3)">
+                    <input type="radio" id="q13_option3" name="q13" value="3">
+                    <label for="q13_option3">Regular</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(13, 4)">
+                    <input type="radio" id="q13_option4" name="q13" value="4">
+                    <label for="q13_option4">Mala</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn13" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 14 con 2 opciones -->
+        <div class="question-container" id="question14">
+            <div class="question">
+                14. ¿Ha considerado abandonar sus estudios por dificultades académicas?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(14, 1)">
+                    <input type="radio" id="q14_option1" name="q14" value="1">
+                    <label for="q14_option1">Sí</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(14, 2)">
+                    <input type="radio" id="q14_option2" name="q14" value="2">
+                    <label for="q14_option2">No</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn14" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 15 con 2 opciones -->
+        <div class="question-container" id="question15">
+            <div class="question">
+                15. ¿Recibe apoyo económico familiar para sus estudios?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(15, 1)">
+                    <input type="radio" id="q15_option1" name="q15" value="1">
+                    <label for="q15_option1">Sí</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(15, 2)">
+                    <input type="radio" id="q15_option2" name="q15" value="2">
+                    <label for="q15_option2">No</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn15" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 16 -->
+        <div class="question-container" id="question16">
+            <div class="question">
+                16. ¿Qué tan frecuentemente utiliza recursos digitales para su aprendizaje?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(16, 1)">
+                    <input type="radio" id="q16_option1" name="q16" value="1">
+                    <label for="q16_option1">Nunca</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(16, 2)">
+                    <input type="radio" id="q16_option2" name="q16" value="2">
+                    <label for="q16_option2">Rara vez</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(16, 3)">
+                    <input type="radio" id="q16_option3" name="q16" value="3">
+                    <label for="q16_option3">Ocasionalmente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(16, 4)">
+                    <input type="radio" id="q16_option4" name="q16" value="4">
+                    <label for="q16_option4">Frecuentemente</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn16" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 17 -->
+        <div class="question-container" id="question17">
+            <div class="question">
+                17. ¿Cómo calificaría la relación con sus compañeros de estudio?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(17, 1)">
+                    <input type="radio" id="q17_option1" name="q17" value="1">
+                    <label for="q17_option1">Excelente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(17, 2)">
+                    <input type="radio" id="q17_option2" name="q17" value="2">
+                    <label for="q17_option2">Buena</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(17, 3)">
+                    <input type="radio" id="q17_option3" name="q17" value="3">
+                    <label for="q17_option3">Regular</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(17, 4)">
+                    <input type="radio" id="q17_option4" name="q17" value="4">
+                    <label for="q17_option4">Mala</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn17" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 18 -->
+        <div class="question-container" id="question18">
+            <div class="question">
+                18. ¿Qué tan accesibles son los materiales de estudio en su institución?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(18, 1)">
+                    <input type="radio" id="q18_option1" name="q18" value="1">
+                    <label for="q18_option1">Muy accesibles</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(18, 2)">
+                    <input type="radio" id="q18_option2" name="q18" value="2">
+                    <label for="q18_option2">Accesibles</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(18, 3)">
+                    <input type="radio" id="q18_option3" name="q18" value="3">
+                    <label for="q18_option3">Poco accesibles</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(18, 4)">
+                    <input type="radio" id="q18_option4" name="q18" value="4">
+                    <label for="q18_option4">Inaccesibles</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn18" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 19 -->
+        <div class="question-container" id="question19">
+            <div class="question">
+                19. ¿Cómo calificaría la preparación académica de sus profesores?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(19, 1)">
+                    <input type="radio" id="q19_option1" name="q19" value="1">
+                    <label for="q19_option1">Excelente</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(19, 2)">
+                    <input type="radio" id="q19_option2" name="q19" value="2">
+                    <label for="q19_option2">Buena</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(19, 3)">
+                    <input type="radio" id="q19_option3" name="q19" value="3">
+                    <label for="q19_option3">Regular</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(19, 4)">
+                    <input type="radio" id="q19_option4" name="q19" value="4">
+                    <label for="q19_option4">Mala</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="nextBtn19" onclick="nextQuestion()" disabled>Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 20 -->
+        <div class="question-container" id="question20">
+            <div class="question">
+                20. ¿Recomendaría su institución educativa a otros estudiantes?
+            </div>
+            
+            <div class="options">
+                <div class="option" onclick="selectOption(20, 1)">
+                    <input type="radio" id="q20_option1" name="q20" value="1">
+                    <label for="q20_option1">Definitivamente sí</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(20, 2)">
+                    <input type="radio" id="q20_option2" name="q20" value="2">
+                    <label for="q20_option2">Probablemente sí</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(20, 3)">
+                    <input type="radio" id="q20_option3" name="q20" value="3">
+                    <label for="q20_option3">Probablemente no</label>
+                </div>
+                
+                <div class="option" onclick="selectOption(20, 4)">
+                    <input type="radio" id="q20_option4" name="q20" value="4">
+                    <label for="q20_option4">Definitivamente no</label>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="submitBtn" onclick="submitSurvey()" disabled>Finalizar Encuesta</button>
+            </div>
+        </div>
+        
+        <!-- Pantalla de agradecimiento -->
+        <div class="result" id="thankYouSection">
+            <div class="thank-you">
+                <h2>¡Gracias por participar!</h2>
+                <p>Su respuesta ha sido registrada exitosamente.</p>
+                <div id="emailStatus"></div>
             </div>
         </div>
     </div>
 
+    <div class="footer">
+        REALIZADO POR PILAR BEATRIZ PÉREZ LEMUS. 2025
+    </div>
+
     <script>
-        // Inicializar EmailJS - REEMPLAZA CON TUS CREDENCIALES
+        // Inicializar EmailJS
         (function() {
-            emailjs.init("4nYJFF-M_hnbkCPtD"); // Reemplaza con tu Public Key de EmailJS
+            emailjs.init("4nYJFF-M_hnbkCPtD");
         })();
         
-        let selectedValue = 0;
-        let selectedText = "";
+        // Configuración de preguntas (20 preguntas)
+        const questions = [
+            // Preguntas 1-7 con 4 opciones
+            {
+                id: 1,
+                text: "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?",
+                options: ["Nunca", "Rara vez (1-2 veces al mes)", "A veces (1-2 veces a la semana)", "Frecuentemente (3 o más veces a la semana)"]
+            },
+            {
+                id: 2,
+                text: "¿Con qué frecuencia siente un alto nivel de tensión o presión durante sus rotaciones de prácticas clínicas/hospitalarias?",
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente"]
+            },
+            {
+                id: 3,
+                text: "En el último mes, ¿con qué frecuencia ha experimentado síntomas físicos como dolores de cabeza, tensión muscular o problemas estomacales relacionados con el estudio?",
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente"]
+            },
+            {
+                id: 4,
+                text: "¿Cómo calificaría el apoyo que recibe de sus profesores cuando tiene dificultades académicas?",
+                options: ["Excelente", "Bueno", "Regular", "Insuficiente"]
+            },
+            {
+                id: 5,
+                text: "¿Qué tan satisfecho está con su rendimiento académico actual?",
+                options: ["Muy satisfecho", "Satisfecho", "Poco satisfecho", "Insatisfecho"]
+            },
+            {
+                id: 6,
+                text: "¿Con qué frecuencia utiliza recursos de apoyo académico como tutorías o asesorías?",
+                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+            },
+            {
+                id: 7,
+                text: "¿Cómo calificaría la calidad de la infraestructura de su institución educativa?",
+                options: ["Excelente", "Buena", "Regular", "Mala"]
+            },
+            // Pregunta 8 con 2 opciones
+            {
+                id: 8,
+                text: "¿Considera que la carga horaria de sus clases es adecuada?",
+                options: ["Sí", "No"]
+            },
+            // Preguntas 9-13 con 4 opciones
+            {
+                id: 9,
+                text: "¿Qué tan motivado se siente para continuar sus estudios?",
+                options: ["Muy motivado", "Motivado", "Poco motivado", "Desmotivado"]
+            },
+            {
+                id: 10,
+                text: "¿Con qué frecuencia participa en actividades extracurriculares de su institución?",
+                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+            },
+            {
+                id: 11,
+                text: "¿Cómo calificaría la claridad de los objetivos de aprendizaje en sus cursos?",
+                options: ["Muy claros", "Claros", "Poco claros", "Confusos"]
+            },
+            {
+                id: 12,
+                text: "¿Qué tan adecuado considera el tiempo disponible para completar sus asignaciones?",
+                options: ["Más que suficiente", "Suficiente", "Insuficiente", "Muy insuficiente"]
+            },
+            {
+                id: 13,
+                text: "¿Cómo calificaría la retroalimentación que recibe sobre su desempeño académico?",
+                options: ["Excelente", "Buena", "Regular", "Mala"]
+            },
+            // Pregunta 14 con 2 opciones
+            {
+                id: 14,
+                text: "¿Ha considerado abandonar sus estudios por dificultades académicas?",
+                options: ["Sí", "No"]
+            },
+            // Pregunta 15 con 2 opciones
+            {
+                id: 15,
+                text: "¿Recibe apoyo económico familiar para sus estudios?",
+                options: ["Sí", "No"]
+            },
+            // Preguntas 16-20 con 4 opciones
+            {
+                id: 16,
+                text: "¿Qué tan frecuentemente utiliza recursos digitales para su aprendizaje?",
+                options: ["Nunca", "Rara vez", "Ocasionalmente", "Frecuentemente"]
+            },
+            {
+                id: 17,
+                text: "¿Cómo calificaría la relación con sus compañeros de estudio?",
+                options: ["Excelente", "Buena", "Regular", "Mala"]
+            },
+            {
+                id: 18,
+                text: "¿Qué tan accesibles son los materiales de estudio en su institución?",
+                options: ["Muy accesibles", "Accesibles", "Poco accesibles", "Inaccesibles"]
+            },
+            {
+                id: 19,
+                text: "¿Cómo calificaría la preparación académica de sus profesores?",
+                options: ["Excelente", "Buena", "Regular", "Mala"]
+            },
+            {
+                id: 20,
+                text: "¿Recomendaría su institución educativa a otros estudiantes?",
+                options: ["Definitivamente sí", "Probablemente sí", "Probablemente no", "Definitivamente no"]
+            }
+        ];
         
-        function selectOption(value) {
-            selectedValue = value;
-            
-            // Remove selected class from all options
-            document.querySelectorAll('.option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked option
-            event.currentTarget.classList.add('selected');
-            
-            // Check the radio button
-            document.getElementById(`option${value}`).checked = true;
-            
-            // Enable submit button
-            document.getElementById('submitBtn').disabled = false;
-            
-            // Store the selected text
-            switch(value) {
-                case 1:
-                    selectedText = "Nunca";
-                    break;
-                case 2:
-                    selectedText = "Rara vez (1-2 veces al mes)";
-                    break;
-                case 3:
-                    selectedText = "A veces (1-2 veces a la semana)";
-                    break;
-                case 4:
-                    selectedText = "Frecuentemente (3 o más veces a la semana)";
-                    break;
+        let currentQuestion = 0; // 0 = Datos personales, 1-20 = Preguntas
+        const totalQuestions = questions.length;
+        const answers = {};
+        let personalData = {};
+        
+        // Inicializar respuestas
+        questions.forEach(q => {
+            answers[q.id] = {
+                selected: false,
+                value: 0,
+                text: ""
+            };
+        });
+        
+        // Función para llenar las opciones de edad
+        function fillAgeOptions() {
+            const ageSelect = document.getElementById('edad');
+            for (let i = 15; i <= 50; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i} años`;
+                ageSelect.appendChild(option);
             }
         }
         
-        async function submitAnswer() {
-            if (selectedValue === 0) {
-                alert("Por favor, seleccione una opción antes de enviar.");
+        function updateProgress() {
+            if (currentQuestion === 0) {
+                document.getElementById('progress').style.width = `0%`;
+                document.getElementById('progressText').textContent = `Datos Personales`;
+            } else {
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+                document.getElementById('progressText').textContent = `Pregunta ${currentQuestion} de ${totalQuestions}`;
+            }
+        }
+        
+        function startSurvey() {
+            // Validar datos personales
+            const fecha = document.getElementById('fecha').value;
+            const semestre = document.getElementById('semestre').value;
+            const edad = document.getElementById('edad').value;
+            const sexo = document.getElementById('sexo').value;
+            const estadoCivil = document.getElementById('estadoCivil').value;
+            const trabajaEstudia = document.getElementById('trabajaEstudia').value;
+            
+            if (!fecha || !semestre || !edad || !sexo || !estadoCivil || !trabajaEstudia) {
+                alert('Por favor, complete todos los datos personales antes de comenzar la encuesta.');
                 return;
             }
             
+            // Guardar datos personales
+            personalData = {
+                fecha: fecha,
+                semestre: semestre,
+                edad: edad,
+                sexo: sexo,
+                estadoCivil: estadoCivil,
+                trabajaEstudia: trabajaEstudia
+            };
+            
+            // Ocultar datos personales y mostrar primera pregunta
+            document.getElementById('personalData').classList.remove('active');
+            currentQuestion = 1;
+            document.getElementById(`question${currentQuestion}`).classList.add('active');
+            updateProgress();
+        }
+        
+        function selectOption(questionId, optionValue) {
+            // Guardar respuesta
+            answers[questionId].selected = true;
+            answers[questionId].value = optionValue;
+            answers[questionId].text = questions[questionId-1].options[optionValue-1];
+            
+            // Remover clase selected de todas las opciones de esta pregunta
+            const options = document.querySelectorAll(`#question${questionId} .option`);
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Agregar clase selected a la opción clickeada
+            event.currentTarget.classList.add('selected');
+            
+            // Marcar el radio button
+            document.getElementById(`q${questionId}_option${optionValue}`).checked = true;
+            
+            // Habilitar botón siguiente/enviar
+            if (currentQuestion < totalQuestions) {
+                document.getElementById(`nextBtn${questionId}`).disabled = false;
+            } else {
+                document.getElementById('submitBtn').disabled = false;
+            }
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Ocultar pregunta actual
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+                
+                // Mostrar siguiente pregunta
+                currentQuestion++;
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+                
+                // Actualizar progreso
+                updateProgress();
+            }
+        }
+        
+        async function submitSurvey() {
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             
@@ -361,27 +1305,19 @@
                 // Enviar por correo automáticamente
                 const emailSent = await enviarPorCorreo();
                 
-                // Show result section
-                document.getElementById('resultSection').style.display = 'block';
+                // Ocultar última pregunta
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
                 
-                // Update result text
-                document.getElementById('selectedAnswer').innerHTML = `<strong>Respuesta seleccionada:</strong> ${selectedText}`;
-                document.getElementById('scoreValue').textContent = `Selección: ${selectedValue}`;
+                // Mostrar pantalla de agradecimiento
+                document.getElementById('thankYouSection').style.display = 'block';
                 
                 // Mostrar estado del correo
                 const emailStatus = document.getElementById('emailStatus');
                 if (emailSent) {
-                    emailStatus.innerHTML = '<div class="email-status email-success">✅ Respuesta enviada correctamente a danvenezuela@gmail.com</div>';
+                    emailStatus.innerHTML = '<div class="email-status email-success">✅ Respuesta enviada correctamente</div>';
                 } else {
-                    emailStatus.innerHTML = '<div class="email-status email-error">⚠️ Respuesta guardada localmente, pero no se pudo enviar por correo</div>';
+                    emailStatus.innerHTML = '<div class="email-status email-error">⚠️ Respuesta registrada, pero no se pudo enviar por correo</div>';
                 }
-                
-                                
-                // Enable download button
-                document.getElementById('downloadBtn').disabled = false;
-                
-                // Scroll to results
-                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
                 
             } catch (error) {
                 console.error('Error:', error);
@@ -395,20 +1331,26 @@
         
         // Función para enviar por correo usando EmailJS
         async function enviarPorCorreo() {
-            const question = "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?";
+            const answersText = questions.map(q => {
+                const answer = answers[q.id];
+                if (answer.selected) {
+                    return `P${q.id}: ${answer.text} [Valoración: ${answer.value}]`;
+                }
+                return `P${q.id}: Sin respuesta`;
+            }).join('\n');
             
             const templateParams = {
                 to_email: 'danvenezuela@gmail.com',
-                pregunta: question,
-                respuesta: selectedText,
-                puntuacion: selectedValue,
                 fecha: new Date().toLocaleString('es-ES'),
-                interpretacion: document.getElementById('interpretationText').textContent
+                datos_personales: `DATOS DEL ESTUDIANTE:\nSemestre: ${personalData.semestre}\nEdad: ${personalData.edad} años\nSexo: ${personalData.sexo}\nEstado Civil: ${personalData.estadoCivil}\nTrabaja y Estudia: ${personalData.trabajaEstudia}`,
+                total_preguntas: totalQuestions,
+                respuestas: answersText
             };
 
             try {
-                // Enviar email usando EmailJS - REEMPLAZA CON TUS CREDENCIALES
-                const response = await emailjs.send('service_xe1bdwm', 'template_u2oplvu', templateParams); console.log('Correo enviado con éxito:', response);
+                // Enviar email usando EmailJS
+                const response = await emailjs.send('service_xe1bdwm', 'template_u2oplvu', templateParams);
+                console.log('Correo enviado con éxito:', response);
                 return true;
             } catch (error) {
                 console.error('Error al enviar correo:', error);
@@ -416,30 +1358,16 @@
             }
         }
         
-        function downloadResults() {
-            // Create text content for the file
-            const question = "¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?";
-            const answer = selectedText;
-            const score = selectedValue;
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Llenar opciones de edad
+            fillAgeOptions();
             
-            const content = `ENCUESTA ACADÉMICA - RESULTADOS\n\n` +
-                           `: ${question}\n` +
-                           `: ${answer}\n` +
-                           `: ${score}\n\n` +
-                           `Fecha: ${new Date().toLocaleString()}\n` +
-                           `: ${document.getElementById('interpretationText').textContent}`;
-            
-            // Create and download the file
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `resultado_encuesta_${new Date().toISOString().slice(0, 10)}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
+            // Establecer fecha actual por defecto
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').value = today;
+            updateProgress();
+        });
     </script>
 </body>
 </html>
