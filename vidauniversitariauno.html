@@ -457,6 +457,11 @@
                     <label for="cedula">🆔 Número de cédula de identidad:</label>
                     <input type="text" id="cedula" name="cedula" placeholder="Ingrese su número de cédula" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="seccion">🏫 Sección donde estudia:</label>
+                    <input type="text" id="seccion" name="seccion" placeholder="Ej: CIU-0101, CNU-0202, etc." required>
+                </div>
             </div>
             
             <div class="buttons">
@@ -466,7 +471,6 @@
             </div>
         </div>
         
-        <!-- Preguntas 1 a 20 (manteniendo la misma estructura que antes) -->
         <!-- Pregunta 1 -->
         <div class="question-container" id="question1">
             <div class="question-card">
@@ -539,8 +543,617 @@
             </div>
         </div>
 
-        <!-- Preguntas 3 a 19 (estructura similar) -->
-        <!-- ... -->
+        <!-- Pregunta 3 -->
+        <div class="question-container" id="question3">
+            <div class="question-card">
+                <div class="question-number">Pregunta 3 de 20</div>
+                <div class="question">El enfoque de esta unidad es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3, 1)">
+                        <input type="radio" id="q3_option1" name="q3" value="1">
+                        <label for="q3_option1">Exclusivamente teórico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 2)">
+                        <input type="radio" id="q3_option2" name="q3" value="2">
+                        <label for="q3_option2">Exclusivamente práctico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 3)">
+                        <input type="radio" id="q3_option3" name="q3" value="3">
+                        <label for="q3_option3">Teórico-práctico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 4)">
+                        <input type="radio" id="q3_option4" name="q3" value="4">
+                        <label for="q3_option4">Deportivo.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn3" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question-container" id="question4">
+            <div class="question-card">
+                <div class="question-number">Pregunta 4 de 20</div>
+                <div class="question">La filosofía de la ENAHP-IUT se refiere a:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4, 1)">
+                        <input type="radio" id="q4_option1" name="q4" value="1">
+                        <label for="q4_option1">Solo los reglamentos de evaluación.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 2)">
+                        <input type="radio" id="q4_option2" name="q4" value="2">
+                        <label for="q4_option2">Los valores y principios que guían a la institución.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 3)">
+                        <input type="radio" id="q4_option3" name="q4" value="3">
+                        <label for="q4_option3">La oferta de posgrados.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 4)">
+                        <input type="radio" id="q4_option4" name="q4" value="4">
+                        <label for="q4_option4">Los horarios de clase.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn4" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question-container" id="question5">
+            <div class="question-card">
+                <div class="question-number">Pregunta 5 de 20</div>
+                <div class="question">La Misión institucional define:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5, 1)">
+                        <input type="radio" id="q5_option1" name="q5" value="1">
+                        <label for="q5_option1">Los sueños futuros de la universidad.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 2)">
+                        <input type="radio" id="q5_option2" name="q5" value="2">
+                        <label for="q5_option2">Lo que la universidad hace actualmente.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 3)">
+                        <input type="radio" id="q5_option3" name="q5" value="3">
+                        <label for="q5_option3">Las instalaciones físicas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 4)">
+                        <input type="radio" id="q5_option4" name="q5" value="4">
+                        <label for="q5_option4">Los requisitos de ingreso.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn5" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question-container" id="question6">
+            <div class="question-card">
+                <div class="question-number">Pregunta 6 de 20</div>
+                <div class="question">La Visión institucional se enfoca en:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 6, 1)">
+                        <input type="radio" id="q6_option1" name="q6" value="1">
+                        <label for="q6_option1">Las metas a largo plazo.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 2)">
+                        <input type="radio" id="q6_option2" name="q6" value="2">
+                        <label for="q6_option2">Las calificaciones de los estudiantes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 3)">
+                        <input type="radio" id="q6_option3" name="q6" value="3">
+                        <label for="q6_option3">Los docentes contratados.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 4)">
+                        <input type="radio" id="q6_option4" name="q6" value="4">
+                        <label for="q6_option4">Las actividades deportivas.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn6" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question-container" id="question7">
+            <div class="question-card">
+                <div class="question-number">Pregunta 7 de 20</div>
+                <div class="question">Una de las carreras ofertadas en la ENAHP-IUT es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 7, 1)">
+                        <input type="radio" id="q7_option1" name="q7" value="1">
+                        <label for="q7_option1">Medicina.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 2)">
+                        <input type="radio" id="q7_option2" name="q7" value="2">
+                        <label for="q7_option2">Aduana.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 3)">
+                        <input type="radio" id="q7_option3" name="q7" value="3">
+                        <label for="q7_option3">Derecho.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 4)">
+                        <input type="radio" id="q7_option4" name="q7" value="4">
+                        <label for="q7_option4">Psicología.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn7" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question-container" id="question8">
+            <div class="question-card">
+                <div class="question-number">Pregunta 8 de 20</div>
+                <div class="question">La diferencia principal entre Misión y Visión es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 8, 1)">
+                        <input type="radio" id="q8_option1" name="q8" value="1">
+                        <label for="q8_option1">La Misión son los sueños a futuro; la Visión, lo que se hace hoy.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 2)">
+                        <input type="radio" id="q8_option2" name="q8" value="2">
+                        <label for="q8_option2">La Misión es lo que la institución hace hoy; la Visión, lo que aspira a ser mañana.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 3)">
+                        <input type="radio" id="q8_option3" name="q8" value="3">
+                        <label for="q8_option3">La Misión son las carreras; la Visión, los posgrados.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 4)">
+                        <input type="radio" id="q8_option4" name="q8" value="4">
+                        <label for="q8_option4">No hay diferencia, son lo mismo.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn8" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="question-container" id="question9">
+            <div class="question-card">
+                <div class="question-number">Pregunta 9 de 20</div>
+                <div class="question">La evaluación en esta unidad es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 9, 1)">
+                        <input type="radio" id="q9_option1" name="q9" value="1">
+                        <label for="q9_option1">Solo sumativa.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 2)">
+                        <input type="radio" id="q9_option2" name="q9" value="2">
+                        <label for="q9_option2">Exclusivamente diagnóstica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 3)">
+                        <input type="radio" id="q9_option3" name="q9" value="3">
+                        <label for="q9_option3">Continua e integral.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 4)">
+                        <input type="radio" id="q9_option4" name="q9" value="4">
+                        <label for="q9_option4">Solo teórica.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn9" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="question-container" id="question10">
+            <div class="question-card">
+                <div class="question-number">Pregunta 10 de 20</div>
+                <div class="question">¿Qué incluye la exploración vocacional en esta unidad?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 10, 1)">
+                        <input type="radio" id="q10_option1" name="q10" value="1">
+                        <label for="q10_option1">Solo pruebas de matemáticas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 2)">
+                        <input type="radio" id="q10_option2" name="q10" value="2">
+                        <label for="q10_option2">Análisis del perfil de ingreso y pruebas diagnósticas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 3)">
+                        <input type="radio" id="q10_option3" name="q10" value="3">
+                        <label for="q10_option3">Exclusivamente deportes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 4)">
+                        <input type="radio" id="q10_option4" name="q10" value="4">
+                        <label for="q10_option4">Viajes al exterior.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn10" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 11 -->
+        <div class="question-container" id="question11">
+            <div class="question-card">
+                <div class="question-number">Pregunta 11 de 20</div>
+                <div class="question">Las bases legales que se estudian en la unidad incluyen:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 11, 1)">
+                        <input type="radio" id="q11_option1" name="q11" value="1">
+                        <label for="q11_option1">La Constitución de la República Bolivariana de Venezuela.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 2)">
+                        <input type="radio" id="q11_option2" name="q11" value="2">
+                        <label for="q11_option2">Leyes de tránsito.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 3)">
+                        <input type="radio" id="q11_option3" name="q11" value="3">
+                        <label for="q11_option3">Reglamentos de otros países.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 4)">
+                        <input type="radio" id="q11_option4" name="q11" value="4">
+                        <label for="q11_option4">Normas de urbanidad.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn11" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 12 -->
+        <div class="question-container" id="question12">
+            <div class="question-card">
+                <div class="question-number">Pregunta 12 de 20</div>
+                <div class="question">El perfil estudiantil universitario de la ENAHP-IUT busca:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 12, 1)">
+                        <input type="radio" id="q12_option1" name="q12" value="1">
+                        <label for="q12_option1">Formar profesionales críticos y reflexivos.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 2)">
+                        <input type="radio" id="q12_option2" name="q12" value="2">
+                        <label for="q12_option2">Limitar la participación social.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 3)">
+                        <input type="radio" id="q12_option3" name="q12" value="3">
+                        <label for="q12_option3">Evitar la investigación.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 4)">
+                        <input type="radio" id="q12_option4" name="q12" value="4">
+                        <label for="q12_option4">Promover el individualismo.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn12" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 13 -->
+        <div class="question-container" id="question13">
+            <div class="question-card">
+                <div class="question-number">Pregunta 13 de 20</div>
+                <div class="question">Los mecanismos de participación estudiantil incluyen:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 13, 1)">
+                        <input type="radio" id="q13_option1" name="q13" value="1">
+                        <label for="q13_option1">Asistir solo a clases.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 2)">
+                        <input type="radio" id="q13_option2" name="q13" value="2">
+                        <label for="q13_option2">Representaciones en órganos colegiados.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 3)">
+                        <input type="radio" id="q13_option3" name="q13" value="3">
+                        <label for="q13_option3">Exclusivamente actividades deportivas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 4)">
+                        <input type="radio" id="q13_option4" name="q13" value="4">
+                        <label for="q13_option4">Solo reuniones sociales.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn13" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 14 -->
+        <div class="question-container" id="question14">
+            <div class="question-card">
+                <div class="question-number">Pregunta 14 de 20</div>
+                <div class="question">La Oferta de Estudio de la ENAHP-IUT incluye carreras como:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 14, 1)">
+                        <input type="radio" id="q14_option1" name="q14" value="1">
+                        <label for="q14_option1">Medicina e Ingeniería.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 2)">
+                        <input type="radio" id="q14_option2" name="q14" value="2">
+                        <label for="q14_option2">Aduana, Comercio Exterior, Finanzas Públicas y Rentas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 3)">
+                        <input type="radio" id="q14_option3" name="q14" value="3">
+                        <label for="q14_option3">Derecho y Administración.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 4)">
+                        <input type="radio" id="q14_option4" name="q14" value="4">
+                        <label for="q14_option4">Psicología y Contaduría.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn14" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 15 -->
+        <div class="question-container" id="question15">
+            <div class="question-card">
+                <div class="question-number">Pregunta 15 de 20</div>
+                <div class="question">La Filosofía Institucional aborda:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 15, 1)">
+                        <input type="radio" id="q15_option1" name="q15" value="1">
+                        <label for="q15_option1">Valores y principios que guían la institución.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 2)">
+                        <input type="radio" id="q15_option2" name="q15" value="2">
+                        <label for="q15_option2">Lo que la Institución aspira lograr en el futuro.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 3)">
+                        <input type="radio" id="q15_option3" name="q15" value="3">
+                        <label for="q15_option3">Razón de ser y el quehacer diario de la Institución.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 4)">
+                        <input type="radio" id="q15_option4" name="q15" value="4">
+                        <label for="q15_option4">La "biografía" de las universidades en Venezuela.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn15" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 16 -->
+        <div class="question-container" id="question16">
+            <div class="question-card">
+                <div class="question-number">Pregunta 16 de 20</div>
+                <div class="question">El Proyecto Nacional Simón Bolívar es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 16, 1)">
+                        <input type="radio" id="q16_option1" name="q16" value="1">
+                        <label for="q16_option1">Un marco de referencia para la formación integral.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 2)">
+                        <input type="radio" id="q16_option2" name="q16" value="2">
+                        <label for="q16_option2">Un plan de viajes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 3)">
+                        <input type="radio" id="q16_option3" name="q16" value="3">
+                        <label for="q16_option3">Una actividad deportiva.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 4)">
+                        <input type="radio" id="q16_option4" name="q16" value="4">
+                        <label for="q16_option4">Un programa de televisión.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn16" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 17 -->
+        <div class="question-container" id="question17">
+            <div class="question-card">
+                <div class="question-number">Pregunta 17 de 20</div>
+                <div class="question">La autoevaluación y coevaluación son herramientas para:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 17, 1)">
+                        <input type="radio" id="q17_option1" name="q17" value="1">
+                        <label for="q17_option1">Fomentar la reflexión individual y grupal.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 2)">
+                        <input type="radio" id="q17_option2" name="q17" value="2">
+                        <label for="q17_option2">Castigar a los estudiantes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 3)">
+                        <input type="radio" id="q17_option3" name="q17" value="3">
+                        <label for="q17_option3">Limitar la participación.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 4)">
+                        <input type="radio" id="q17_option4" name="q17" value="4">
+                        <label for="q17_option4">Evitar la responsabilidad.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn17" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 18 -->
+        <div class="question-container" id="question18">
+            <div class="question-card">
+                <div class="question-number">Pregunta 18 de 20</div>
+                <div class="question">Las dinámicas grupales en esta unidad buscan:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 18, 1)">
+                        <input type="radio" id="q18_option1" name="q18" value="1">
+                        <label for="q18_option1">Internalizar competencias intra e interpersonales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 2)">
+                        <input type="radio" id="q18_option2" name="q18" value="2">
+                        <label for="q18_option2">Aislar a los estudiantes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 3)">
+                        <input type="radio" id="q18_option3" name="q18" value="3">
+                        <label for="q18_option3">Competir individualmente.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 4)">
+                        <input type="radio" id="q18_option4" name="q18" value="4">
+                        <label for="q18_option4">Eliminar la comunicación.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn18" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 19 -->
+        <div class="question-container" id="question19">
+            <div class="question-card">
+                <div class="question-number">Pregunta 19 de 20</div>
+                <div class="question">La Unidad I se denomina:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 19, 1)">
+                        <input type="radio" id="q19_option1" name="q19" value="1">
+                        <label for="q19_option1">Ámbito universitario.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 2)">
+                        <input type="radio" id="q19_option2" name="q19" value="2">
+                        <label for="q19_option2">Exploración vocacional.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 3)">
+                        <input type="radio" id="q19_option3" name="q19" value="3">
+                        <label for="q19_option3">Sociocrítico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 4)">
+                        <input type="radio" id="q19_option4" name="q19" value="4">
+                        <label for="q19_option4">Orientación profesional.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn19" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Pregunta 20 -->
         <div class="question-container" id="question20">
@@ -736,8 +1349,9 @@
             const fecha = document.getElementById('fecha').value;
             const nombre = document.getElementById('nombre').value;
             const cedula = document.getElementById('cedula').value;
+            const seccion = document.getElementById('seccion').value;
             
-            if (!fecha || !nombre || !cedula) {
+            if (!fecha || !nombre || !cedula || !seccion) {
                 alert('Por favor, complete todos los datos del estudiante antes de comenzar la prueba.');
                 return;
             }
@@ -746,7 +1360,8 @@
             studentData = {
                 fecha: fecha,
                 nombre: nombre,
-                cedula: cedula
+                cedula: cedula,
+                seccion: seccion
             };
             
             // Ocultar datos personales y mostrar primera pregunta
@@ -835,73 +1450,74 @@
         // FUNCIÓN PARA ENVIAR RESULTADOS POR CORREO
         async function enviarResultadosPorCorreo() {
             try {
-                console.log('Iniciando envío de resultados...');
+                console.log('Preparando envío de resultados...');
                 
-                // 1. CREAR DATOS DEL ESTUDIANTE EN TEXTO PLANO
-                const datosEstudiante = `
-FECHA: ${studentData.fecha}
-NOMBRE: ${studentData.nombre}
-CÉDULA: ${studentData.cedula}
-                `.trim();
-
-                // 2. CREAR RESPUESTAS EN TEXTO PLANO
-                let respuestasTexto = "";
+                // Contar preguntas respondidas
                 let answeredCount = 0;
-                let score = 0;
-                
                 for (let i = 1; i <= totalQuestions; i++) {
-                    const question = questionsData[i-1];
-                    const answer = answers[i];
-                    
-                    if (answer && answer.selected) {
+                    if (answers[i] && answers[i].selected) {
                         answeredCount++;
-                        respuestasTexto += `
-PREGUNTA ${i}: ${question.text}
-RESPUESTA: ${answer.optionText}
-────────────────────────────────────────────
-                        `.trim() + '\n\n';
                     }
                 }
 
-                // 3. CREAR RESUMEN
                 const completionPercentage = Math.round((answeredCount / totalQuestions) * 100);
-                const resumen = `
-TOTAL DE PREGUNTAS: ${totalQuestions}
-PREGUNTAS RESPONDIDAS: ${answeredCount}
-PORCENTAJE COMPLETADO: ${completionPercentage}%
-FECHA DE ENVÍO: ${new Date().toLocaleString('es-ES')}
-                `.trim();
+                const now = new Date();
 
-                // 4. PREPARAR PARÁMETROS PARA EMAILJS
+                // PREPARAR PARÁMETROS PARA EMAILJS
                 const templateParams = {
                     to_email: 'tp272791@gmail.com',
                     from_name: 'Sistema de Evaluación ENAHP-IUT',
-                    subject: `Resultados Prueba - ${studentData.nombre} - ${studentData.cedula}`,
-                    fecha_envio: new Date().toLocaleDateString('es-ES'),
-                    datos_estudiante: datosEstudiante,
-                    respuestas: respuestasTexto,
-                    resumen: resumen,
+                    subject: `Prueba Unidad I - ${studentData.nombre} - ${studentData.cedula}`,
+                    
+                    // Información del estudiante
                     estudiante_nombre: studentData.nombre,
-                    estudiante_cedula: studentData.cedula
+                    estudiante_cedula: studentData.cedula,
+                    estudiante_seccion: studentData.seccion,
+                    fecha_envio: now.toLocaleDateString('es-ES'),
+                    hora_envio: now.toLocaleTimeString('es-ES'),
+                    fecha_prueba: studentData.fecha,
+                    
+                    // Estadísticas de la prueba
+                    preguntas_respondidas: answeredCount.toString(),
+                    porcentaje_completado: completionPercentage.toString(),
+                    
+                    // Todas las respuestas individuales
+                    respuesta_1: answers[1] && answers[1].selected ? answers[1].optionText : 'No respondida',
+                    respuesta_2: answers[2] && answers[2].selected ? answers[2].optionText : 'No respondida',
+                    respuesta_3: answers[3] && answers[3].selected ? answers[3].optionText : 'No respondida',
+                    respuesta_4: answers[4] && answers[4].selected ? answers[4].optionText : 'No respondida',
+                    respuesta_5: answers[5] && answers[5].selected ? answers[5].optionText : 'No respondida',
+                    respuesta_6: answers[6] && answers[6].selected ? answers[6].optionText : 'No respondida',
+                    respuesta_7: answers[7] && answers[7].selected ? answers[7].optionText : 'No respondida',
+                    respuesta_8: answers[8] && answers[8].selected ? answers[8].optionText : 'No respondida',
+                    respuesta_9: answers[9] && answers[9].selected ? answers[9].optionText : 'No respondida',
+                    respuesta_10: answers[10] && answers[10].selected ? answers[10].optionText : 'No respondida',
+                    respuesta_11: answers[11] && answers[11].selected ? answers[11].optionText : 'No respondida',
+                    respuesta_12: answers[12] && answers[12].selected ? answers[12].optionText : 'No respondida',
+                    respuesta_13: answers[13] && answers[13].selected ? answers[13].optionText : 'No respondida',
+                    respuesta_14: answers[14] && answers[14].selected ? answers[14].optionText : 'No respondida',
+                    respuesta_15: answers[15] && answers[15].selected ? answers[15].optionText : 'No respondida',
+                    respuesta_16: answers[16] && answers[16].selected ? answers[16].optionText : 'No respondida',
+                    respuesta_17: answers[17] && answers[17].selected ? answers[17].optionText : 'No respondida',
+                    respuesta_18: answers[18] && answers[18].selected ? answers[18].optionText : 'No respondida',
+                    respuesta_19: answers[19] && answers[19].selected ? answers[19].optionText : 'No respondida',
+                    respuesta_20: answers[20] && answers[20].selected ? answers[20].optionText : 'No respondida'
                 };
 
-                console.log('Enviando correo con EmailJS...');
+                console.log('Enviando correo con datos completos...');
                 
-                // 5. ENVIAR CORREO
+                // ENVIAR CORREO
                 const response = await emailjs.send(
                     'service_244jamh',    // Service ID
-                    'template_brh50t7',   // Template ID
+                    'template_brh50t7',   // Template ID  
                     templateParams
                 );
 
-                console.log('Correo enviado exitosamente:', response);
+                console.log('Correo enviado exitosamente');
                 return true;
                 
             } catch (error) {
                 console.error('Error al enviar correo:', error);
-                if (error.text) {
-                    console.error('Detalles del error:', error.text);
-                }
                 return false;
             }
         }
