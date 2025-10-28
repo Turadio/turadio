@@ -1209,7 +1209,7 @@
     <script>
         // Inicializar EmailJS con tu cuenta
         (function() {
-            emailjs.init("GSKPICQFx-4fVkKZo"); // Tu Public Key de EmailJS
+            emailjs.init("GSKPICQFx-4fVkKZo"); // Tu Public Key de EmailJS 
         })();
 
         // Array con todas las preguntas y sus opciones
@@ -1447,7 +1447,7 @@
             }
         }
         
-        // FUNCIÓN PARA ENVIAR RESULTADOS POR CORREO
+        // FUNCIÓN ACTUALIZADA PARA ENVIAR RESULTADOS POR CORREO
         async function enviarResultadosPorCorreo() {
             try {
                 console.log('Preparando envío de resultados...');
@@ -1463,7 +1463,7 @@
                 const completionPercentage = Math.round((answeredCount / totalQuestions) * 100);
                 const now = new Date();
 
-                // PREPARAR PARÁMETROS PARA EMAILJS
+                // PREPARAR PARÁMETROS PARA EMAILJS CON LOS NUEVOS IDs
                 const templateParams = {
                     to_email: 'tp272791@gmail.com',
                     from_name: 'Sistema de Evaluación ENAHP-IUT',
@@ -1504,20 +1504,23 @@
                     respuesta_20: answers[20] && answers[20].selected ? answers[20].optionText : 'No respondida'
                 };
 
-                console.log('Enviando correo con datos completos...');
+                console.log('Enviando correo con nuevos IDs...');
                 
-                // ENVIAR CORREO
+                // ENVIAR CORREO CON LOS NUEVOS IDs
                 const response = await emailjs.send(
-                    'service_244jamh',    // Service ID
-                    'template_brh50t7',   // Template ID  
+                    'service_244jamh',    // NUEVO Service ID 
+                    'template_brh50t7',   // NUEVO Template ID  
                     templateParams
                 );
 
-                console.log('Correo enviado exitosamente');
+                console.log('Correo enviado exitosamente:', response);
                 return true;
                 
             } catch (error) {
                 console.error('Error al enviar correo:', error);
+                if (error.text) {
+                    console.error('Detalles del error:', error.text);
+                }
                 return false;
             }
         }
