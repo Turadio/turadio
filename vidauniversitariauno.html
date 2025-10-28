@@ -1203,7 +1203,7 @@
     </div>
 
     <div class="footer">
-        INICIACIÓN A LA VIDA UNIVERSITARIA - UNIDAD I - ENAHP-IUT
+        INICIACIÓN A LA VIDA UNIVERSITARIA - EVALUACIÓN UNIDAD I - ENAHP-IUT - PROGRAMA REALIZADO POR LIC. TULIA PÉREZ
     </div>
 
     <script>
@@ -1211,6 +1211,30 @@
         (function() {
             emailjs.init("GSKPICQFx-4fVkKZo"); // Tu Public Key de EmailJS 
         })();
+
+        // CLAVE DE RESPUESTAS CORRECTAS
+        const correctAnswers = {
+            1: 2,  // b
+            2: 2,  // b
+            3: 3,  // c
+            4: 2,  // b
+            5: 2,  // b
+            6: 1,  // a
+            7: 2,  // b
+            8: 2,  // b
+            9: 3,  // c
+            10: 2, // b
+            11: 1, // a
+            12: 1, // a
+            13: 2, // b
+            14: 2, // b
+            15: 1, // a
+            16: 1, // a
+            17: 1, // a
+            18: 1, // a
+            19: 1, // a
+            20: 1  // a
+        };
 
         // Array con todas las preguntas y sus opciones
         const questionsData = [
@@ -1328,7 +1352,8 @@
                 answers[i] = {
                     selected: false,
                     value: 0,
-                    optionText: ""
+                    optionText: "",
+                    isCorrect: false
                 };
             }
         }
@@ -1411,6 +1436,31 @@
             }
         }
         
+        // FUNCIÓN PARA CALCULAR LA NOTA FINAL
+        function calcularNotaFinal() {
+            let nota = 0;
+            let respuestasCorrectas = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (answers[i] && answers[i].selected) {
+                    // Verificar si la respuesta es correcta
+                    if (answers[i].value === correctAnswers[i]) {
+                        nota += 1; // 1 punto por respuesta correcta
+                        respuestasCorrectas++;
+                        answers[i].isCorrect = true;
+                    } else {
+                        answers[i].isCorrect = false;
+                    }
+                }
+            }
+            
+            return {
+                nota: nota,
+                respuestasCorrectas: respuestasCorrectas,
+                porcentaje: Math.round((nota / totalQuestions) * 100)
+            };
+        }
+        
         async function submitSurvey() {
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
@@ -1420,8 +1470,11 @@
             submitBtn.disabled = true;
             
             try {
+                // Calcular nota final antes de enviar
+                const resultado = calcularNotaFinal();
+                
                 // Enviar por correo automáticamente
-                const emailSent = await enviarResultadosPorCorreo();
+                const emailSent = await enviarResultadosPorCorreo(resultado);
                 
                 // Ocultar última pregunta
                 document.getElementById(`question${currentQuestion}`).classList.remove('active');
@@ -1448,7 +1501,7 @@
         }
         
         // FUNCIÓN ACTUALIZADA PARA ENVIAR RESULTADOS POR CORREO
-        async function enviarResultadosPorCorreo() {
+        async function enviarResultadosPorCorreo(resultado) {
             try {
                 console.log('Preparando envío de resultados...');
                 
@@ -1477,34 +1530,60 @@
                     hora_envio: now.toLocaleTimeString('es-ES'),
                     fecha_prueba: studentData.fecha,
                     
+                    // Resultados de la evaluación
+                    nota_final: resultado.nota.toString(),
+                    respuestas_correctas: resultado.respuestasCorrectas.toString(),
+                    porcentaje_correcto: resultado.porcentaje.toString(),
+                    total_preguntas: totalQuestions.toString(),
+                    
                     // Estadísticas de la prueba
                     preguntas_respondidas: answeredCount.toString(),
                     porcentaje_completado: completionPercentage.toString(),
                     
-                    // Todas las respuestas individuales
-                    respuesta_1: answers[1] && answers[1].selected ? answers[1].optionText : 'No respondida',
-                    respuesta_2: answers[2] && answers[2].selected ? answers[2].optionText : 'No respondida',
-                    respuesta_3: answers[3] && answers[3].selected ? answers[3].optionText : 'No respondida',
-                    respuesta_4: answers[4] && answers[4].selected ? answers[4].optionText : 'No respondida',
-                    respuesta_5: answers[5] && answers[5].selected ? answers[5].optionText : 'No respondida',
-                    respuesta_6: answers[6] && answers[6].selected ? answers[6].optionText : 'No respondida',
-                    respuesta_7: answers[7] && answers[7].selected ? answers[7].optionText : 'No respondida',
-                    respuesta_8: answers[8] && answers[8].selected ? answers[8].optionText : 'No respondida',
-                    respuesta_9: answers[9] && answers[9].selected ? answers[9].optionText : 'No respondida',
-                    respuesta_10: answers[10] && answers[10].selected ? answers[10].optionText : 'No respondida',
-                    respuesta_11: answers[11] && answers[11].selected ? answers[11].optionText : 'No respondida',
-                    respuesta_12: answers[12] && answers[12].selected ? answers[12].optionText : 'No respondida',
-                    respuesta_13: answers[13] && answers[13].selected ? answers[13].optionText : 'No respondida',
-                    respuesta_14: answers[14] && answers[14].selected ? answers[14].optionText : 'No respondida',
-                    respuesta_15: answers[15] && answers[15].selected ? answers[15].optionText : 'No respondida',
-                    respuesta_16: answers[16] && answers[16].selected ? answers[16].optionText : 'No respondida',
-                    respuesta_17: answers[17] && answers[17].selected ? answers[17].optionText : 'No respondida',
-                    respuesta_18: answers[18] && answers[18].selected ? answers[18].optionText : 'No respondida',
-                    respuesta_19: answers[19] && answers[19].selected ? answers[19].optionText : 'No respondida',
-                    respuesta_20: answers[20] && answers[20].selected ? answers[20].optionText : 'No respondida'
+                    // Todas las respuestas individuales con indicador de corrección
+                    respuesta_1: answers[1] && answers[1].selected ? 
+                        `${answers[1].optionText} ${answers[1].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_2: answers[2] && answers[2].selected ? 
+                        `${answers[2].optionText} ${answers[2].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_3: answers[3] && answers[3].selected ? 
+                        `${answers[3].optionText} ${answers[3].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_4: answers[4] && answers[4].selected ? 
+                        `${answers[4].optionText} ${answers[4].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_5: answers[5] && answers[5].selected ? 
+                        `${answers[5].optionText} ${answers[5].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_6: answers[6] && answers[6].selected ? 
+                        `${answers[6].optionText} ${answers[6].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_7: answers[7] && answers[7].selected ? 
+                        `${answers[7].optionText} ${answers[7].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_8: answers[8] && answers[8].selected ? 
+                        `${answers[8].optionText} ${answers[8].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_9: answers[9] && answers[9].selected ? 
+                        `${answers[9].optionText} ${answers[9].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_10: answers[10] && answers[10].selected ? 
+                        `${answers[10].optionText} ${answers[10].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_11: answers[11] && answers[11].selected ? 
+                        `${answers[11].optionText} ${answers[11].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_12: answers[12] && answers[12].selected ? 
+                        `${answers[12].optionText} ${answers[12].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_13: answers[13] && answers[13].selected ? 
+                        `${answers[13].optionText} ${answers[13].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_14: answers[14] && answers[14].selected ? 
+                        `${answers[14].optionText} ${answers[14].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_15: answers[15] && answers[15].selected ? 
+                        `${answers[15].optionText} ${answers[15].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_16: answers[16] && answers[16].selected ? 
+                        `${answers[16].optionText} ${answers[16].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_17: answers[17] && answers[17].selected ? 
+                        `${answers[17].optionText} ${answers[17].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_18: answers[18] && answers[18].selected ? 
+                        `${answers[18].optionText} ${answers[18].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_19: answers[19] && answers[19].selected ? 
+                        `${answers[19].optionText} ${answers[19].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_20: answers[20] && answers[20].selected ? 
+                        `${answers[20].optionText} ${answers[20].isCorrect ? '✅' : '❌'}` : 'No respondida'
                 };
 
-                console.log('Enviando correo con nuevos IDs...');
+                console.log('Enviando correo con calificación...');
                 
                 // ENVIAR CORREO CON LOS NUEVOS IDs
                 const response = await emailjs.send(
