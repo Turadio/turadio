@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<br>
+	<div class="logo-container">
+        <img src="https://cuecmc.edu.ve/wp-content/uploads/2024/03/cropped-cropped-LOGO-CUECMC-COLOR.png" 
+             alt="Logo CUECMC" 
+             class="header-logo">
+    </div>
+    <title>Encuesta - Estilos de Vida de Estudiantes de Enfermería</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+	
+	.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Para versión móvil */
+@media (max-width: 768px) {
+    .header-logo {
+        max-width: 150px;
+    }
+}
+	
+	
+	
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .instructions {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--warning-color);
+        }
+        
+        .instructions h3 {
+            color: var(--warning-color);
+            margin-bottom: 10px;
+        }
+        
+        .form-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .radio-option input, .checkbox-option input {
+            margin-right: 8px;
+        }
+        
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .food-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .food-table th, .food-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .food-table th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        .food-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 40px auto;
+            width: 200px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-submit:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 600;
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        
+        .notification.success {
+            background-color: var(--success-color);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.error {
+            background-color: var(--accent-color);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .completion-message {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--success-color);
+            display: none;
+        }
+        
+        .completion-message h2 {
+            color: var(--success-color);
+            margin-bottom: 15px;
+        }
+        
+        .completion-message p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--accent-color);
+        }
+        
+        .error-message {
+            color: var(--accent-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .radio-group, .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .food-table {
+                font-size: 14px;
+            }
+            
+            .food-table th, .food-table td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cuestionario sobre Vida Saludable</h1>
+            <p>Para ser respondido por estudiantes de enfermería </p>
+			<p>del Colegio Universitario de Enfermería Centro Médico de Caracas</p>
+        </header>
+        <div class="intro">
+    <p style="text-align: justify; line-height: 1.8; margin-bottom: 15px;">
+        El presente cuestionario tiene como finalidad obtener información relevante que sirva para conocer y analizar 
+        el estilo de Vida Saludable de los estudiantes de enfermería del Colegio Universitario de Enfermería Centro Médico de Caracas, 
+        como parte del trabajo especial de grado. <br> Los datos aquí recolectados serán utilizados confidencialmente. </br>
+    </p>
+    
+</div>
+		
+		
+        <div class="instructions">
+            <h3>Instrucciones:</h3>
+            <p>- Marcar con una X la respuesta que usted crea conveniente o responder brevemente si la pregunta lo amerita.</p>
+            <p>- Todas las preguntas son obligatorias.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+		
+		
+        
+        <form id="survey-form">
+            <!-- DATOS GENERALES -->
+            <div class="form-section">
+                <h2>Datos Generales</h2>
+                
+                <div class="form-group">
+                    <label class="required-field">1. Edad:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="edad1" name="edad" value="15 a 19 años" required>
+                            <label for="edad1">15 a 19 años</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="edad2" name="edad" value="19 a 25 años" required>
+                            <label for="edad2">19 a 25 años</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="edad3" name="edad" value="25 a más años" required>
+                            <label for="edad3">25 a más años</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="edad-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">2. Género:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="genero1" name="genero" value="Femenino" required>
+                            <label for="genero1">Femenino</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="genero2" name="genero" value="Masculino" required>
+                            <label for="genero2">Masculino</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="genero-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">3. Semestre que cursa:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="semestre1" name="semestre" value="I" required>
+                            <label for="semestre1">I</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="semestre2" name="semestre" value="II" required>
+                            <label for="semestre2">II</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="semestre3" name="semestre" value="III" required>
+                            <label for="semestre3">III</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="semestre4" name="semestre" value="IV" required>
+                            <label for="semestre4">IV</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="semestre5" name="semestre" value="V" required>
+                            <label for="semestre5">V</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="semestre6" name="semestre" value="VI" required>
+                            <label for="semestre6">VI</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="semestre-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">4. Estado Civil:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="estado1" name="estado" value="Casado(a)" required>
+                            <label for="estado1">Casado(a)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="estado2" name="estado" value="Soltero(a)" required>
+                            <label for="estado2">Soltero(a)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="estado3" name="estado" value="Concubino(a)" required>
+                            <label for="estado3">Concubino(a)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="estado4" name="estado" value="Viudo(a)" required>
+                            <label for="estado4">Viudo(a)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="estado5" name="estado" value="Divorciado(a)" required>
+                            <label for="estado5">Divorciado(a)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="estado-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">5. ¿Trabaja?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="trabaja1" name="trabaja" value="SÍ" required>
+                            <label for="trabaja1">SÍ</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="trabaja2" name="trabaja" value="NO" required>
+                            <label for="trabaja2">NO</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="trabaja-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group" id="ingreso-trabajo" style="display: none;">
+                    <label class="required-field">5.1 Si la respuesta es afirmativa ¿Cuánto es el ingreso promedio al mes?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="ingreso1" name="ingreso" value="Menos del salario mínimo">
+                            <label for="ingreso1">Menos del salario mínimo</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ingreso2" name="ingreso" value="Salario mínimo">
+                            <label for="ingreso2">Salario mínimo</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ingreso3" name="ingreso" value="Dos salarios mínimos">
+                            <label for="ingreso3">Dos salarios mínimos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ingreso4" name="ingreso" value="Tres o más">
+                            <label for="ingreso4">Tres o más</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="ingreso-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group" id="ingreso-no-trabajo" style="display: none;">
+                    <label class="required-field">5.2 Si la respuesta es negativa ¿Cuánto de dinero se le asigna a diario? (Ej. Mesadas)</label>
+                    <input type="text" id="mesada" name="mesada">
+                    <div class="error-message" id="mesada-error">Este campo es obligatorio</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">6. ¿Cree usted que su estilo de vida actual afectaría su salud en el futuro?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="afecta1" name="afecta" value="SÍ" required>
+                            <label for="afecta1">SÍ</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="afecta2" name="afecta" value="NO" required>
+                            <label for="afecta2">NO</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="afecta-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">7. ¿Por qué?</label>
+                    <textarea id="porque" name="porque" required></textarea>
+                    <div class="error-message" id="porque-error">Este campo es obligatorio</div>
+                </div>
+            </div>
+            
+            <!-- HÁBITOS ALIMENTICIOS -->
+            <div class="form-section">
+                <h2>Hábitos Alimenticios</h2>
+                
+                <div class="form-group">
+                    <label class="required-field">1. ¿Desayuna?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="desayuna1" name="desayuna" value="Diario" required>
+                            <label for="desayuna1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="desayuna2" name="desayuna" value="Inter diario" required>
+                            <label for="desayuna2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="desayuna3" name="desayuna" value="1 o 2 veces por semana" required>
+                            <label for="desayuna3">1 o 2 veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="desayuna4" name="desayuna" value="Nunca" required>
+                            <label for="desayuna4">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="desayuna5" name="desayuna" value="otros" required>
+                            <label for="desayuna5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="desayuna-error">Debe seleccionar una opción</div>
+                    <div id="desayuna-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="desayuna-otros" name="desayuna-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="hora-desayuno-group">
+                    <label class="required-field">2. ¿A qué hora consume su desayuno con frecuencia?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hora-desayuno1" name="hora_desayuno" value="Antes de las 7 a.m.">
+                            <label for="hora-desayuno1">Antes de las 7 a.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-desayuno2" name="hora_desayuno" value="De 7 a 8 a.m.">
+                            <label for="hora-desayuno2">De 7 a 8 a.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-desayuno3" name="hora_desayuno" value="De 8 a 9 a.m.">
+                            <label for="hora-desayuno3">De 8 a 9 a.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-desayuno4" name="hora_desayuno" value="De 9 a 10 a.m.">
+                            <label for="hora-desayuno4">De 9 a 10 a.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-desayuno5" name="hora_desayuno" value="De 10 a.m. a más">
+                            <label for="hora-desayuno5">De 10 a.m. a más</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="hora-desayuno-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">3. ¿Almuerza?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="almuerza1" name="almuerza" value="Diario" required>
+                            <label for="almuerza1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="almuerza2" name="almuerza" value="Inter diario" required>
+                            <label for="almuerza2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="almuerza3" name="almuerza" value="1 o 2 veces por semana" required>
+                            <label for="almuerza3">1 o 2 veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="almuerza4" name="almuerza" value="Nunca" required>
+                            <label for="almuerza4">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="almuerza5" name="almuerza" value="otros" required>
+                            <label for="almuerza5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="almuerza-error">Debe seleccionar una opción</div>
+                    <div id="almuerza-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="almuerza-otros" name="almuerza-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="hora-almuerzo-group">
+                    <label class="required-field">4. ¿A qué hora consume su almuerzo con frecuencia?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hora-almuerzo1" name="hora_almuerzo" value="De 12 a 1 p.m.">
+                            <label for="hora-almuerzo1">De 12 a 1 p.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-almuerzo2" name="hora_almuerzo" value="De 1 a 2 p.m.">
+                            <label for="hora-almuerzo2">De 1 a 2 p.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-almuerzo3" name="hora_almuerzo" value="De 2 p.m. a más">
+                            <label for="hora-almuerzo3">De 2 p.m. a más</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="hora-almuerzo-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">5. ¿Cena?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="cena1" name="cena" value="Diario" required>
+                            <label for="cena1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cena2" name="cena" value="Inter diario" required>
+                            <label for="cena2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cena3" name="cena" value="1 o 2 veces por semana" required>
+                            <label for="cena3">1 o 2 veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cena4" name="cena" value="Nunca" required>
+                            <label for="cena4">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cena5" name="cena" value="otros" required>
+                            <label for="cena5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="cena-error">Debe seleccionar una opción</div>
+                    <div id="cena-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="cena-otros" name="cena-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="hora-cena-group">
+                    <label class="required-field">6. ¿A qué hora consume su cena con mayor frecuencia?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hora-cena1" name="hora_cena" value="De 6 a 7 p.m.">
+                            <label for="hora-cena1">De 6 a 7 p.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-cena2" name="hora_cena" value="De 7 a 8 p.m.">
+                            <label for="hora-cena2">De 7 a 8 p.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-cena3" name="hora_cena" value="De 8 a 9 p.m.">
+                            <label for="hora-cena3">De 8 a 9 p.m.</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hora-cena4" name="hora_cena" value="De 9 p.m. a más">
+                            <label for="hora-cena4">De 9 p.m. a más</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="hora-cena-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">19. ¿Cuántas veces a la semana consume comidas nutritivas preparadas en casa?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="comidas-casa1" name="comidas_casa" value="5 o más veces (casi a diario)" required>
+                            <label for="comidas-casa1">5 o más veces (casi a diario)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="comidas-casa2" name="comidas_casa" value="3 - 4 veces" required>
+                            <label for="comidas-casa2">3 - 4 veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="comidas-casa3" name="comidas_casa" value="1 - 2 veces" required>
+                            <label for="comidas-casa3">1 - 2 veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="comidas-casa4" name="comidas_casa" value="Nunca o rara vez" required>
+                            <label for="comidas-casa4">Nunca o rara vez</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="comidas-casa-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">7. Marcar con una X la respuesta que crea conveniente, respecto a los alimentos que consume con mayor frecuencia.</label>
+                    <table class="food-table">
+                        <thead>
+                            <tr>
+                                <th>Alimentos que consume en el almuerzo</th>
+                                <th>SI</th>
+                                <th>NO</th>
+                                <th>Frecuencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carnes (pollo, pescado, res, cerdo, etc.)</td>
+                                <td><input type="radio" name="carnes" value="si" required></td>
+                                <td><input type="radio" name="carnes" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_carnes" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Verduras (apio, zanahoria, auyama, etc.)</td>
+                                <td><input type="radio" name="verduras" value="si" required></td>
+                                <td><input type="radio" name="verduras" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_verduras" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Frutas (manzana, cambur, naranja, etc.)</td>
+                                <td><input type="radio" name="frutas" value="si" required></td>
+                                <td><input type="radio" name="frutas" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_frutas" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cereales (trigo, arroz, quinua, fideos)</td>
+                                <td><input type="radio" name="cereales" value="si" required></td>
+                                <td><input type="radio" name="cereales" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_cereales" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tubérculos (papa, yuca, batata, etc.)</td>
+                                <td><input type="radio" name="tuberculos" value="si" required></td>
+                                <td><input type="radio" name="tuberculos" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_tuberculos" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hamburguesas, sándwich, empanadas</td>
+                                <td><input type="radio" name="comida_rapida" value="si" required></td>
+                                <td><input type="radio" name="comida_rapida" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_comida_rapida" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bebidas gaseosas</td>
+                                <td><input type="radio" name="gaseosas" value="si" required></td>
+                                <td><input type="radio" name="gaseosas" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_gaseosas" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Granos (frijol, lenteja, caraotas)</td>
+                                <td><input type="radio" name="granos" value="si" required></td>
+                                <td><input type="radio" name="granos" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_granos" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dulces, galletas</td>
+                                <td><input type="radio" name="dulces" value="si" required></td>
+                                <td><input type="radio" name="dulces" value="no" required></td>
+                                <td>
+                                    <select name="frecuencia_dulces" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="Diario">Diario</option>
+                                        <option value="Inter diario">Inter diario</option>
+                                        <option value="1-2 veces por semana">1-2 veces por semana</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">8. ¿Consume sus alimentos en horarios?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="horarios1" name="horarios" value="Fijos" required>
+                            <label for="horarios1">Fijos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="horarios2" name="horarios" value="No tiene horario" required>
+                            <label for="horarios2">No tiene horario</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="horarios-error">Debe seleccionar una opción</div>
+                </div>
+            </div>
+            
+            <!-- ACTIVIDAD FÍSICA Y HÁBITOS -->
+            <div class="form-section">
+                <h2>Actividad Física y Hábitos</h2>
+                
+                <div class="form-group">
+                    <label class="required-field">9. ¿Realiza usted ejercicios o práctica algún deporte?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="ejercicio1" name="ejercicio" value="SÍ" required>
+                            <label for="ejercicio1">SÍ</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ejercicio2" name="ejercicio" value="NO" required>
+                            <label for="ejercicio2">NO</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="ejercicio-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group" id="frecuencia-ejercicio" style="display: none;">
+                    <label class="required-field">10. En caso afirmativo con qué frecuencia realiza ejercicios o deportes</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="frecuencia1" name="frecuencia" value="Diario">
+                            <label for="frecuencia1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="frecuencia2" name="frecuencia" value="Una vez por semana">
+                            <label for="frecuencia2">Una vez por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="frecuencia3" name="frecuencia" value="Dos veces por semana">
+                            <label for="frecuencia3">Dos veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="frecuencia4" name="frecuencia" value="Tres o cuatro veces por semana">
+                            <label for="frecuencia4">Tres o cuatro veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="frecuencia5" name="frecuencia" value="otros">
+                            <label for="frecuencia5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="frecuencia-error">Debe seleccionar una opción</div>
+                    <div id="frecuencia-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="frecuencia-otros" name="frecuencia-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="tiempo-ejercicio" style="display: none;">
+                    <label class="required-field">11. ¿Cuánto tiempo diario invierte en la práctica de ejercicios o deportes?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="tiempo1" name="tiempo" value="10 a 15 minutos">
+                            <label for="tiempo1">10 a 15 minutos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tiempo2" name="tiempo" value="15 a 30 minutos">
+                            <label for="tiempo2">15 a 30 minutos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tiempo3" name="tiempo" value="30 a 60 minutos">
+                            <label for="tiempo3">30 a 60 minutos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tiempo4" name="tiempo" value="60 minutos a más">
+                            <label for="tiempo4">60 minutos a más</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="tiempo-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">12. ¿Cuántas horas diarias duerme?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="sueño1" name="sueño" value="4 horas" required>
+                            <label for="sueño1">4 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño2" name="sueño" value="5 horas" required>
+                            <label for="sueño2">5 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño3" name="sueño" value="6 horas" required>
+                            <label for="sueño3">6 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño4" name="sueño" value="7 horas" required>
+                            <label for="sueño4">7 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño5" name="sueño" value="Más de 7 horas" required>
+                            <label for="sueño5">Más de 7 horas</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="sueño-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">20. Al despertar, ¿siente que su sueño fue realmente reparador y se siente con energía?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="sueño-reparador1" name="sueño_reparador" value="Siempre" required>
+                            <label for="sueño-reparador1">Siempre</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño-reparador2" name="sueño_reparador" value="Casi siempre" required>
+                            <label for="sueño-reparador2">Casi siempre</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño-reparador3" name="sueño_reparador" value="A veces" required>
+                            <label for="sueño-reparador3">A veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sueño-reparador4" name="sueño_reparador" value="Nunca" required>
+                            <label for="sueño-reparador4">Nunca</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="sueño-reparador-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">21. ¿Con qué frecuencia tiene dificultad para conciliar el sueño o se despierta sin poder volver a dormir?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="dificultad-sueño1" name="dificultad_sueño" value="Nunca" required>
+                            <label for="dificultad-sueño1">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dificultad-sueño2" name="dificultad_sueño" value="Rara vez" required>
+                            <label for="dificultad-sueño2">Rara vez</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dificultad-sueño3" name="dificultad_sueño" value="A veces" required>
+                            <label for="dificultad-sueño3">A veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dificultad-sueño4" name="dificultad_sueño" value="Frecuentemente" required>
+                            <label for="dificultad-sueño4">Frecuentemente</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="dificultad-sueño-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">13. ¿Realiza usted siesta?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="siesta1" name="siesta" value="SÍ" required>
+                            <label for="siesta1">SÍ</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="siesta2" name="siesta" value="NO" required>
+                            <label for="siesta2">NO</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="siesta-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">14. ¿Consume usted cigarrillos?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="cigarrillos1" name="cigarrillos" value="Diario" required>
+                            <label for="cigarrillos1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cigarrillos2" name="cigarrillos" value="Inter diario" required>
+                            <label for="cigarrillos2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cigarrillos3" name="cigarrillos" value="1 o 2 veces por semana" required>
+                            <label for="cigarrillos3">1 o 2 veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cigarrillos4" name="cigarrillos" value="Nunca" required>
+                            <label for="cigarrillos4">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cigarrillos5" name="cigarrillos" value="otros" required>
+                            <label for="cigarrillos5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="cigarrillos-error">Debe seleccionar una opción</div>
+                    <div id="cigarrillos-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="cigarrillos-otros" name="cigarrillos-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="cantidad-cigarrillos" style="display: none;">
+                    <label class="required-field">15. En caso afirmativo ¿Cuántos cigarrillos consume, las veces que lo hace?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="cantidad-cig1" name="cantidad_cig" value="1 a 2 cigarrillos">
+                            <label for="cantidad-cig1">1 a 2 cigarrillos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cantidad-cig2" name="cantidad_cig" value="2 a 4 cigarrillos">
+                            <label for="cantidad-cig2">2 a 4 cigarrillos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cantidad-cig3" name="cantidad_cig" value="4 a más cigarrillos">
+                            <label for="cantidad-cig3">4 a más cigarrillos</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="cantidad-cig4" name="cantidad_cig" value="Por cajetillas">
+                            <label for="cantidad-cig4">Por cajetillas</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="cantidad-cig-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">16. ¿Consume usted bebidas alcohólicas?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="alcohol1" name="alcohol" value="Diario" required>
+                            <label for="alcohol1">Diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="alcohol2" name="alcohol" value="Inter diario" required>
+                            <label for="alcohol2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="alcohol3" name="alcohol" value="1 o 2 veces por semana" required>
+                            <label for="alcohol3">1 o 2 veces por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="alcohol4" name="alcohol" value="Nunca" required>
+                            <label for="alcohol4">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="alcohol5" name="alcohol" value="otros" required>
+                            <label for="alcohol5">Otros (especifique)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="alcohol-error">Debe seleccionar una opción</div>
+                    <div id="alcohol-otros-container" style="display: none; margin-top: 10px;">
+                        <input type="text" id="alcohol-otros" name="alcohol-otros" placeholder="Especifique otros">
+                    </div>
+                </div>
+                
+                <div class="form-group" id="cantidad-alcohol" style="display: none;">
+                    <label class="required-field">17. En caso afirmativo ¿Cuántas copas de licor consume?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="copas1" name="copas" value="1 a 2 copas">
+                            <label for="copas1">1 a 2 copas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="copas2" name="copas" value="2 a 4 copas">
+                            <label for="copas2">2 a 4 copas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="copas3" name="copas" value="4 a más copas">
+                            <label for="copas3">4 a más copas</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="copas-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">22. ¿Considera que consumir alcohol o tabaco le ayuda a reducir o manejar el estrés de la carrera?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="estres-alcohol1" name="estres_alcohol" value="No, no me ayuda" required>
+                            <label for="estres-alcohol1">No, no me ayuda</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="estres-alcohol2" name="estres_alcohol" value="Sí, me ayuda un poco o mucho" required>
+                            <label for="estres-alcohol2">Sí, me ayuda un poco o mucho</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="estres-alcohol-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">23. ¿Cuántas horas al día pasa sentado/a por ocio pasivo (ver televisión, redes sociales, videojuegos), sin contar las horas de clase o estudio?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="ocio-pasivo1" name="ocio_pasivo" value="Menos de 1 hora" required>
+                            <label for="ocio-pasivo1">Menos de 1 hora</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ocio-pasivo2" name="ocio_pasivo" value="1 - 2 horas" required>
+                            <label for="ocio-pasivo2">1 - 2 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ocio-pasivo3" name="ocio_pasivo" value="3 - 4 horas" required>
+                            <label for="ocio-pasivo3">3 - 4 horas</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ocio-pasivo4" name="ocio_pasivo" value="5 o más horas" required>
+                            <label for="ocio-pasivo4">5 o más horas</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="ocio-pasivo-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">24. ¿Con qué frecuencia se realiza evaluación o cheque médicos de rutina (no por enfermedad aguda)?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="chequeo-medico1" name="chequeo_medico" value="Anualmente" required>
+                            <label for="chequeo-medico1">Anualmente</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="chequeo-medico2" name="chequeo_medico" value="Cada 2-3 años" required>
+                            <label for="chequeo-medico2">Cada 2-3 años</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="chequeo-medico3" name="chequeo_medico" value="Rara vez (más de 3 años)" required>
+                            <label for="chequeo-medico3">Rara vez (más de 3 años)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="chequeo-medico4" name="chequeo_medico" value="Nunca" required>
+                            <label for="chequeo-medico4">Nunca</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="chequeo-medico-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">25. ¿Con qué frecuencia utiliza técnicas de relajación, meditación para manejar el estrés?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="relajacion1" name="relajacion" value="Frecuentemente (Varias veces a la semana)" required>
+                            <label for="relajacion1">Frecuentemente (Varias veces a la semana)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="relajacion2" name="relajacion" value="A veces (1-3 veces al mes)" required>
+                            <label for="relajacion2">A veces (1-3 veces al mes)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="relajacion3" name="relajacion" value="Rara vez" required>
+                            <label for="relajacion3">Rara vez</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="relajacion4" name="relajacion" value="Nunca" required>
+                            <label for="relajacion4">Nunca</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="relajacion-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">26. En general, ¿cómo calificaría su nivel de energía y vitalidad en la mayoría de los días?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="energia1" name="energia" value="Excelente" required>
+                            <label for="energia1">Excelente</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="energia2" name="energia" value="Bueno" required>
+                            <label for="energia2">Bueno</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="energia3" name="energia" value="Regular" required>
+                            <label for="energia3">Regular</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="energia4" name="energia" value="Bajo" required>
+                            <label for="energia4">Bajo</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="energia-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">18. ¿Con qué frecuencia realiza usted actividades recreativas? (ver televisión, escuchar música, leer, ir al cine, bailar, etc.)</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="recreativas1" name="recreativas" value="Todos los días" required>
+                            <label for="recreativas1">Todos los días</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recreativas2" name="recreativas" value="Inter diario" required>
+                            <label for="recreativas2">Inter diario</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recreativas3" name="recreativas" value="1 vez por semana" required>
+                            <label for="recreativas3">1 vez por semana</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="recreativas4" name="recreativas" value="1 vez al mes" required>
+                            <label for="recreativas4">1 vez al mes</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="recreativas-error">Debe seleccionar una opción</div>
+                </div>
+            </div>
+            
+            <!-- NUEVA SECCIÓN: ESTRÉS ACADÉMICO -->
+            <div class="form-section">
+                <h2>Estrés Académico y Bienestar</h2>
+                
+                <div class="form-group">
+                    <label class="required-field">27. ¿Con qué frecuencia siente que las asignaciones académicas (tareas, lecturas) exceden su capacidad para manejarlas?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="asignaciones1" name="asignaciones" value="Nunca" required>
+                            <label for="asignaciones1">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="asignaciones2" name="asignaciones" value="Rara vez (1-2 veces al mes)" required>
+                            <label for="asignaciones2">Rara vez (1-2 veces al mes)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="asignaciones3" name="asignaciones" value="A veces (1-2 veces a la semana)" required>
+                            <label for="asignaciones3">A veces (1-2 veces a la semana)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="asignaciones4" name="asignaciones" value="Frecuentemente (3 o más veces a la semana)" required>
+                            <label for="asignaciones4">Frecuentemente (3 o más veces a la semana)</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="asignaciones-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">28. ¿Con qué frecuencia siente un alto nivel de tensión o presión durante sus rotaciones de prácticas clínicas/hospitalarias?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="tension-practicas1" name="tension_practicas" value="Nunca" required>
+                            <label for="tension-practicas1">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tension-practicas2" name="tension_practicas" value="Rara vez" required>
+                            <label for="tension-practicas2">Rara vez</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tension-practicas3" name="tension_practicas" value="A veces" required>
+                            <label for="tension-practicas3">A veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tension-practicas4" name="tension_practicas" value="Frecuentemente" required>
+                            <label for="tension-practicas4">Frecuentemente</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="tension-practicas-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">29. En el último mes, ¿con qué frecuencia ha experimentado síntomas físicos como dolores de cabeza, tensión muscular o problemas estomacales relacionados con el estudio?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="sintomas1" name="sintomas" value="Nunca" required>
+                            <label for="sintomas1">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sintomas2" name="sintomas" value="Rara vez" required>
+                            <label for="sintomas2">Rara vez</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sintomas3" name="sintomas" value="A veces" required>
+                            <label for="sintomas3">A veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="sintomas4" name="sintomas" value="Frecuentemente" required>
+                            <label for="sintomas4">Frecuentemente</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="sintomas-error">Debe seleccionar una opción</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">30. ¿Qué tan a menudo se siente completamente agotado o al límite emocionalmente por la carrera?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="agotamiento1" name="agotamiento" value="Nunca" required>
+                            <label for="agotamiento1">Nunca</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="agotamiento2" name="agotamiento" value="Rara vez" required>
+                            <label for="agotamiento2">Rara vez</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="agotamiento3" name="agotamiento" value="A veces" required>
+                            <label for="agotamiento3">A veces</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="agotamiento4" name="agotamiento" value="Frecuentemente" required>
+                            <label for="agotamiento4">Frecuentemente</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="agotamiento-error">Debe seleccionar una opción</div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-submit" id="submit-btn">Enviar Encuesta</button>
+        </form>
+        
+        <div class="completion-message" id="completion-message">
+            <h2>¡Encuesta Completada!</h2>
+            <p>Gracias por completar la encuesta sobre estilos de vida de estudiantes de enfermería.</p>
+            <p>Sus respuestas han sido tratadas de forma confidencial y han sido entregadas para su análisis por correo a la INVESTIGADORA.</p>
+            <p>Si tiene alguna pregunta adicional, puede contactar a la investigadora principal.</p>
+        </div>
+        
+        <footer>
+            <p>2025 Cuestionario sobre Vida Saludable de estudiantes de Enfermería del Colegio Universitario de Enfermería Centro Médico de Caracas. Todos los datos son anónimos y confidenciales.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Inicializar EmailJS con tu Public Key
+        emailjs.init("4nYJFF-M_hnbkCPtD");
+        
+        // Función para mostrar campos "otros" cuando se selecciona la opción
+        function setupOtrosFields() {
+            const otrosConfig = [
+                { radioName: 'desayuna', containerId: 'desayuna-otros-container' },
+                { radioName: 'almuerza', containerId: 'almuerza-otros-container' },
+                { radioName: 'cena', containerId: 'cena-otros-container' },
+                { radioName: 'frecuencia', containerId: 'frecuencia-otros-container' },
+                { radioName: 'cigarrillos', containerId: 'cigarrillos-otros-container' },
+                { radioName: 'alcohol', containerId: 'alcohol-otros-container' }
+            ];
+            
+            otrosConfig.forEach(config => {
+                document.querySelectorAll(`input[name="${config.radioName}"]`).forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        const container = document.getElementById(config.containerId);
+                        if (this.value === 'otros') {
+                            container.style.display = 'block';
+                        } else {
+                            container.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Mostrar/ocultar campos condicionales
+        document.querySelectorAll('input[name="trabaja"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(this.value === 'SÍ') {
+                    document.getElementById('ingreso-trabajo').style.display = 'block';
+                    document.getElementById('ingreso-no-trabajo').style.display = 'none';
+                } else if(this.value === 'NO') {
+                    document.getElementById('ingreso-trabajo').style.display = 'none';
+                    document.getElementById('ingreso-no-trabajo').style.display = 'block';
+                }
+            });
+        });
+        
+        // Control de preguntas de horas según respuesta de desayuno/almuerzo/cena
+        document.querySelectorAll('input[name="desayuna"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const horaDesayunoGroup = document.getElementById('hora-desayuno-group');
+                if (this.value === 'Nunca') {
+                    horaDesayunoGroup.style.display = 'none';
+                    // Desmarcar opciones si están seleccionadas
+                    document.querySelectorAll('input[name="hora_desayuno"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    horaDesayunoGroup.style.display = 'block';
+                }
+            });
+        });
+        
+        document.querySelectorAll('input[name="almuerza"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const horaAlmuerzoGroup = document.getElementById('hora-almuerzo-group');
+                if (this.value === 'Nunca') {
+                    horaAlmuerzoGroup.style.display = 'none';
+                    // Desmarcar opciones si están seleccionadas
+                    document.querySelectorAll('input[name="hora_almuerzo"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    horaAlmuerzoGroup.style.display = 'block';
+                }
+            });
+        });
+        
+        document.querySelectorAll('input[name="cena"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const horaCenaGroup = document.getElementById('hora-cena-group');
+                if (this.value === 'Nunca') {
+                    horaCenaGroup.style.display = 'none';
+                    // Desmarcar opciones si están seleccionadas
+                    document.querySelectorAll('input[name="hora_cena"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    horaCenaGroup.style.display = 'block';
+                }
+            });
+        });
+        
+        document.querySelectorAll('input[name="ejercicio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(this.value === 'SÍ') {
+                    document.getElementById('frecuencia-ejercicio').style.display = 'block';
+                    document.getElementById('tiempo-ejercicio').style.display = 'block';
+                } else {
+                    document.getElementById('frecuencia-ejercicio').style.display = 'none';
+                    document.getElementById('tiempo-ejercicio').style.display = 'none';
+                }
+            });
+        });
+        
+        document.querySelectorAll('input[name="cigarrillos"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const mostrar = this.value !== 'Nunca' && this.value !== 'otros';
+                document.getElementById('cantidad-cigarrillos').style.display = mostrar ? 'block' : 'none';
+            });
+        });
+        
+        document.querySelectorAll('input[name="alcohol"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const mostrar = this.value !== 'Nunca' && this.value !== 'otros';
+                document.getElementById('cantidad-alcohol').style.display = mostrar ? 'block' : 'none';
+            });
+        });
+        
+        // Barra de progreso
+        const form = document.getElementById('survey-form');
+        const progressBar = document.getElementById('progress');
+        
+        form.addEventListener('input', function() {
+            const formElements = Array.from(form.elements);
+            const totalFields = formElements.filter(el => 
+                (el.type === 'radio' || el.type === 'text' || el.type === 'textarea' || el.type === 'select-one') && 
+                !el.disabled && el.required
+            ).length;
+            
+            const filledFields = formElements.filter(el => {
+                if(el.type === 'radio' && el.required) {
+                    const name = el.name;
+                    return Array.from(form.elements).some(radio => 
+                        radio.name === name && radio.checked
+                    );
+                } else if((el.type === 'text' || el.type === 'textarea') && el.required) {
+                    return el.value.trim() !== '';
+                } else if(el.type === 'select-one' && el.required) {
+                    return el.value !== '';
+                }
+                return false;
+            }).length;
+            
+            const progress = (filledFields / totalFields) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+        
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Función para validar formulario
+        function validateForm() {
+            let isValid = true;
+            
+            // Validar todos los campos requeridos
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                const errorElement = document.getElementById(`${field.name}-error`);
+                
+                if (field.type === 'radio') {
+                    const radioGroup = document.querySelectorAll(`input[name="${field.name}"]`);
+                    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                    
+                    if (!isChecked) {
+                        isValid = false;
+                        if (errorElement) errorElement.style.display = 'block';
+                    } else {
+                        if (errorElement) errorElement.style.display = 'none';
+                    }
+                } else if (field.type === 'select-one') {
+                    if (!field.value) {
+                        isValid = false;
+                        if (errorElement) errorElement.style.display = 'block';
+                    } else {
+                        if (errorElement) errorElement.style.display = 'none';
+                    }
+                } else {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        if (errorElement) errorElement.style.display = 'block';
+                    } else {
+                        if (errorElement) errorElement.style.display = 'none';
+                    }
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Función para obtener el valor de un grupo de radio buttons
+        function getRadioValue(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? selected.value : 'No respondió';
+        }
+        
+        // Función para obtener el valor de un select
+        function getSelectValue(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            return select && select.value ? select.value : 'No especificada';
+        }
+        
+        // Función para obtener el valor de un campo de texto
+        function getTextValue(name) {
+            const input = document.querySelector(`[name="${name}"]`);
+            return input && input.value ? input.value : 'No especificó';
+        }
+        
+        // Manejo del envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                showNotification('Por favor, complete todos los campos obligatorios.', 'error');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            
+            // Recopilar todos los datos del formulario
+            const data = {};
+            
+            // Procesar datos de radio buttons
+            form.querySelectorAll('input[type="radio"]').forEach(radio => {
+                if(radio.checked) {
+                    data[radio.name] = radio.value;
+                }
+            });
+            
+            // Procesar datos de selects
+            form.querySelectorAll('select').forEach(select => {
+                if(select.value) {
+                    data[select.name] = select.value;
+                }
+            });
+            
+            // Procesar datos de texto
+            form.querySelectorAll('input[type="text"], textarea').forEach(input => {
+                if(input.value.trim()) {
+                    data[input.name] = input.value.trim();
+                }
+            });
+            
+            // Procesar campos "otros" - reemplazar el valor "otros" con el texto especificado
+            if(data.desayuna === 'otros' && data['desayuna-otros']) {
+                data.desayuna = data['desayuna-otros'];
+            }
+            if(data.almuerza === 'otros' && data['almuerza-otros']) {
+                data.almuerza = data['almuerza-otros'];
+            }
+            if(data.cena === 'otros' && data['cena-otros']) {
+                data.cena = data['cena-otros'];
+            }
+            if(data.frecuencia === 'otros' && data['frecuencia-otros']) {
+                data.frecuencia = data['frecuencia-otros'];
+            }
+            if(data.cigarrillos === 'otros' && data['cigarrillos-otros']) {
+                data.cigarrillos = data['cigarrillos-otros'];
+            }
+            if(data.alcohol === 'otros' && data['alcohol-otros']) {
+                data.alcohol = data['alcohol-otros'];
+            }
+            
+            // Preparar datos para EmailJS
+            const templateParams = {
+                to_email: 'danvenezuela@gmail.com',
+                from_name: 'Encuesta Estilos de Vida',
+                message: `
+NUEVA ENCUESTA COMPLETADA - ESTILOS DE VIDA ESTUDIANTES ENFERMERÍA
+
+DATOS GENERALES:
+1. Edad: ${getRadioValue('edad')}
+2. Género: ${getRadioValue('genero')}
+3. Semestre: ${getRadioValue('semestre')}
+4. Estado Civil: ${getRadioValue('estado')}
+5. Trabaja: ${getRadioValue('trabaja')}
+${data.trabaja === 'SÍ' ? `5.1 Ingreso mensual: ${getRadioValue('ingreso')}` : `5.2 Mesada diaria: ${getTextValue('mesada')}`}
+6. ¿Afecta su salud en el futuro?: ${getRadioValue('afecta')}
+7. Razón: ${getTextValue('porque')}
+
+HÁBITOS ALIMENTICIOS:
+1. ¿Desayuna?: ${data.desayuna || getRadioValue('desayuna')}
+${(data.desayuna && data.desayuna !== 'Nunca') || getRadioValue('desayuna') !== 'Nunca' ? `2. Hora desayuno: ${getRadioValue('hora_desayuno')}` : ''}
+3. ¿Almuerza?: ${data.almuerza || getRadioValue('almuerza')}
+${(data.almuerza && data.almuerza !== 'Nunca') || getRadioValue('almuerza') !== 'Nunca' ? `4. Hora almuerzo: ${getRadioValue('hora_almuerzo')}` : ''}
+5. ¿Cena?: ${data.cena || getRadioValue('cena')}
+${(data.cena && data.cena !== 'Nunca') || getRadioValue('cena') !== 'Nunca' ? `6. Hora cena: ${getRadioValue('hora_cena')}` : ''}
+19. Comidas nutritivas en casa: ${getRadioValue('comidas_casa')}
+8. Horarios de comida: ${getRadioValue('horarios')}
+
+ALIMENTOS CONSUMIDOS:
+- Carnes: ${getRadioValue('carnes')} - Frecuencia: ${getSelectValue('frecuencia_carnes')}
+- Verduras: ${getRadioValue('verduras')} - Frecuencia: ${getSelectValue('frecuencia_verduras')}
+- Frutas: ${getRadioValue('frutas')} - Frecuencia: ${getSelectValue('frecuencia_frutas')}
+- Cereales: ${getRadioValue('cereales')} - Frecuencia: ${getSelectValue('frecuencia_cereales')}
+- Tubérculos: ${getRadioValue('tuberculos')} - Frecuencia: ${getSelectValue('frecuencia_tuberculos')}
+- Comida rápida: ${getRadioValue('comida_rapida')} - Frecuencia: ${getSelectValue('frecuencia_comida_rapida')}
+- Bebidas gaseosas: ${getRadioValue('gaseosas')} - Frecuencia: ${getSelectValue('frecuencia_gaseosas')}
+- Granos: ${getRadioValue('granos')} - Frecuencia: ${getSelectValue('frecuencia_granos')}
+- Dulces: ${getRadioValue('dulces')} - Frecuencia: ${getSelectValue('frecuencia_dulces')}
+
+ACTIVIDAD FÍSICA Y HÁBITOS:
+9. Ejercicio: ${getRadioValue('ejercicio')}
+${data.ejercicio === 'SÍ' ? `10. Frecuencia ejercicio: ${data.frecuencia || getRadioValue('frecuencia')}` : ''}
+${data.ejercicio === 'SÍ' ? `11. Tiempo ejercicio: ${getRadioValue('tiempo')}` : ''}
+12. Horas de sueño: ${getRadioValue('sueño')}
+20. Sueño reparador: ${getRadioValue('sueño_reparador')}
+21. Dificultad para dormir: ${getRadioValue('dificultad_sueño')}
+13. Siesta: ${getRadioValue('siesta')}
+14. Cigarrillos: ${data.cigarrillos || getRadioValue('cigarrillos')}
+${(data.cigarrillos && data.cigarrillos !== 'Nunca') || getRadioValue('cigarrillos') !== 'Nunca' ? `15. Cantidad cigarrillos: ${getRadioValue('cantidad_cig')}` : ''}
+16. Alcohol: ${data.alcohol || getRadioValue('alcohol')}
+${(data.alcohol && data.alcohol !== 'Nunca') || getRadioValue('alcohol') !== 'Nunca' ? `17. Copas de alcohol: ${getRadioValue('copas')}` : ''}
+22. Alcohol/tabaco para estrés: ${getRadioValue('estres_alcohol')}
+23. Ocio pasivo (horas/día): ${getRadioValue('ocio_pasivo')}
+24. Chequeos médicos: ${getRadioValue('chequeo_medico')}
+25. Técnicas relajación: ${getRadioValue('relajacion')}
+26. Nivel de energía: ${getRadioValue('energia')}
+18. Actividades recreativas: ${getRadioValue('recreativas')}
+
+ESTRÉS ACADÉMICO Y BIENESTAR:
+27. Asignaciones exceden capacidad: ${getRadioValue('asignaciones')}
+28. Tensión en prácticas clínicas: ${getRadioValue('tension_practicas')}
+29. Síntomas físicos por estudio: ${getRadioValue('sintomas')}
+30. Agotamiento emocional: ${getRadioValue('agotamiento')}
+
+Fecha de envío: ${new Date().toLocaleString('es-ES')}
+                `.trim()
+            };
+            
+            console.log('Enviando datos:', templateParams);
+            
+            // Enviar correo usando EmailJS con el template correcto
+            emailjs.send('service_xe1bdwm', 'template_ofg0mab', templateParams)
+                .then(function(response) {
+                    console.log('Éxito:', response);
+                    showNotification('¡Encuesta enviada correctamente!', 'success');
+                    form.reset();
+                    progressBar.style.width = '0%';
+                    document.getElementById('completion-message').style.display = 'block';
+                    window.scrollTo(0, document.body.scrollHeight);
+                }, function(error) {
+                    console.error('Error:', error);
+                    showNotification('Error al enviar la encuesta. Inténtalo de nuevo.', 'error');
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar Encuesta';
+                });
+        });
+        
+        // Inicializar campos "otros"
+        setupOtrosFields();
+    </script>
+</body>
+</html>
