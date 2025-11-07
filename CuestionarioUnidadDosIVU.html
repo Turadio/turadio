@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciación a la Vida Universitaria - Segunda Prueba</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header h1 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header .coordinator {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .header .description {
+            color: var(--gray);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s ease;
+            width: 0%;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .question-container.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .option:hover {
+            border-color: var(--primary);
+            background-color: #f8f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.1);
+        }
+        
+        .option.selected {
+            border-color: var(--primary);
+            background-color: #eef2ff;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.15);
+        }
+        
+        .option input {
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: var(--primary);
+        }
+        
+        .option label {
+            font-size: 1rem;
+            color: var(--dark);
+            cursor: pointer;
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        #nextBtn, #submitBtn, #startSurvey {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+        
+        #nextBtn:hover, #submitBtn:hover, #startSurvey:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4);
+        }
+        
+        #nextBtn:disabled, #submitBtn:disabled {
+            background: #adb5bd;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff, #eef2ff);
+            display: none;
+            text-align: center;
+            border: 2px solid var(--primary);
+        }
+        
+        .thank-you h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        
+        .thank-you p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .email-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .email-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .email-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .personal-data {
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff, #eef2ff);
+            border: 2px dashed var(--primary);
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 900px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option label {
+                font-size: 0.95rem;
+            }
+            
+            button {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+                min-width: 120px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
+            
+            .option {
+                padding: 14px 16px;
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .icon {
+            font-size: 1.2rem;
+        }
+    </style>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Iniciación a la Vida Universitaria</h1>
+            <div class="subtitle">Unidad II - Segunda Prueba</div>
+            <div class="coordinator">Coordinadora: Lic. Tulia Pérez</div>
+            <p class="description">Evaluación de conocimientos sobre Bases Legales y Modelo Productivo Venezolano</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="progress-text" id="progressText">Datos del Estudiante</div>
+        </div>
+        
+        <!-- Datos del Estudiante -->
+        <div class="question-container active" id="studentData">
+            <div class="personal-data">
+                <h3 class="section-title">📋 DATOS DEL ESTUDIANTE</h3>
+                
+                <div class="form-group">
+                    <label for="fecha">📅 Fecha de realización de la prueba:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nombre">👤 Nombre completo del estudiante:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cedula">🆔 Número de cédula de identidad:</label>
+                    <input type="text" id="cedula" name="cedula" placeholder="Ingrese su número de cédula" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="seccion">🏫 Sección donde estudia:</label>
+                    <input type="text" id="seccion" name="seccion" placeholder="Ej: O, P" required>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="startSurvey" onclick="startSurvey()">
+                    <span class="icon">🚀</span> Comenzar Prueba
+                </button>
+            </div>
+        </div>
+        
+        <!-- Pregunta 1 -->
+        <div class="question-container" id="question1">
+            <div class="question-card">
+                <div class="question-number">Pregunta 1 de 20</div>
+                <div class="question">Según la CRBV, la educación debe orientarse hacia:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1, 1)">
+                        <input type="radio" id="q1_option1" name="q1" value="1">
+                        <label for="q1_option1">La competitividad y el lucro individual.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 2)">
+                        <input type="radio" id="q1_option2" name="q1" value="2">
+                        <label for="q1_option2">El desarrollo humano, la soberanía productiva y la justicia social.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 3)">
+                        <input type="radio" id="q1_option3" name="q1" value="3">
+                        <label for="q1_option3">La formación exclusivamente técnica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 1, 4)">
+                        <input type="radio" id="q1_option4" name="q1" value="4">
+                        <label for="q1_option4">La internacionalización del conocimiento.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn1" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pregunta 2 -->
+        <div class="question-container" id="question2">
+            <div class="question-card">
+                <div class="question-number">Pregunta 2 de 20</div>
+                <div class="question">La LOEU busca vincular la educación universitaria con:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 2, 1)">
+                        <input type="radio" id="q2_option1" name="q2" value="1">
+                        <label for="q2_option1">El sistema de producción de bienes y servicios.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 2)">
+                        <input type="radio" id="q2_option2" name="q2" value="2">
+                        <label for="q2_option2">Las tendencias educativas globales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 3)">
+                        <input type="radio" id="q2_option3" name="q2" value="3">
+                        <label for="q2_option3">Las universidades privadas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 2, 4)">
+                        <input type="radio" id="q2_option4" name="q2" value="4">
+                        <label for="q2_option4">Los sistemas educativos extranjeros.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn2" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question-container" id="question3">
+            <div class="question-card">
+                <div class="question-number">Pregunta 3 de 20</div>
+                <div class="question">¿Cuál de los siguientes es uno de los "7 Transformadores" (7T)?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3, 1)">
+                        <input type="radio" id="q3_option1" name="q3" value="1">
+                        <label for="q3_option1">Telecomunicaciones.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 2)">
+                        <input type="radio" id="q3_option2" name="q3" value="2">
+                        <label for="q3_option2">Industria pesada.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 3)">
+                        <input type="radio" id="q3_option3" name="q3" value="3">
+                        <label for="q3_option3">Finanzas internacionales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 3, 4)">
+                        <input type="radio" id="q3_option4" name="q3" value="4">
+                        <label for="q3_option4">Minería ilegal.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn3" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question-container" id="question4">
+            <div class="question-card">
+                <div class="question-number">Pregunta 4 de 20</div>
+                <div class="question">El Artículo 102 de la CRBV establece que la educación es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4, 1)">
+                        <input type="radio" id="q4_option1" name="q4" value="1">
+                        <label for="q4_option1">Un privilegio para quienes puedan pagarla.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 2)">
+                        <input type="radio" id="q4_option2" name="q4" value="2">
+                        <label for="q4_option2">Un derecho humano y un servicio público.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 3)">
+                        <input type="radio" id="q4_option3" name="q4" value="3">
+                        <label for="q4_option3">Solo obligatoria hasta la secundaria.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 4, 4)">
+                        <input type="radio" id="q4_option4" name="q4" value="4">
+                        <label for="q4_option4">Responsabilidad exclusiva de las familias.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn4" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question-container" id="question5">
+            <div class="question-card">
+                <div class="question-number">Pregunta 5 de 20</div>
+                <div class="question">¿Qué promueve el Artículo 112 de la CRBV?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5, 1)">
+                        <input type="radio" id="q5_option1" name="q5" value="1">
+                        <label for="q5_option1">La concentración de la riqueza.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 2)">
+                        <input type="radio" id="q5_option2" name="q5" value="2">
+                        <label for="q5_option2">La privatización de todos los servicios.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 3)">
+                        <input type="radio" id="q5_option3" name="q5" value="3">
+                        <label for="q5_option3">Las empresas de producción social.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 5, 4)">
+                        <input type="radio" id="q5_option4" name="q5" value="4">
+                        <label for="q5_option4">La eliminación del sector privado.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn5" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question-container" id="question6">
+            <div class="question-card">
+                <div class="question-number">Pregunta 6 de 20</div>
+                <div class="question">Uno de los fines de la LOEU es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 6, 1)">
+                        <input type="radio" id="q6_option1" name="q6" value="1">
+                        <label for="q6_option1">Formar profesionales con conciencia social.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 2)">
+                        <input type="radio" id="q6_option2" name="q6" value="2">
+                        <label for="q6_option2">Limitar el acceso a la educación superior.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 3)">
+                        <input type="radio" id="q6_option3" name="q6" value="3">
+                        <label for="q6_option3">Reducir la investigación científica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 6, 4)">
+                        <input type="radio" id="q6_option4" name="q6" value="4">
+                        <label for="q6_option4">Priorizar carreras del sector petrolero.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn6" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question-container" id="question7">
+            <div class="question-card">
+                <div class="question-number">Pregunta 7 de 20</div>
+                <div class="question">Los "13 motores productivos" buscan:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 7, 1)">
+                        <input type="radio" id="q7_option1" name="q7" value="1">
+                        <label for="q7_option1">Sustituir completamente la empresa privada.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 2)">
+                        <input type="radio" id="q7_option2" name="q7" value="2">
+                        <label for="q7_option2">Avanzar hacia una economía diversificada y soberana.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 3)">
+                        <input type="radio" id="q7_option3" name="q7" value="3">
+                        <label for="q7_option3">Eliminar la producción nacional.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 7, 4)">
+                        <input type="radio" id="q7_option4" name="q7" value="4">
+                        <label for="q7_option4">Depender exclusivamente del turismo.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn7" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question-container" id="question8">
+            <div class="question-card">
+                <div class="question-number">Pregunta 8 de 20</div>
+                <div class="question">Según el Artículo 70 de la CRBV, una forma de participación del pueblo es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 8, 1)">
+                        <input type="radio" id="q8_option1" name="q8" value="1">
+                        <label for="q8_option1">Las empresas de propiedad social.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 2)">
+                        <input type="radio" id="q8_option2" name="q8" value="2">
+                        <label for="q8_option2">Las corporaciones transnacionales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 3)">
+                        <input type="radio" id="q8_option3" name="q8" value="3">
+                        <label for="q8_option3">Los monopolios estatales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 8, 4)">
+                        <input type="radio" id="q8_option4" name="q8" value="4">
+                        <label for="q8_option4">Las alianzas con empresas extranjeras.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn8" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="question-container" id="question9">
+            <div class="question-card">
+                <div class="question-number">Pregunta 9 de 20</div>
+                <div class="question">La LOEU, en su Artículo 12, establece el principio de:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 9, 1)">
+                        <input type="radio" id="q9_option1" name="q9" value="1">
+                        <label for="q9_option1">Complementariedad con los planes de desarrollo económico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 2)">
+                        <input type="radio" id="q9_option2" name="q9" value="2">
+                        <label for="q9_option2">Exclusividad de la educación privada.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 3)">
+                        <input type="radio" id="q9_option3" name="q9" value="3">
+                        <label for="q9_option3">Autonomía universitaria sin límites.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 9, 4)">
+                        <input type="radio" id="q9_option4" name="q9" value="4">
+                        <label for="q9_option4">Formación sin vinculación social.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn9" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="question-container" id="question10">
+            <div class="question-card">
+                <div class="question-number">Pregunta 10 de 20</div>
+                <div class="question">¿Qué sector NO forma parte de los "7 Transformadores"?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 10, 1)">
+                        <input type="radio" id="q10_option1" name="q10" value="1">
+                        <label for="q10_option1">Textiles.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 2)">
+                        <input type="radio" id="q10_option2" name="q10" value="2">
+                        <label for="q10_option2">Tranques (represas).</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 3)">
+                        <input type="radio" id="q10_option3" name="q10" value="3">
+                        <label for="q10_option3">Hidrocarburos.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 10, 4)">
+                        <input type="radio" id="q10_option4" name="q10" value="4">
+                        <label for="q10_option4">Transporte.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn10" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 11 -->
+        <div class="question-container" id="question11">
+            <div class="question-card">
+                <div class="question-number">Pregunta 11 de 20</div>
+                <div class="question">El Artículo 3 de la CRBV se refiere a:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 11, 1)">
+                        <input type="radio" id="q11_option1" name="q11" value="1">
+                        <label for="q11_option1">Los fines esenciales del Estado.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 2)">
+                        <input type="radio" id="q11_option2" name="q11" value="2">
+                        <label for="q11_option2">Los símbolos patrios.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 3)">
+                        <input type="radio" id="q11_option3" name="q11" value="3">
+                        <label for="q11_option3">La división de los poderes públicos.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 11, 4)">
+                        <input type="radio" id="q11_option4" name="q11" value="4">
+                        <label for="q11_option4">La organización de los estados.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn11" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 12 -->
+        <div class="question-container" id="question12">
+            <div class="question-card">
+                <div class="question-number">Pregunta 12 de 20</div>
+                <div class="question">La LOEU, en su Artículo 34, señala que los programas de formación deben:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 12, 1)">
+                        <input type="radio" id="q12_option1" name="q12" value="1">
+                        <label for="q12_option1">Satisfacer necesidades sociales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 2)">
+                        <input type="radio" id="q12_option2" name="q12" value="2">
+                        <label for="q12_option2">Evitar la investigación aplicada.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 3)">
+                        <input type="radio" id="q12_option3" name="q12" value="3">
+                        <label for="q12_option3">Ignorar las potencialidades regionales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 12, 4)">
+                        <input type="radio" id="q12_option4" name="q12" value="4">
+                        <label for="q12_option4">Limitarse a carreras tradicionales.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn12" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 13 -->
+        <div class="question-container" id="question13">
+            <div class="question-card">
+                <div class="question-number">Pregunta 13 de 20</div>
+                <div class="question">El Artículo 299 de la CRBV se refiere al régimen:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 13, 1)">
+                        <input type="radio" id="q13_option1" name="q13" value="1">
+                        <label for="q13_option1">Político-electoral.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 2)">
+                        <input type="radio" id="q13_option2" name="q13" value="2">
+                        <label for="q13_option2">Socioeconómico.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 3)">
+                        <input type="radio" id="q13_option3" name="q13" value="3">
+                        <label for="q13_option3">De seguridad nacional.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 13, 4)">
+                        <input type="radio" id="q13_option4" name="q13" value="4">
+                        <label for="q13_option4">De relaciones internacionales.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn13" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 14 -->
+        <div class="question-container" id="question14">
+            <div class="question-card">
+                <div class="question-number">Pregunta 14 de 20</div>
+                <div class="question">¿Qué promueve el Artículo 184 de la CRBV?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 14, 1)">
+                        <input type="radio" id="q14_option1" name="q14" value="1">
+                        <label for="q14_option1">Centralización de los servicios.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 2)">
+                        <input type="radio" id="q14_option2" name="q14" value="2">
+                        <label for="q14_option2">Transferencia de servicios a las comunidades.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 3)">
+                        <input type="radio" id="q14_option3" name="q14" value="3">
+                        <label for="q14_option3">Eliminación de los gobiernos locales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 14, 4)">
+                        <input type="radio" id="q14_option4" name="q14" value="4">
+                        <label for="q14_option4">Privatización de la educación.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn14" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 15 -->
+        <div class="question-container" id="question15">
+            <div class="question-card">
+                <div class="question-number">Pregunta 15 de 20</div>
+                <div class="question">Según la LOEU, la educación universitaria debe contribuir a la:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 15, 1)">
+                        <input type="radio" id="q15_option1" name="q15" value="1">
+                        <label for="q15_option1">Dependencia tecnológica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 2)">
+                        <input type="radio" id="q15_option2" name="q15" value="2">
+                        <label for="q15_option2">Independencia y soberanía tecnológica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 3)">
+                        <input type="radio" id="q15_option3" name="q15" value="3">
+                        <label for="q15_option3">Exclusión de las comunidades.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 15, 4)">
+                        <input type="radio" id="q15_option4" name="q15" value="4">
+                        <label for="q15_option4">Formación sin valores sociales.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn15" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 16 -->
+        <div class="question-container" id="question16">
+            <div class="question-card">
+                <div class="question-number">Pregunta 16 de 20</div>
+                <div class="question">Uno de los motores productivos mencionados en el documento es:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 16, 1)">
+                        <input type="radio" id="q16_option1" name="q16" value="1">
+                        <label for="q16_option1">Industria cinematográfica.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 2)">
+                        <input type="radio" id="q16_option2" name="q16" value="2">
+                        <label for="q16_option2">Minería e industrias básicas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 3)">
+                        <input type="radio" id="q16_option3" name="q16" value="3">
+                        <label for="q16_option3">Comercio minorista.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 16, 4)">
+                        <input type="radio" id="q16_option4" name="q16" value="4">
+                        <label for="q16_option4">Publicidad y marketing.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn16" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 17 -->
+        <div class="question-container" id="question17">
+            <div class="question-card">
+                <div class="question-number">Pregunta 17 de 20</div>
+                <div class="question">El Artículo 4 de la LOEU tiene como objetivo:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 17, 1)">
+                        <input type="radio" id="q17_option1" name="q17" value="1">
+                        <label for="q17_option1">Articular la educación universitaria con el sistema productivo.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 2)">
+                        <input type="radio" id="q17_option2" name="q17" value="2">
+                        <label for="q17_option2">Eliminar las humanidades de la universidad.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 3)">
+                        <input type="radio" id="q17_option3" name="q17" value="3">
+                        <label for="q17_option3">Reducir el número de universidades.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 17, 4)">
+                        <input type="radio" id="q17_option4" name="q17" value="4">
+                        <label for="q17_option4">Priorizar carreras cortas.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn17" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 18 -->
+        <div class="question-container" id="question18">
+            <div class="question-card">
+                <div class="question-number">Pregunta 18 de 20</div>
+                <div class="question">¿Qué principio establece la CRBV en materia económica?</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 18, 1)">
+                        <input type="radio" id="q18_option1" name="q18" value="1">
+                        <label for="q18_option1">Sólo la empresa privada.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 2)">
+                        <input type="radio" id="q18_option2" name="q18" value="2">
+                        <label for="q18_option2">Justicia social y protección ambiental.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 3)">
+                        <input type="radio" id="q18_option3" name="q18" value="3">
+                        <label for="q18_option3">Libre competencia sin regulación.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 18, 4)">
+                        <input type="radio" id="q18_option4" name="q18" value="4">
+                        <label for="q18_option4">Prohibición de la propiedad social.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn18" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 19 -->
+        <div class="question-container" id="question19">
+            <div class="question-card">
+                <div class="question-number">Pregunta 19 de 20</div>
+                <div class="question">La integración "universidad-comunidad" es impulsada por:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 19, 1)">
+                        <input type="radio" id="q19_option1" name="q19" value="1">
+                        <label for="q19_option1">Los reglamentos y resoluciones vigentes.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 2)">
+                        <input type="radio" id="q19_option2" name="q19" value="2">
+                        <label for="q19_option2">Las empresas transnacionales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 3)">
+                        <input type="radio" id="q19_option3" name="q19" value="3">
+                        <label for="q19_option3">Los acuerdos internacionales.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 19, 4)">
+                        <input type="radio" id="q19_option4" name="q19" value="4">
+                        <label for="q19_option4">Las organizaciones no gubernamentales.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="nextBtn19" onclick="nextQuestion()" disabled>
+                        <span class="icon">➡️</span> Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pregunta 20 -->
+        <div class="question-container" id="question20">
+            <div class="question-card">
+                <div class="question-number">Pregunta 20 de 20</div>
+                <div class="question">Los motores productivos y los 7T forman parte de:</div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 20, 1)">
+                        <input type="radio" id="q20_option1" name="q20" value="1">
+                        <label for="q20_option1">La Agenda Económica Bolivariana.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 2)">
+                        <input type="radio" id="q20_option2" name="q20" value="2">
+                        <label for="q20_option2">Un plan de empresas privadas.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 3)">
+                        <input type="radio" id="q20_option3" name="q20" value="3">
+                        <label for="q20_option3">Estrategias de otros países.</label>
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 20, 4)">
+                        <input type="radio" id="q20_option4" name="q20" value="4">
+                        <label for="q20_option4">Programas de asistencia social.</label>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="submitBtn" onclick="submitSurvey()" disabled>
+                        <span class="icon">✅</span> Finalizar Prueba
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pantalla de agradecimiento -->
+        <div class="result" id="thankYouSection">
+            <div class="thank-you">
+                <h2>¡Prueba Finalizada! 🎓</h2>
+                <p>Su evaluación ha sido registrada exitosamente.</p>
+                <p><strong>Coordinadora: Lic. Tulia Pérez</strong></p>
+                <div id="emailStatus"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        INICIACIÓN A LA VIDA UNIVERSITARIA - EVALUACIÓN UNIDAD II - ENAHP-IUT - PROGRAMA REALIZADO POR LIC. TULIA PÉREZ
+    </div>
+
+    <script>
+        // Inicializar EmailJS con tu cuenta
+        (function() {
+            emailjs.init("GSKPICQFx-4fVkKZo"); // Tu Public Key de EmailJS 
+        })();
+
+        // CLAVE DE RESPUESTAS CORRECTAS
+        const correctAnswers = {
+            1: 2,  // b
+            2: 1,  // a
+            3: 1,  // a
+            4: 2,  // b
+            5: 3,  // c
+            6: 1,  // a
+            7: 2,  // b
+            8: 1,  // a
+            9: 1,  // a
+            10: 3, // c
+            11: 1, // a
+            12: 1, // a
+            13: 2, // b
+            14: 2, // b
+            15: 2, // b
+            16: 2, // b
+            17: 1, // a
+            18: 2, // b
+            19: 1, // a
+            20: 1  // a
+        };
+
+        // Array con todas las preguntas y sus opciones
+        const questionsData = [
+            {
+                id: 1,
+                text: "Según la CRBV, la educación debe orientarse hacia:",
+                options: ["La competitividad y el lucro individual.", "El desarrollo humano, la soberanía productiva y la justicia social.", "La formación exclusivamente técnica.", "La internacionalización del conocimiento."]
+            },
+            {
+                id: 2,
+                text: "La LOEU busca vincular la educación universitaria con:",
+                options: ["El sistema de producción de bienes y servicios.", "Las tendencias educativas globales.", "Las universidades privadas.", "Los sistemas educativos extranjeros."]
+            },
+            {
+                id: 3,
+                text: "¿Cuál de los siguientes es uno de los \"7 Transformadores\" (7T)?",
+                options: ["Telecomunicaciones.", "Industria pesada.", "Finanzas internacionales.", "Minería ilegal."]
+            },
+            {
+                id: 4,
+                text: "El Artículo 102 de la CRBV establece que la educación es:",
+                options: ["Un privilegio para quienes puedan pagarla.", "Un derecho humano y un servicio público.", "Solo obligatoria hasta la secundaria.", "Responsabilidad exclusiva de las familias."]
+            },
+            {
+                id: 5,
+                text: "¿Qué promueve el Artículo 112 de la CRBV?",
+                options: ["La concentración de la riqueza.", "La privatización de todos los servicios.", "Las empresas de producción social.", "La eliminación del sector privado."]
+            },
+            {
+                id: 6,
+                text: "Uno de los fines de la LOEU es:",
+                options: ["Formar profesionales con conciencia social.", "Limitar el acceso a la educación superior.", "Reducir la investigación científica.", "Priorizar carreras del sector petrolero."]
+            },
+            {
+                id: 7,
+                text: "Los \"13 motores productivos\" buscan:",
+                options: ["Sustituir completamente la empresa privada.", "Avanzar hacia una economía diversificada y soberana.", "Eliminar la producción nacional.", "Depender exclusivamente del turismo."]
+            },
+            {
+                id: 8,
+                text: "Según el Artículo 70 de la CRBV, una forma de participación del pueblo es:",
+                options: ["Las empresas de propiedad social.", "Las corporaciones transnacionales.", "Los monopolios estatales.", "Las alianzas con empresas extranjeras."]
+            },
+            {
+                id: 9,
+                text: "La LOEU, en su Artículo 12, establece el principio de:",
+                options: ["Complementariedad con los planes de desarrollo económico.", "Exclusividad de la educación privada.", "Autonomía universitaria sin límites.", "Formación sin vinculación social."]
+            },
+            {
+                id: 10,
+                text: "¿Qué sector NO forma parte de los \"7 Transformadores\"?",
+                options: ["Textiles.", "Tranques (represas).", "Hidrocarburos.", "Transporte."]
+            },
+            {
+                id: 11,
+                text: "El Artículo 3 de la CRBV se refiere a:",
+                options: ["Los fines esenciales del Estado.", "Los símbolos patrios.", "La división de los poderes públicos.", "La organización de los estados."]
+            },
+            {
+                id: 12,
+                text: "La LOEU, en su Artículo 34, señala que los programas de formación deben:",
+                options: ["Satisfacer necesidades sociales.", "Evitar la investigación aplicada.", "Ignorar las potencialidades regionales.", "Limitarse a carreras tradicionales."]
+            },
+            {
+                id: 13,
+                text: "El Artículo 299 de la CRBV se refiere al régimen:",
+                options: ["Político-electoral.", "Socioeconómico.", "De seguridad nacional.", "De relaciones internacionales."]
+            },
+            {
+                id: 14,
+                text: "¿Qué promueve el Artículo 184 de la CRBV?",
+                options: ["Centralización de los servicios.", "Transferencia de servicios a las comunidades.", "Eliminación de los gobiernos locales.", "Privatización de la educación."]
+            },
+            {
+                id: 15,
+                text: "Según la LOEU, la educación universitaria debe contribuir a la:",
+                options: ["Dependencia tecnológica.", "Independencia y soberanía tecnológica.", "Exclusión de las comunidades.", "Formación sin valores sociales."]
+            },
+            {
+                id: 16,
+                text: "Uno de los motores productivos mencionados en el documento es:",
+                options: ["Industria cinematográfica.", "Minería e industrias básicas.", "Comercio minorista.", "Publicidad y marketing."]
+            },
+            {
+                id: 17,
+                text: "El Artículo 4 de la LOEU tiene como objetivo:",
+                options: ["Articular la educación universitaria con el sistema productivo.", "Eliminar las humanidades de la universidad.", "Reducir el número de universidades.", "Priorizar carreras cortas."]
+            },
+            {
+                id: 18,
+                text: "¿Qué principio establece la CRBV en materia económica?",
+                options: ["Sólo la empresa privada.", "Justicia social y protección ambiental.", "Libre competencia sin regulación.", "Prohibición de la propiedad social."]
+            },
+            {
+                id: 19,
+                text: "La integración \"universidad-comunidad\" es impulsada por:",
+                options: ["Los reglamentos y resoluciones vigentes.", "Las empresas transnacionales.", "Los acuerdos internacionales.", "Las organizaciones no gubernamentales."]
+            },
+            {
+                id: 20,
+                text: "Los motores productivos y los 7T forman parte de:",
+                options: ["La Agenda Económica Bolivariana.", "Un plan de empresas privadas.", "Estrategias de otros países.", "Programas de asistencia social."]
+            }
+        ];
+
+        // Variables globales
+        let currentQuestion = 0;
+        const totalQuestions = 20;
+        const answers = {};
+        let studentData = {};
+        
+        // Inicializar respuestas
+        function initializeAnswers() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                answers[i] = {
+                    selected: false,
+                    value: 0,
+                    optionText: "",
+                    isCorrect: false
+                };
+            }
+        }
+        
+        function updateProgress() {
+            if (currentQuestion === 0) {
+                document.getElementById('progress').style.width = `0%`;
+                document.getElementById('progressText').textContent = `Datos del Estudiante`;
+            } else {
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+                document.getElementById('progressText').textContent = `Pregunta ${currentQuestion} de ${totalQuestions}`;
+            }
+        }
+        
+        function startSurvey() {
+            // Validar datos del estudiante
+            const fecha = document.getElementById('fecha').value;
+            const nombre = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const seccion = document.getElementById('seccion').value;
+            
+            if (!fecha || !nombre || !cedula || !seccion) {
+                alert('Por favor, complete todos los datos del estudiante antes de comenzar la prueba.');
+                return;
+            }
+            
+            // Guardar datos del estudiante
+            studentData = {
+                fecha: fecha,
+                nombre: nombre,
+                cedula: cedula,
+                seccion: seccion
+            };
+            
+            // Ocultar datos personales y mostrar primera pregunta
+            document.getElementById('studentData').classList.remove('active');
+            currentQuestion = 1;
+            document.getElementById(`question${currentQuestion}`).classList.add('active');
+            updateProgress();
+        }
+        
+        function selectOption(element, questionId, optionValue) {
+            // Guardar respuesta con el texto completo de la opción
+            answers[questionId].selected = true;
+            answers[questionId].value = optionValue;
+            answers[questionId].optionText = questionsData[questionId-1].options[optionValue-1];
+            
+            // Remover clase selected de todas las opciones de esta pregunta
+            const options = document.querySelectorAll(`#question${questionId} .option`);
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Agregar clase selected a la opción clickeada
+            element.classList.add('selected');
+            
+            // Marcar el radio button
+            document.getElementById(`q${questionId}_option${optionValue}`).checked = true;
+            
+            // Habilitar botón siguiente/enviar
+            if (currentQuestion < totalQuestions) {
+                document.getElementById(`nextBtn${questionId}`).disabled = false;
+            } else {
+                document.getElementById('submitBtn').disabled = false;
+            }
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Ocultar pregunta actual
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+                
+                // Mostrar siguiente pregunta
+                currentQuestion++;
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+                
+                // Actualizar progreso
+                updateProgress();
+            }
+        }
+        
+        // FUNCIÓN PARA CALCULAR LA NOTA FINAL
+        function calcularNotaFinal() {
+            let nota = 0;
+            let respuestasCorrectas = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (answers[i] && answers[i].selected) {
+                    // Verificar si la respuesta es correcta
+                    if (answers[i].value === correctAnswers[i]) {
+                        nota += 1; // 1 punto por respuesta correcta
+                        respuestasCorrectas++;
+                        answers[i].isCorrect = true;
+                    } else {
+                        answers[i].isCorrect = false;
+                    }
+                }
+            }
+            
+            return {
+                nota: nota,
+                respuestasCorrectas: respuestasCorrectas,
+                porcentaje: Math.round((nota / totalQuestions) * 100)
+            };
+        }
+        
+        async function submitSurvey() {
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Mostrar loading
+            submitBtn.innerHTML = '<div class="loading"></div> Enviando...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Calcular nota final antes de enviar
+                const resultado = calcularNotaFinal();
+                
+                // Enviar por correo automáticamente
+                const emailSent = await enviarResultadosPorCorreo(resultado);
+                
+                // Ocultar última pregunta
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+                
+                // Mostrar pantalla de agradecimiento
+                document.getElementById('thankYouSection').style.display = 'block';
+                
+                // Mostrar estado del correo
+                const emailStatus = document.getElementById('emailStatus');
+                if (emailSent) {
+                    emailStatus.innerHTML = '<div class="email-status email-success">✅ Resultados enviados correctamente a tp272791@gmail.com</div>';
+                } else {
+                    emailStatus.innerHTML = '<div class="email-status email-error">⚠️ Prueba registrada, pero no se pudo enviar por correo</div>';
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('emailStatus').innerHTML = '<div class="email-status email-error">❌ Error al procesar la prueba</div>';
+            } finally {
+                // Restaurar botón
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // FUNCIÓN ACTUALIZADA PARA ENVIAR RESULTADOS POR CORREO
+        async function enviarResultadosPorCorreo(resultado) {
+            try {
+                console.log('Preparando envío de resultados...');
+                
+                // Contar preguntas respondidas
+                let answeredCount = 0;
+                for (let i = 1; i <= totalQuestions; i++) {
+                    if (answers[i] && answers[i].selected) {
+                        answeredCount++;
+                    }
+                }
+
+                const completionPercentage = Math.round((answeredCount / totalQuestions) * 100);
+                const now = new Date();
+
+                // PREPARAR PARÁMETROS PARA EMAILJS CON LOS NUEVOS IDs
+                const templateParams = {
+                    to_email: 'tp272791@gmail.com',
+                    from_name: 'Sistema de Evaluación ENAHP-IUT',
+                    subject: `Prueba Unidad II - ${studentData.nombre} - ${studentData.cedula}`,
+                    
+                    // Información del estudiante
+                    estudiante_nombre: studentData.nombre,
+                    estudiante_cedula: studentData.cedula,
+                    estudiante_seccion: studentData.seccion,
+                    fecha_envio: now.toLocaleDateString('es-ES'),
+                    hora_envio: now.toLocaleTimeString('es-ES'),
+                    fecha_prueba: studentData.fecha,
+                    
+                    // Resultados de la evaluación
+                    nota_final: resultado.nota.toString(),
+                    respuestas_correctas: resultado.respuestasCorrectas.toString(),
+                    porcentaje_correcto: resultado.porcentaje.toString(),
+                    total_preguntas: totalQuestions.toString(),
+                    
+                    // Estadísticas de la prueba
+                    preguntas_respondidas: answeredCount.toString(),
+                    porcentaje_completado: completionPercentage.toString(),
+                    
+                    // Todas las respuestas individuales con indicador de corrección
+                    respuesta_1: answers[1] && answers[1].selected ? 
+                        `${answers[1].optionText} ${answers[1].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_2: answers[2] && answers[2].selected ? 
+                        `${answers[2].optionText} ${answers[2].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_3: answers[3] && answers[3].selected ? 
+                        `${answers[3].optionText} ${answers[3].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_4: answers[4] && answers[4].selected ? 
+                        `${answers[4].optionText} ${answers[4].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_5: answers[5] && answers[5].selected ? 
+                        `${answers[5].optionText} ${answers[5].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_6: answers[6] && answers[6].selected ? 
+                        `${answers[6].optionText} ${answers[6].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_7: answers[7] && answers[7].selected ? 
+                        `${answers[7].optionText} ${answers[7].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_8: answers[8] && answers[8].selected ? 
+                        `${answers[8].optionText} ${answers[8].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_9: answers[9] && answers[9].selected ? 
+                        `${answers[9].optionText} ${answers[9].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_10: answers[10] && answers[10].selected ? 
+                        `${answers[10].optionText} ${answers[10].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_11: answers[11] && answers[11].selected ? 
+                        `${answers[11].optionText} ${answers[11].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_12: answers[12] && answers[12].selected ? 
+                        `${answers[12].optionText} ${answers[12].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_13: answers[13] && answers[13].selected ? 
+                        `${answers[13].optionText} ${answers[13].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_14: answers[14] && answers[14].selected ? 
+                        `${answers[14].optionText} ${answers[14].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_15: answers[15] && answers[15].selected ? 
+                        `${answers[15].optionText} ${answers[15].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_16: answers[16] && answers[16].selected ? 
+                        `${answers[16].optionText} ${answers[16].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_17: answers[17] && answers[17].selected ? 
+                        `${answers[17].optionText} ${answers[17].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_18: answers[18] && answers[18].selected ? 
+                        `${answers[18].optionText} ${answers[18].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_19: answers[19] && answers[19].selected ? 
+                        `${answers[19].optionText} ${answers[19].isCorrect ? '✅' : '❌'}` : 'No respondida',
+                    respuesta_20: answers[20] && answers[20].selected ? 
+                        `${answers[20].optionText} ${answers[20].isCorrect ? '✅' : '❌'}` : 'No respondida'
+                };
+
+                console.log('Enviando correo con calificación...');
+                
+                // ENVIAR CORREO CON LOS NUEVOS IDs
+                const response = await emailjs.send(
+                    'service_244jamh',    // NUEVO Service ID 
+                    'template_brh50t7',   // NUEVO Template ID  
+                    templateParams
+                );
+
+                console.log('Correo enviado exitosamente:', response);
+                return true;
+                
+            } catch (error) {
+                console.error('Error al enviar correo:', error);
+                if (error.text) {
+                    console.error('Detalles del error:', error.text);
+                }
+                return false;
+            }
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar respuestas
+            initializeAnswers();
+            
+            // Establecer fecha actual por defecto
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').value = today;
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
