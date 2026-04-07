@@ -24,8 +24,13 @@
             box-sizing: border-box;
         }
 
+        /* Fondo original de tu primer código (fondo con imagen de cielo pastel) */
         body {
-            background: linear-gradient(145deg, #fbd5e5 0%, #f8e0ec 100%);
+            background-image: url('https://img.freepik.com/vector-gratis/fondo-degradado-cielo-pastel_23-2148925555.jpg?size=626&ext=jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
             font-family: 'Garamond', 'Segoe UI', system-ui, sans-serif;
             padding: 2rem 1rem 5rem 1rem;
             min-height: 100vh;
@@ -47,6 +52,7 @@
             font-size: 3rem;
             color: #c2366b;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
         .hero h3 {
@@ -72,7 +78,7 @@
             font-weight: normal;
         }
 
-        /* Parrilla de radios (grid responsivo) */
+        /* Parrilla de radios */
         .radios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -82,20 +88,20 @@
 
         /* Tarjeta */
         .radio-card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(3px);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
             border-radius: 20px;
             padding: 1rem 0.8rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s ease;
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
         .radio-card:hover {
             transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.45);
             box-shadow: 0 15px 28px rgba(0, 0, 0, 0.1);
         }
 
@@ -103,10 +109,10 @@
             transform: scale(0.98);
         }
 
-        /* Imagen rectangular (más alta que ancha) */
+        /* Imagen rectangular */
         .radio-card img {
             width: 100%;
-            aspect-ratio: 3 / 4;  /* 3 de ancho, 4 de alto → rectángulo vertical */
+            aspect-ratio: 3 / 4;
             object-fit: cover;
             border-radius: 18px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -127,15 +133,43 @@
             letter-spacing: 0.5px;
         }
 
-        /* Reproductor fijo abajo (simple, sin lista visible) */
+        /* Reproductor fijo abajo (estilo personalizado para que combine con el fondo) */
         #aplayer {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-            background: #1e1e2f;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 235, 245, 0.95) !important;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid #f0c0d8;
+        }
+
+        /* Personalización de colores del reproductor */
+        .aplayer {
+            background: rgba(255, 235, 245, 0.95) !important;
+            font-family: inherit;
+        }
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+            background-color: #e67e9e !important;
+        }
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+            background-color: #c2366b !important;
+        }
+        .aplayer .aplayer-info .aplayer-music .aplayer-title {
+            color: #4a235a !important;
+        }
+        .aplayer .aplayer-info .aplayer-music .aplayer-author {
+            color: #8e44ad !important;
+        }
+        .aplayer .aplayer-icon path {
+            fill: #6c3483 !important;
+        }
+
+        /* Ocultar el botón de lista (para que no aparezcan las 28 radios) */
+        .aplayer .aplayer-info .aplayer-controller .aplayer-icon.aplayer-icon-menu {
+            display: none !important;
         }
 
         /* Botón de descarga */
@@ -157,6 +191,7 @@
             text-decoration: none;
             display: inline-block;
             font-family: inherit;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .btn-download:hover {
@@ -206,7 +241,6 @@
 <body>
 
 <div class="container">
-    <!-- Encabezado -->
     <div class="hero">
         <h1>TURADIO</h1>
         <h3>CENTRAL DE RADIOS</h3>
@@ -214,17 +248,14 @@
         <h5>🎧 Toca la imagen para seleccionar el género musical</h5>
     </div>
 
-    <!-- Aquí se generarán las tarjetas automáticamente -->
     <div id="radiosContainer" class="radios-grid"></div>
 
-    <!-- Botón de descarga de la app -->
     <div class="download-area">
         <a class="btn-download" href="https://onedrive.live.com/?authkey=%21AH5dcDcgaFJKnPU&cid=62B73BC7AF1156F0&id=62B73BC7AF1156F0%211335&parId=62B73BC7AF1156F0%211334&o=OneUp" target="_blank" rel="noopener noreferrer">
             📱 NEW - DESCARGAR APP ANDROID DE TURADIO · GRATIS · SIN PUBLICIDAD · SIN INSCRIPCIÓN
         </a>
     </div>
 
-    <!-- Pie de página -->
     <div class="footer">
         <div class="share-links">
             <a href="https://twitter.com/intent/tweet?text=Puedes%20escuchar%20TURADIO%20por%20www.turadiofm.ga%20con%20la%20mejor%20música%20y%20sin%20interrupciones&url=http%3A%2F%2Fturadiofm.ga" target="_blank" rel="noopener noreferrer">
@@ -236,15 +267,10 @@
     </div>
 </div>
 
-<!-- Reproductor APlayer (simple, sin lista visible) -->
 <div id="aplayer"></div>
 
-<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
 <script>
-    // ==========================================
-    // LISTA DE RADIOS (UN SOLO LUGAR)
-    // ==========================================
     const radios = [
         { id: 0, name: "TURADIO", artist: "Éxitos", url: "https://stream.zeno.fm/c9t52s6tn0hvv", cover: "https://s2.abcstatics.com/media/200805/16/sh375.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
         { id: 1, name: "TURADIO", artist: "Baladas", url: "https://stream-146.zeno.fm/dossnihtsrytv", cover: "https://thumbs.dreamstime.com/b/brunette-com-auscultadores-13106190.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
@@ -276,7 +302,6 @@
         { id: 27, name: "TURADIO", artist: "Ha Ash", url: "https://stream.zeno.fm/wxgv509m6f0uv", cover: "https://hairstylecamp.com/wp-content/uploads/pink-curly-hair-13.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" }
     ];
 
-    // Generar todas las tarjetas dinámicamente
     const container = document.getElementById('radiosContainer');
     function generarTarjetas() {
         container.innerHTML = '';
@@ -297,9 +322,6 @@
         });
     }
 
-    // Configurar APlayer en modo "mini" (sin lista visible)
-    // Para que no muestre las 28 emisoras en franjas negras, usamos listFolded: true
-    // y además limitamos el alto máximo para que no se despliegue la lista completa
     const audioList = radios.map(radio => ({
         name: radio.name,
         artist: radio.artist,
@@ -309,27 +331,10 @@
 
     const ap = new APlayer({
         container: document.getElementById('aplayer'),
-        listFolded: true,      // La lista de canciones aparece oculta (se puede desplegar, pero no por defecto)
-        mini: false,           // No modo mini, queremos el reproductor completo pero sin lista visible
+        listFolded: true,
         audio: audioList
     });
 
-    // Opcional: ocultar completamente el botón de lista si quieres que nunca se vea
-    // Esto se hace con CSS (ocultamos el botón de "lista" del reproductor)
-    const style = document.createElement('style');
-    style.textContent = `
-        /* Oculta el botón de lista (los tres puntitos que muestran todas las radios) */
-        .aplayer .aplayer-info .aplayer-controller .aplayer-icon.aplayer-icon-menu {
-            display: none !important;
-        }
-        /* Ajusta el ancho del reproductor para que ocupe bien */
-        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
-            margin-right: 10px;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Inicializar
     generarTarjetas();
 </script>
 </body>
