@@ -382,13 +382,24 @@
                 else if (radio.artist === 'Trip') playlistName = 'Inglés';
                 
                 if (playlistName) {
-                    cambiarPlaylistEnRadioBOSS(playlistName);
-                } else {
-                    showToast(`⚠️ No hay playlist asociada a "${radio.artist}"`, true);
-                }
-            });
-            container.appendChild(card);
-        });
+                        // Función para enviar comando al servidor Flask (RadioBOSS)
+    async function cambiarPlaylistEnRadioBOSS(playlistName) {
+        // Construimos la URL correctamente para evitar errores
+        const apiUrl = `${SERVER_URL}/api/cambiar_playlist/${playlistName}`;
+        console.log("Intentando conectar a:", apiUrl); // <--- Esto ayuda a depurar
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            if (data.success) {
+                showToast(`✅ RadioBOSS cambió a: ${playlistName}`);
+            } else {
+                showToast(`❌ Error: ${data.error || 'no se pudo cambiar la playlist'}`, true);
+            }
+        } catch (error) {
+            console.error('Error conectando con RadioBOSS:', error);
+            showToast(`⚠️ No se pudo conectar con RadioBOSS.`, true);
+        }
     }
 
     // Configurar APlayer
