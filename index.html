@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>TURADIO · Central de Radios</title>
     
-    <!-- Google Analytics (moderno) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM8CHJ01KT"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -24,7 +24,6 @@
             box-sizing: border-box;
         }
 
-        /* Fondo original de tu primer código (fondo con imagen de cielo pastel) */
         body {
             background-image: url('https://img.freepik.com/vector-gratis/fondo-degradado-cielo-pastel_23-2148925555.jpg?size=626&ext=jpg');
             background-repeat: no-repeat;
@@ -36,13 +35,11 @@
             min-height: 100vh;
         }
 
-        /* Contenedor principal */
         .container {
             max-width: 1300px;
             margin: 0 auto;
         }
 
-        /* Encabezado */
         .hero {
             text-align: center;
             margin-bottom: 2rem;
@@ -67,18 +64,12 @@
             margin-top: 0.5rem;
         }
 
-        .hero p {
-            font-size: 0.8rem;
-            color: #6c3483;
-        }
-
         .hero h5 {
             margin-top: 1rem;
             color: #a569bd;
             font-weight: normal;
         }
 
-        /* Parrilla de radios */
         .radios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -86,7 +77,6 @@
             margin: 2rem 0;
         }
 
-        /* Tarjeta */
         .radio-card {
             background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(4px);
@@ -109,7 +99,6 @@
             transform: scale(0.98);
         }
 
-        /* Imagen rectangular */
         .radio-card img {
             width: 100%;
             aspect-ratio: 3 / 4;
@@ -133,7 +122,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Reproductor fijo abajo (estilo personalizado para que combine con el fondo) */
         #aplayer {
             position: fixed;
             bottom: 0;
@@ -146,7 +134,6 @@
             border-top: 1px solid #f0c0d8;
         }
 
-        /* Personalización de colores del reproductor */
         .aplayer {
             background: rgba(255, 235, 245, 0.95) !important;
             font-family: inherit;
@@ -167,12 +154,10 @@
             fill: #6c3483 !important;
         }
 
-        /* Ocultar el botón de lista (para que no aparezcan las 28 radios) */
         .aplayer .aplayer-info .aplayer-controller .aplayer-icon.aplayer-icon-menu {
             display: none !important;
         }
 
-        /* Botón de descarga */
         .download-area {
             text-align: center;
             margin: 2rem 0 1rem;
@@ -199,7 +184,6 @@
             transform: scale(1.02);
         }
 
-        /* Pie de página */
         .footer {
             text-align: center;
             margin-top: 2rem;
@@ -226,7 +210,6 @@
             border-radius: 40px;
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
             .radios-grid {
                 gap: 1rem;
@@ -235,6 +218,28 @@
             .hero h1 {
                 font-size: 2.2rem;
             }
+        }
+
+        /* Feedback visual para el control remoto */
+        .toast-message {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c2366b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: monospace;
+        }
+        .toast-message.show {
+            opacity: 1;
         }
     </style>
 </head>
@@ -268,9 +273,17 @@
 </div>
 
 <div id="aplayer"></div>
+<div id="toast" class="toast-message"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
 <script>
+    // ==================================================
+    // CONFIGURACIÓN: CAMBIA ESTA URL SEGÚN TU SERVIDOR
+    // Puede ser la IP de Tailscale o la URL de Cloudflare
+    // ==================================================
+    const SERVER_URL = "http://100.88.208.74:5004";  // <--- REEMPLAZA CON TU IP DE TAILSCALE
+
+    // Lista de radios (nombre del artista es el identificador para el servidor)
     const radios = [
         { id: 0, name: "TURADIO", artist: "Éxitos", url: "https://stream.zeno.fm/c9t52s6tn0hvv", cover: "https://s2.abcstatics.com/media/200805/16/sh375.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
         { id: 1, name: "TURADIO", artist: "Baladas", url: "https://stream-146.zeno.fm/dossnihtsrytv", cover: "https://es.rollingstone.com/wp-content/uploads/2023/03/Mujeres_Warthon-819x1024.jpg" },
@@ -297,6 +310,34 @@
         { id: 22, name: "TURADIO", artist: "Trip", url: "https://stream.zenolive.com/e3r11d73sfeuv", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu_ysz9LfiZ3oD9fuHaWjF0atIn6_8Urb0D2RFOLt_SeA7stzU4N5vj1DdW5C272Bx33Q&usqp=CAU?interpolation=progressive-bilinear&downsize=600px:*?auto=compress&cs=tinysrgb&dpr=1&w=500" }
     ];
 
+    // Función para mostrar notificaciones
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.backgroundColor = isError ? '#c2366b' : '#4a235a';
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    // Función para enviar comando al servidor Flask (RadioBOSS)
+    async function cambiarPlaylistEnRadioBOSS(playlistName) {
+        try {
+            const response = await fetch(`${SERVER_URL}/api/cambiar_playlist/${playlistName}`);
+            const data = await response.json();
+            if (data.success) {
+                showToast(`✅ RadioBOSS cambió a: ${playlistName}`);
+            } else {
+                showToast(`❌ Error: ${data.error || 'no se pudo cambiar la playlist'}`, true);
+            }
+        } catch (error) {
+            console.error('Error conectando con RadioBOSS:', error);
+            showToast(`⚠️ No se pudo conectar con RadioBOSS. Verifica que el servidor esté corriendo.`, true);
+        }
+    }
+
+    // Generar tarjetas y conectar eventos
     const container = document.getElementById('radiosContainer');
     function generarTarjetas() {
         container.innerHTML = '';
@@ -310,13 +351,48 @@
                 <p>${radio.artist}</p>
             `;
             card.addEventListener('click', () => {
+                // 1. Cambiar el reproductor web (APlayer)
                 ap.list.switch(idx);
                 ap.play();
+                
+                // 2. Enviar comando a RadioBOSS (usando el nombre del artista como identificador)
+                // Mapeo entre el nombre del artista y la playlist en RadioBOSS
+                let playlistName = '';
+                if (radio.artist === 'Éxitos') playlistName = 'Español';
+                else if (radio.artist === 'Baladas') playlistName = 'Español';
+                else if (radio.artist === 'Tropical') playlistName = 'Español';
+                else if (radio.artist === 'TURADIO DOS') playlistName = 'Inglés';
+                else if (radio.artist === 'Actual') playlistName = 'Inglés';
+                else if (radio.artist === 'Easy Listening') playlistName = 'Inglés';
+                else if (radio.artist === 'Pop') playlistName = 'Inglés';
+                else if (radio.artist === 'Italia') playlistName = 'Inglés';
+                else if (radio.artist === 'Studio') playlistName = 'Inglés';
+                else if (radio.artist === 'Clásicos') playlistName = 'Inglés';
+                else if (radio.artist === 'Más éxitos') playlistName = 'Español';
+                else if (radio.artist === 'Más romántica') playlistName = 'Español';
+                else if (radio.artist === 'Solo Beatles') playlistName = 'Inglés';
+                else if (radio.artist === 'Solo Phil Collins') playlistName = 'Inglés';
+                else if (radio.artist === 'Solo en español') playlistName = 'Español';
+                else if (radio.artist === 'Solo Pop') playlistName = 'Inglés';
+                else if (radio.artist === 'Bee Gees') playlistName = 'Inglés';
+                else if (radio.artist === 'Solo Elton John') playlistName = 'Inglés';
+                else if (radio.artist === 'Solo ABBA') playlistName = 'Inglés';
+                else if (radio.artist === 'Ilusion') playlistName = 'Español';
+                else if (radio.artist === 'Caracas') playlistName = 'Español';
+                else if (radio.artist === 'Armonía') playlistName = 'Inglés';
+                else if (radio.artist === 'Trip') playlistName = 'Inglés';
+                
+                if (playlistName) {
+                    cambiarPlaylistEnRadioBOSS(playlistName);
+                } else {
+                    showToast(`⚠️ No hay playlist asociada a "${radio.artist}"`, true);
+                }
             });
             container.appendChild(card);
         });
     }
 
+    // Configurar APlayer
     const audioList = radios.map(radio => ({
         name: radio.name,
         artist: radio.artist,
