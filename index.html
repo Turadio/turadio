@@ -37,7 +37,7 @@
             margin: 0 auto;
         }
 
-        /* Encabezado (igual que tu diseño) */
+        /* Encabezado */
         .hero {
             text-align: center;
             margin-bottom: 2rem;
@@ -75,12 +75,12 @@
         /* Parrilla de radios (grid responsivo) */
         .radios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
 
-        /* Tarjeta (mantiene el estilo de tus imágenes) */
+        /* Tarjeta */
         .radio-card {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(3px);
@@ -103,10 +103,10 @@
             transform: scale(0.98);
         }
 
-        /* Imagen dentro de la tarjeta (tus imágenes originales) */
+        /* Imagen rectangular (más alta que ancha) */
         .radio-card img {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 3 / 4;  /* 3 de ancho, 4 de alto → rectángulo vertical */
             object-fit: cover;
             border-radius: 18px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -127,7 +127,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Reproductor fijo abajo (tal como querías) */
+        /* Reproductor fijo abajo (simple, sin lista visible) */
         #aplayer {
             position: fixed;
             bottom: 0;
@@ -135,11 +135,10 @@
             width: 100%;
             z-index: 1000;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-            transition: bottom 0.2s ease;
             background: #1e1e2f;
         }
 
-        /* Botón de descarga de app */
+        /* Botón de descarga */
         .download-area {
             text-align: center;
             margin: 2rem 0 1rem;
@@ -196,7 +195,7 @@
         @media (max-width: 640px) {
             .radios-grid {
                 gap: 1rem;
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
             .hero h1 {
                 font-size: 2.2rem;
@@ -207,7 +206,7 @@
 <body>
 
 <div class="container">
-    <!-- Encabezado (tu estilo original) -->
+    <!-- Encabezado -->
     <div class="hero">
         <h1>TURADIO</h1>
         <h3>CENTRAL DE RADIOS</h3>
@@ -215,10 +214,10 @@
         <h5>🎧 Toca la imagen para seleccionar el género musical</h5>
     </div>
 
-    <!-- Aquí se generarán las tarjetas automáticamente con tus imágenes -->
+    <!-- Aquí se generarán las tarjetas automáticamente -->
     <div id="radiosContainer" class="radios-grid"></div>
 
-    <!-- Botón de descarga de la app (tal como lo tenías) -->
+    <!-- Botón de descarga de la app -->
     <div class="download-area">
         <a class="btn-download" href="https://onedrive.live.com/?authkey=%21AH5dcDcgaFJKnPU&cid=62B73BC7AF1156F0&id=62B73BC7AF1156F0%211335&parId=62B73BC7AF1156F0%211334&o=OneUp" target="_blank" rel="noopener noreferrer">
             📱 NEW - DESCARGAR APP ANDROID DE TURADIO · GRATIS · SIN PUBLICIDAD · SIN INSCRIPCIÓN
@@ -237,15 +236,14 @@
     </div>
 </div>
 
-<!-- Reproductor APlayer (abajo, fijo) -->
+<!-- Reproductor APlayer (simple, sin lista visible) -->
 <div id="aplayer"></div>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
 <script>
     // ==========================================
-    // LISTA DE RADIOS (UN SOLO LUGAR PARA MANTENER)
-    // AQUÍ PUEDES AGREGAR, ELIMINAR O MODIFICAR RADIOS FÁCILMENTE
+    // LISTA DE RADIOS (UN SOLO LUGAR)
     // ==========================================
     const radios = [
         { id: 0, name: "TURADIO", artist: "Éxitos", url: "https://stream.zeno.fm/c9t52s6tn0hvv", cover: "https://s2.abcstatics.com/media/200805/16/sh375.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
@@ -278,7 +276,7 @@
         { id: 27, name: "TURADIO", artist: "Ha Ash", url: "https://stream.zeno.fm/wxgv509m6f0uv", cover: "https://hairstylecamp.com/wp-content/uploads/pink-curly-hair-13.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" }
     ];
 
-    // Generar todas las tarjetas dinámicamente (con las imágenes originales)
+    // Generar todas las tarjetas dinámicamente
     const container = document.getElementById('radiosContainer');
     function generarTarjetas() {
         container.innerHTML = '';
@@ -294,13 +292,14 @@
             card.addEventListener('click', () => {
                 ap.list.switch(idx);
                 ap.play();
-                document.getElementById('aplayer').style.bottom = '0px';
             });
             container.appendChild(card);
         });
     }
 
-    // Configurar APlayer con las URLs de las radios
+    // Configurar APlayer en modo "mini" (sin lista visible)
+    // Para que no muestre las 28 emisoras en franjas negras, usamos listFolded: true
+    // y además limitamos el alto máximo para que no se despliegue la lista completa
     const audioList = radios.map(radio => ({
         name: radio.name,
         artist: radio.artist,
@@ -310,16 +309,27 @@
 
     const ap = new APlayer({
         container: document.getElementById('aplayer'),
-        listFolded: false,
+        listFolded: true,      // La lista de canciones aparece oculta (se puede desplegar, pero no por defecto)
+        mini: false,           // No modo mini, queremos el reproductor completo pero sin lista visible
         audio: audioList
     });
 
-    // Asegurar que el reproductor se muestre al reproducir
-    ap.on('play', () => {
-        document.getElementById('aplayer').style.bottom = '0px';
-    });
+    // Opcional: ocultar completamente el botón de lista si quieres que nunca se vea
+    // Esto se hace con CSS (ocultamos el botón de "lista" del reproductor)
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Oculta el botón de lista (los tres puntitos que muestran todas las radios) */
+        .aplayer .aplayer-info .aplayer-controller .aplayer-icon.aplayer-icon-menu {
+            display: none !important;
+        }
+        /* Ajusta el ancho del reproductor para que ocupe bien */
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+            margin-right: 10px;
+        }
+    `;
+    document.head.appendChild(style);
 
-    // Inicializar la página
+    // Inicializar
     generarTarjetas();
 </script>
 </body>
